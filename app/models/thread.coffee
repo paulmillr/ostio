@@ -6,7 +6,7 @@ module.exports = class Thread extends Model
   urlKey: 'number'
 
   urlPath: ->
-    "/users/#{@get('repo').get('user').get('username')}
+    "/users/#{@get('repo').get('user').get('login')}
 /repos/#{@get('repo').get('name')}
 /threads/"
 

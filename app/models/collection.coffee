@@ -10,7 +10,7 @@ module.exports = class Collection extends ChaplinCollection
 
   urlPath: ->
     "
-/users/#{@urlParams.username}
+/users/#{@urlParams.login}
 /repos/#{@urlParams.repoName}
 /threads/#{@urlParams.threadNumber}
 /posts/"

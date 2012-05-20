@@ -2,8 +2,8 @@
 <div class="header-auth">
   {{#if_logged_in}}
     {{#with_user}}
-      <a href="/{{user.username}}"><img class="avatar header-avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}"></a>
-      <a href="/{{user.username}}">{{user.username}}</a>
+      <a href="/{{user.login}}"><img class="avatar header-avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}"></a>
+      <a href="/{{user.login}}">{{user.login}}</a>
     {{/with_user}}
   {{else}}
     <button class="header-login-button button">Login with GitHub</button>

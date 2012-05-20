@@ -6,6 +6,6 @@ module.exports = class UsersController extends Controller
   historyURL: 'users'
 
   show: (params) ->
-    @model = new User({username: params.username})
+    @model = new User({login: params.login})
     @view = new UserPageView({@model})
     @model.fetch()

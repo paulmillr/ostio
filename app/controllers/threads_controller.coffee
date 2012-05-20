@@ -8,10 +8,10 @@ module.exports = class ThreadsController extends Controller
   historyURL: 'threads'
 
   redirect_to_repo: (params) ->
-    Backbone.history.navigate "/#{params.username}/#{params.repoName}"
+    Backbone.history.navigate "/#{params.login}/#{params.repoName}"
 
   show: (params) ->
-    user = new User({username: params.username})
+    user = new User({login: params.login})
     repo = new Repo({user, name: params.repoName})
     @model = new Thread({repo, number: params.threadNumber})
     @view = new ThreadPageView({@model})

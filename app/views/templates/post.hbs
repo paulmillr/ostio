@@ -1,9 +1,9 @@
-<a class="thread-post-avatar-container" href="/{{user.username}}">
+<a class="thread-post-avatar-container" href="/{{user.login}}">
   <img class="thread-post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
 </a>
 <div class="thread-post-content">
   <div class="thread-post-header">
-    <a class="thread-post-author" href="/{{user.username}}">{{user.username}}</a>
+    <a class="thread-post-author" href="/{{user.login}}">{{user.login}}</a>
     <time class="thread-post-metadata thread-post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
   <div class="thread-post-text">

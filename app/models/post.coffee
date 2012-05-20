@@ -5,7 +5,7 @@ Thread = require 'models/thread'
 
 module.exports = class Post extends Model
   urlPath: ->
-    "/users/#{@get('thread').get('repo').get('user').get('username')}
+    "/users/#{@get('thread').get('repo').get('user').get('login')}
 /repos/#{@get('thread').get('repo').get('name')}
 /threads/#{@get('thread').get('number')}
 /posts/"
