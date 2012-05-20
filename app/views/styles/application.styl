@@ -1,0 +1,73 @@
+// nib is a powerful lib for stylus that provides cross-browser css3 mixins.
+// No more vendor prefixes. http://visionmedia.github.com/nib/
+@import 'nib'
+@import '_theme'
+
+// Apply a natural box layout model to all elements.
+// http://paulirish.com/2012/box-sizing-border-box-ftw/
+*
+  box-sizing: border-box
+
+.avatar
+  width: 60px
+  height: 60px
+  border-radius: 5px
+
+.header
+  &-auth
+    float: right
+    margin-top: 2px
+    .logged-out &
+      margin-top: 7px
+    // &-button
+      
+  &-avatar
+    width: 30px
+    height: 30px
+
+.thread
+  &-posts
+    position: relative
+    top: -20px
+    padding-top: 5px
+  &-post
+    position: relative
+    padding-top: 20px
+    clearfix()
+    &-avatar-container
+      position: relative
+      display: block
+      float: left
+    &-content
+      min-height: 60px
+      margin-left: 70px
+      padding: 0 5px 5px 5px
+    &-author
+      margin-right: 3px
+      font-family: 'OpenSansBold', "Helvetica Neue", Helvetica, Arial, sans-serif
+      font-weight: normal
+    &-metadata
+      float: right
+      font-style: italic
+  &-new-post
+    &-body
+      width: 100%
+      height: 100px
+      margin-top: 5px
+    &-create-button
+      margin-top: 10px
+      float: right
+
+.user
+  &-repo-list
+    padding-left: 20px
+    li
+      font-size: 25px
+
+.repo
+  &-thread
+    padding: 10px 0
+    border-image: url('../images/hr.gif') 3 0 repeat
+    border-width: 3px 0 0 0
+    &:last-child
+      border-bottom-width: 3px
