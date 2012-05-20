@@ -1,10 +1,10 @@
 PageView = require 'views/page_view'
-template = require 'views/templates/thread_page'
+template = require 'views/templates/topic_page'
 Collection = require 'models/collection'
 Post = require 'models/post'
 PostsView = require 'views/posts_view'
 
-module.exports = class ThreadPageView extends PageView
+module.exports = class TopicPageView extends PageView
   template: template
 
   renderSubviews: ->
@@ -12,5 +12,5 @@ module.exports = class ThreadPageView extends PageView
     posts.url = @model.url() + '/posts/'
     @subview 'posts', new PostsView
       collection: posts,
-      container: @$('.thread-posts')
+      container: @$('.topic-posts')
     posts.fetch()

@@ -1,12 +1,12 @@
-<a class="thread-post-avatar-container" href="/{{user.login}}">
-  <img class="thread-post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
+<a class="topic-post-avatar-container" href="/{{user.login}}">
+  <img class="topic-post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
 </a>
-<div class="thread-post-content">
-  <div class="thread-post-header">
-    <a class="thread-post-author" href="/{{user.login}}">{{user.login}}</a>
-    <time class="thread-post-metadata thread-post-date">{{#date}}{{created_at}}{{/date}}</time>
+<div class="topic-post-content">
+  <div class="topic-post-header">
+    <a class="topic-post-author" href="/{{user.login}}">{{user.login}}</a>
+    <time class="topic-post-metadata topic-post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
-  <div class="thread-post-text">
+  <div class="topic-post-text">
     <p>{{text}}</p>
   </div>
 </div>

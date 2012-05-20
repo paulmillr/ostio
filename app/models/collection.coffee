@@ -12,5 +12,5 @@ module.exports = class Collection extends ChaplinCollection
     "
 /users/#{@urlParams.login}
 /repos/#{@urlParams.repoName}
-/threads/#{@urlParams.threadNumber}
+/topics/#{@urlParams.topicNumber}
 /posts/"
