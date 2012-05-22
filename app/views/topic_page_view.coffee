@@ -9,7 +9,7 @@ module.exports = class TopicPageView extends PageView
 
   renderSubviews: ->
     posts = new Collection null, model: Post
-    posts.url = @model.url() + '/posts/'
+    posts.url = @model.url('/posts/')
     @subview 'posts', new PostsView
       collection: posts,
       container: @$('.topic-posts')

@@ -9,7 +9,7 @@ module.exports = class UserPageView extends PageView
 
   renderSubviews: ->
     repos = new Collection null, model: Repo
-    repos.url = @model.url() + '/repos/'
+    repos.url = @model.url('/repos/')
     @subview 'repos', new ReposView
       collection: repos,
       container: @$('.user-repo-list-container')

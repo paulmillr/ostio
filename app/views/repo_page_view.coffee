@@ -9,7 +9,7 @@ module.exports = class RepoPageView extends PageView
 
   renderSubviews: ->
     topics = new Collection null, model: Topic
-    topics.url = @model.url() + '/topics/'
+    topics.url = @model.url('/topics/')
     @subview 'topics', new TopicsView
       collection: topics,
       container: @$('.repo-topic-list-container')

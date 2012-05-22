@@ -2,7 +2,7 @@ mediator = require 'mediator'
 ChaplinModel = require 'chaplin/models/model'
 
 module.exports = class Model extends ChaplinModel
-  apiRoot: 'http://localhost:3000'
+  apiRoot: 'http://localhost:3000/v1'
   urlKey: 'id'
 
   urlPath: ->
@@ -20,12 +20,12 @@ module.exports = class Model extends ChaplinModel
     else
       throw new Error('Model must redefine urlPath')
 
-  url: ->
+  url: (data = '') ->
     base = @urlRoot()
     full = if @get(@urlKey)?
-      base + encodeURIComponent @get(@urlKey)
+      base + encodeURIComponent(@get(@urlKey)) + data
     else
-      base
+      base + data
     sep = if full.indexOf('?') >= 0 then '&' else '?'
     params = @urlParams()
     payload = _.keys(params)

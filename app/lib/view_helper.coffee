@@ -35,7 +35,7 @@ Handlebars.registerHelper 'without', (context, options) ->
 
 # Evaluate block with context being current user
 Handlebars.registerHelper 'with_user', (options) ->
-  context = mediator.user or {}
+  context = mediator.user.getAttributes()
   Handlebars.helpers.with.call(this, context, options)
 
 Handlebars.registerHelper 'gravatar', (options) ->
