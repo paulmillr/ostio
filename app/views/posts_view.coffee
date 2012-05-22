@@ -4,6 +4,7 @@ template = require 'views/templates/posts'
 
 module.exports = class PostsView extends CollectionView
   template: template
+  className: 'topic-posts'
 
   getView: (item) ->
     new Post model: item

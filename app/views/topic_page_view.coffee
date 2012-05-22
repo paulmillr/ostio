@@ -13,7 +13,7 @@ module.exports = class TopicPageView extends PageView
     posts.url = @model.url('/posts/')
     @subview 'posts', new PostsView
       collection: posts,
-      container: @$('.topic-posts')
+      container: @$('.topic-posts-container')
     posts.fetch()
     @subscribeEvent 'new:post', (post) =>
       posts.push post
