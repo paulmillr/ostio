@@ -5,6 +5,7 @@ Your open-source talks place.
 Ostio is a [Backbone.js](http://backbonejs.org/) + [Chaplin](https://github.com/chaplinjs/chaplin) application, that uses [Brunch](http://brunch.io/) for building.
 
 * Clone the project.
+* Install brunch via nodejs: `npm install -g brunch`
 * Run `brunch w -s` (or `brunch b` if you'll listen webserver on `public/`)
 * Open `localhost:3333`
 * Run [backend](https://github.com/paulmillr/ostio-api)
