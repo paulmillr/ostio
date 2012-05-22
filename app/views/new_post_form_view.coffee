@@ -19,4 +19,5 @@ module.exports = class NewPostFormView extends View
     @delegate 'click', '.topic-new-post-create-button', (event) =>
       @model.save().success (response) =>
         mediator.publish 'new:post', response
+        @trigger 'dispose'
         @dispose()

@@ -334,7 +334,6 @@ module.exports = class View extends Backbone.View
   dispose: ->
     ###console.debug 'View#dispose', this, 'disposed?', @disposed###
     return if @disposed
-    @trigger 'dispose'
 
     # Dispose subviews
     view.dispose() for view in @subviews
