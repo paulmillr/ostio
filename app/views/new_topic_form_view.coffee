@@ -14,7 +14,7 @@ module.exports = class NewTopicFormView extends View
     @post = new Post({topic: @model})
     @delegate 'click', '.new-topic-form-toggle-fields-button', (event) =>
       $(event.currentTarget).toggleClass('hover')
-      @$('.new-topic-form-fields').toggleClass('hidden')
+      @$('.new-topic-form-fields').toggleClass('visible')
     
     @delegate 'keyup keydown', '.new-topic-form-title', (event) =>
       @model.set(title: $(event.currentTarget).val())

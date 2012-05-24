@@ -1,6 +1,6 @@
 Model = require 'models/model'
 
-module.exports = class Navigation extends Model
+module.exports = class Header extends Model
   defaults:
     items: [
       {href: 'http://brunch.readthedocs.org/', title: 'Documentation'},

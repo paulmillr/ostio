@@ -1,7 +1,7 @@
 mediator = require 'mediator'
 ChaplinApplication = require 'chaplin/application'
 SessionController = require 'controllers/session_controller'
-NavigationController = require 'controllers/navigation_controller'
+HeaderController = require 'controllers/header_controller'
 SidebarController = require 'controllers/sidebar_controller'
 routes = require 'routes'
 
@@ -18,7 +18,7 @@ module.exports = class Application extends ChaplinApplication
     # ------------------------------
 
     new SessionController()
-    new NavigationController()
+    new HeaderController()
     new SidebarController()
 
     # Initialize the router

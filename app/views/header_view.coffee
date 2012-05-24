@@ -1,12 +1,13 @@
 mediator = require 'mediator'
 View = require 'views/view'
-template = require 'views/templates/navigation'
+template = require 'views/templates/header'
 
-module.exports = class NavigationView extends View
+module.exports = class HeaderView extends View
   template: template
-  id: 'navigation'
-  className: 'navigation'
-  containerSelector: '#navigation-container'
+  tagName: 'header'
+  id: 'header'
+  className: 'header'
+  containerSelector: '#header-container'
   autoRender: true
 
   initialize: ->
