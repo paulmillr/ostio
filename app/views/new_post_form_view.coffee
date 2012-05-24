@@ -11,10 +11,8 @@ module.exports = class NewPostFormView extends View
   initialize: ->
     super
     @pass 'text', '.topic-new-post-body'
-    cache = null
     @delegate 'keyup keydown', '.topic-new-post-body', (event) =>
-      cache ?= @$('.topic-new-post-body')
-      @model.set(text: cache.val())
+      @model.set(text: $(event.currentTarget).val())
 
     @delegate 'click', '.topic-new-post-create-button', (event) =>
       @model.save().success (response) =>

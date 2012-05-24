@@ -65,9 +65,30 @@
       font-size: 25px
 
 .repo
+  &-topic-list-container
+    margin-top: 10px
   &-topic
     padding: 10px 0
     border-image: url('../images/hr.gif') 3 0 repeat
     border-width: 3px 0 0 0
     &:last-child
       border-bottom-width: 3px
+
+.new-topic-form
+  padding: 10px 0
+  &-toggle-fields-button
+    &-container
+      text-align: right
+  &-title, &-text
+    padding: 6px
+  &-title
+    width: 50%
+    font-size: 25px
+    font-weight: bold
+    color: #444
+  &-text
+    width: 100%
+    height: 200px
+    margin: 10px 0
+  &-submit-button-container
+    text-align: right
