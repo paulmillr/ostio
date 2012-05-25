@@ -88,22 +88,14 @@ module.exports = class ApplicationView # This class does not extend View
 
   initLinkRouting: ->
     # Handle links
-    eventName = if 'ontouchstart' of document.documentElement
-      'touchstart'
-    else
-      'mousedown'
     $(document)
-      .on(eventName, '.go-to', @goToHandler)
-      .on(eventName, 'a', @openLink)
+      .on('click', '.go-to', @goToHandler)
+      .on('click', 'a', @openLink)
 
   stopLinkRouting: ->
-    eventName = if 'ontouchstart' of document.documentElement
-      'touchstart'
-    else
-      'mousedown'
     $(document)
-      .off(eventName, '.go-to', @goToHandler)
-      .off(eventName, 'a', @openLink)
+      .off('click', '.go-to', @goToHandler)
+      .off('click', 'a', @openLink)
 
   # Handle all clicks on A elements and try to route them internally
   openLink: (event) =>

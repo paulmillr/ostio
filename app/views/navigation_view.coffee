@@ -6,11 +6,10 @@ module.exports = class NavigationView extends View
   tagName: 'nav'
   className: 'navigation'
   containerSelector: '#navigation-container'
-  autoRender: true
 
   initialize: ->
     super
     @modelBind 'change', @render
     @subscribeEvent 'navigation:change', (attributes) =>
-      @model.clear()
+      @model.clear(silent: yes)
       @model.set attributes
