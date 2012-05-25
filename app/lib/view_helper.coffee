@@ -44,3 +44,6 @@ Handlebars.registerHelper 'gravatar', (options) ->
 Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
   new Handlebars.SafeString moment(date).fromNow()
+
+Handlebars.registerHelper 'markdown', (options) ->
+  new Handlebars.SafeString marked options.fn this
