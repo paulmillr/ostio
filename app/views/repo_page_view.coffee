@@ -8,6 +8,11 @@ TopicsView = require 'views/topics_view'
 module.exports = class RepoPageView extends PageView
   template: template
 
+  getNavigationData: ->
+    gravatar_id: @model.get('user').get('gravatar_id')
+    user_login: @model.get('user').get('login')
+    repo_name: @model.get('name')
+
   renderSubviews: ->
     topics = new Collection null, model: Topic
     topics.url = @model.url('/topics/')

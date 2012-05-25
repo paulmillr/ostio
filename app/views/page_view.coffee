@@ -1,3 +1,4 @@
+mediator = require 'mediator'
 View = require 'views/view'
 template = require 'views/templates/page'
 
@@ -14,6 +15,9 @@ module.exports = class PageView extends View
         @render() unless rendered
         rendered = yes
 
+  getNavigationData: ->
+    {}
+
   renderSubviews: ->
     return
 
@@ -22,3 +26,4 @@ module.exports = class PageView extends View
     unless @renderedSubviews
       @renderSubviews()
       @renderedSubviews = yes
+    mediator.publish 'navigation:change', @getNavigationData()

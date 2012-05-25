@@ -7,6 +7,10 @@ ReposView = require 'views/repos_view'
 module.exports = class UserPageView extends PageView
   template: template
 
+  getNavigationData: ->
+    gravatar_id: @model.get('gravatar_id'),
+    user_login: @model.get('login')
+
   renderSubviews: ->
     repos = new Collection null, model: Repo
     repos.url = @model.url('/repos/')

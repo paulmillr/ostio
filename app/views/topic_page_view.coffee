@@ -8,6 +8,12 @@ NewPostFormView = require 'views/new_post_form_view'
 module.exports = class TopicPageView extends PageView
   template: template
 
+  getNavigationData: ->
+    gravatar_id: @model.get('repo').get('user').get('gravatar_id'),
+    user_login: @model.get('repo').get('user').get('login'),
+    repo_name: @model.get('repo').get('name'),
+    topic_number: @model.get('number')
+
   renderSubviews: ->
     posts = new Collection null, model: Post
     posts.url = @model.url('/posts/')
