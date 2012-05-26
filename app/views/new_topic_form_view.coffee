@@ -5,7 +5,7 @@ Post = require 'models/post'
 module.exports = class NewTopicFormView extends FormView
   template: template
   className: 'new-topic-form'
-  saveEvent: 'new:topic'
+  saveEvent: 'topic:new'
 
   initialize: ->
     super
