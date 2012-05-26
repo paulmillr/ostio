@@ -15,4 +15,5 @@ module.exports = class FormView extends View
     @model.save()
       .success (response) =>
         @publishSave response
+        @trigger 'dispose'
         @dispose()
