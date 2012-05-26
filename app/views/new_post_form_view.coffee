@@ -1,29 +1,20 @@
-mediator = require 'mediator'
-View = require 'views/view'
+FormView = require 'views/form_view'
 template = require 'views/templates/new_post_form'
 
-module.exports = class NewPostFormView extends View
+module.exports = class NewPostFormView extends FormView
   template: template
-  autoRender: yes
   className: 'topic-post topic-post-create'
   tagName: 'article'
+  saveEvent: 'post:new'
 
   initialize: ->
     super
     @pass 'text', '.topic-new-post-body'
+    @delegate 'keyup keydown', '.topic-new-post-body', @changeText
 
-    # Update model data by default, save on ⌘R.
-    @delegate 'keyup keydown', '.topic-new-post-body', (event) =>
-      if event.metaKey and event.keyCode is 13
-        @save()
-      else
-        @model.set(text: $(event.currentTarget).val())
-
-    # Save on button submit.
-    @delegate 'click', '.topic-new-post-create-button', @save
-
-  save: (event) =>
-    @model.save().success (response) =>
-      mediator.publish 'new:post', response
-      @trigger 'dispose'
-      @dispose()
+  # Update model data by default, save on ⌘R.
+  changeText: (event) =>
+    if event.metaKey and event.keyCode is 13
+      @save()
+    else
+      @model.set(text: $(event.currentTarget).val())

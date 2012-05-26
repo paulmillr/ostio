@@ -21,7 +21,7 @@ module.exports = class TopicPageView extends PageView
       collection: posts,
       container: @$('.topic-posts-container')
     posts.fetch()
-    @subscribeEvent 'new:post', (post) =>
+    @subscribeEvent 'post:new', (post) =>
       posts.push post
 
     createNewPost = =>

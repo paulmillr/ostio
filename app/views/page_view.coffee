@@ -1,9 +1,7 @@
 mediator = require 'mediator'
 View = require 'views/view'
-template = require 'views/templates/page'
 
 module.exports = class PageView extends View
-  template: template
   renderedSubviews: no
   containerSelector: '#content-container'
 

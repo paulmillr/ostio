@@ -20,7 +20,7 @@ module.exports = class RepoPageView extends PageView
       collection: topics,
       container: @$('.repo-topic-list-container')
     topics.fetch()
-    @subscribeEvent 'new:topic', (topic) =>
+    @subscribeEvent 'topic:new', (topic) =>
       topics.unshift topic
 
     createNewTopic = =>
