@@ -8,6 +8,19 @@
 *
   box-sizing: border-box
 
+slide-down(slided-height, duration, type = ease-in)
+  height: 0
+  visibility: hidden
+  opacity: 0
+  transition: height duration type, visibility duration type, opacity duration type
+  &.visible
+    height: slided-height
+    visibility: visible
+    opacity: 1
+
+textarea:disabled
+  background-color: #d5d5d5
+
 .avatar
   width: 60px
   height: 60px
@@ -33,18 +46,17 @@
 .page-container
   position: relative
 
+.content-container
+  padding-top: 10px
+
 .navigation
   > h2
     margin-bottom: 0
 
 .topic
-  &-posts
-    position: relative
-    top: -20px
-    padding-top: 5px
   &-post
     position: relative
-    padding-top: 20px
+    padding: 5px 0
     clearfix()
     &-avatar-container
       position: relative
@@ -66,6 +78,7 @@
       width: 100%
       height: 100px
       margin-top: 5px
+      padding: 5px
     &-create-button
       margin-top: 10px
       float: right
@@ -77,8 +90,6 @@
       font-size: 25px
 
 .repo
-  &-topic-list-container
-    margin-top: 10px
   &-topic
     padding: 10px 0
     border-image: url('../images/hr.gif') 3 0 repeat
@@ -86,18 +97,11 @@
     &:last-child
       border-bottom-width: 3px
 
-
 .new-topic-form
-  padding: 10px 0
   &-fields
-    height: 0
-    visibility: hidden
-    opacity: 0
-    transition: opacity 0.3s ease-in, visibility 0.3s ease-in
+    slide-down(311px, ease-in, 0.3s)
     &.visible
-      height: auto
-      visibility: visible
-      opacity: 1
+      padding-bottom: 10px
   &-toggle-fields-button
     &-container
       text-align: right

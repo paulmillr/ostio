@@ -15,7 +15,7 @@ module.exports = class NewTopicFormView extends FormView
     @delegate 'keyup keydown', '.new-topic-form-text', @changeText
 
   toggleFields: (event) =>
-    $(event.currentTarget).toggleClass('hover')
+    $(event.currentTarget).toggleClass('active')
     @$('.new-topic-form-fields').toggleClass('visible')
 
   changeTitle: (event) =>
@@ -32,9 +32,12 @@ module.exports = class NewTopicFormView extends FormView
       .success (response) =>
         @post.save()
           .success (postResponse) =>
-            @publishSave response
-            @trigger 'dispose'
-            @dispose()
+            @$('.new-topic-form-toggle-fields-button').click()
+            setTimeout =>
+              @publishSave response
+              @trigger 'dispose'
+              @dispose()
+            , 300
           .error (error) =>
             console.error 'NewTopicFormView#save', error
             @model.destroy()

@@ -197,11 +197,6 @@ dt
     font-size: 40px
     line-height: 36px
 
-.content-container
-  // max-width: 950px
-  // margin: 0 auto
-  // padding: 70px 20px 50px 20px
-
 .button
   color: white
   border: 1px solid #5d910b
@@ -214,9 +209,8 @@ dt
   font-size: 14px
   display: inline-block
   text-align: center
-
-.button:hover, .button.hover
-  background: linear-gradient(top, #749619, #527f0e)
-  background-color: #659e10
-  border: 1px solid #527f0e
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0)
+  &:active, &.active
+    background: linear-gradient(top, #749619, #527f0e)
+    background-color: #659e10
+    border: 1px solid #527f0e
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0)
