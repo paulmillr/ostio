@@ -9,6 +9,7 @@ module.exports = class NewPostFormView extends FormView
 
   initialize: ->
     super
+    @subscribeEvent 'loginStatus', @render
     @pass 'text', '.topic-new-post-body'
     @delegate 'keyup keydown', '.topic-new-post-body', @changeText
 
