@@ -2,7 +2,7 @@ mediator = require 'mediator'
 ServiceProvider = require 'lib/services/service_provider'
 
 module.exports = class Ostio extends ServiceProvider
-  baseUrl: 'http://dev.ost.io:3000'
+  baseUrl: 'http://ost.io:3000'
 
   constructor: ->
     super
