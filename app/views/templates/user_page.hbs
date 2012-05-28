@@ -1,1 +1,35 @@
-<div class="user-repo-list-container"></div>
+<div class="user-repo-sync-container">
+  <div class="user-repo-sync">
+    <div class="user-repo-sync-button-container">
+      <button class="button user-repo-sync-button">Sync GitHub repos</button>
+    </div>
+  </div>
+</div>
+
+{{#if organizations}}
+  <div class="user-organization-list-container">
+    <h4>Organizations</h4>
+    <div class="user-organization-list">
+      {{#each organizations}}
+        <a class="user-organization organization" href="/{{this.login}}">
+          <img class="avatar" src="{{#gravatar}}{{this.gravatar_id}}{{/gravatar}}" />
+      </a>
+      {{/each}}
+    </div>
+  </div>
+{{else}}
+  <div class="user-organization-list-container">
+    <h4>Owners</h4>
+    <div class="user-organization-list">
+      {{#each owners}}
+        <a class="user-organization organization" href="/{{this.login}}">
+          <img class="avatar" src="{{#gravatar}}{{this.gravatar_id}}{{/gravatar}}" />
+      </a>
+      {{/each}}
+    </div>
+  </div>
+{{/if}}
+
+<div class="user-repo-list-container">
+  <h4>Repositories</h4>
+</div>

@@ -2,7 +2,7 @@ mediator = require 'mediator'
 ChaplinModel = require 'chaplin/models/model'
 
 module.exports = class Model extends ChaplinModel
-  apiRoot: 'http://localhost:3000/v1'
+  apiRoot: 'http://dev.ost.io:3000/v1'
   urlKey: 'id'
 
   urlPath: ->

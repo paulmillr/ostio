@@ -8,6 +8,13 @@
 *
   box-sizing: border-box
 
+nav-button()
+  text-align: right
+  position: absolute
+  top: 0
+  right: 0
+  margin: 9px 0
+
 slide-down($slided-height, $duration, $type = ease-in)
   height: 0
   visibility: hidden
@@ -88,11 +95,14 @@ textarea:disabled
       float: right
 
 .user
+  &-repo-sync-button
+    &-container
+      nav-button()
   &-repo-list
     padding-left: 20px
     li
       font-size: 25px
-  &-organization-list
+  &-organization-list-container
     position: relative
     float: right
     width: 220px
@@ -121,11 +131,7 @@ textarea:disabled
       padding-bottom: 10px
   &-toggle-fields-button
     &-container
-      text-align: right
-      position: absolute
-      top: 0
-      right: 0
-      margin: 9px 0
+      nav-button()
   &-title, &-text
     padding: 6px
   &-title

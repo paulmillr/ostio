@@ -1,12 +1,13 @@
-<div class="new-topic-form-toggle-fields-button-container">
-  <button class="button new-topic-form-toggle-fields-button">Create new topic</button>
-</div>
-
-<div class="new-topic-form-fields">
-  <input class="new-topic-form-title" type="text" name="new-topic-form-title" value="" placeholder="Title">
-  <textarea class="new-topic-form-text" placeholder="Post body"></textarea>
-  <div class="new-topic-form-submit-button-container">
-    <button class="new-topic-form-submit-button save-form-data button">Submit new topic</button>
+{{#if_logged_in}}
+  <div class="new-topic-form-toggle-fields-button-container">
+    <button class="button new-topic-form-toggle-fields-button">Create new topic</button>
   </div>
-</div>
 
+  <div class="new-topic-form-fields">
+    <input class="new-topic-form-title" type="text" name="new-topic-form-title" value="" placeholder="Title">
+    <textarea class="new-topic-form-text" placeholder="Post body"></textarea>
+    <div class="new-topic-form-submit-button-container">
+      <button class="new-topic-form-submit-button save-form-data button">Submit new topic</button>
+    </div>
+  </div>
+{{/if_logged_in}}
