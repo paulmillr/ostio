@@ -6,6 +6,7 @@ module.exports = class FormView extends View
 
   initialize: ->
     super
+    @subscribeEvent 'loginStatus', @render
     @delegate 'click', '.save-form-data', @save
 
   publishSave: (response) ->
