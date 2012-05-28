@@ -19,8 +19,8 @@ Handlebars.registerHelper 'if_logged_in', (options) ->
 Handlebars.registerHelper 'if_has_sync_repo_permission', (options) ->
   user = mediator.user
   if (user and
-      user.get('login') is @login or
-      @login in user.get('organizations'))
+      (user.get('login') is @login or
+      @login in user.get('organizations')))
     options.fn(this)
   else
     options.inverse(this)
