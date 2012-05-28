@@ -16,6 +16,19 @@ Handlebars.registerHelper 'if_logged_in', (options) ->
   else
     options.inverse(this)
 
+Handlebars.registerHelper 'if_has_sync_repo_permission', (options) ->
+  if (mediator.user?.get('login') is @login or
+      @login in mediator.user.get('organizations'))
+    options.fn(this)
+  else
+    options.inverse(this)
+
+Handlebars.registerHelper 'if_user_type_is_user', (options) ->
+  if mediator.user?.get('type') is 'User'
+    options.fn(this)
+  else
+    options.inverse(this)
+
 # Map helpers
 # -----------
 

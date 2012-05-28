@@ -14,10 +14,4 @@ module.exports = class Topic extends Model
     Post = require 'models/post'
     user = new User _.extend response.repo.user, {}
     repo = new Repo _.extend response.repo, {user}
-    topic = _.extend response, {repo}
-    first = topic.first_post
-    if first
-      firstPost = new Post Post::parse(_.extend first, {topic})
-      _.extend topic, {first_post: _.extend firstPost, {topic}}
-    else
-      topic
+    _.extend response, {repo}

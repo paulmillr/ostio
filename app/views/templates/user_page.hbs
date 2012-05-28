@@ -1,12 +1,14 @@
-<div class="user-repo-sync-container">
-  <div class="user-repo-sync">
-    <div class="user-repo-sync-button-container">
-      <button class="button user-repo-sync-button">Sync GitHub repos</button>
+{{#if_has_sync_repo_permission}}
+  <div class="user-repo-sync-container">
+    <div class="user-repo-sync">
+      <div class="user-repo-sync-button-container">
+        <button class="button user-repo-sync-button">Sync GitHub repos</button>
+      </div>
     </div>
   </div>
-</div>
+{{/if_has_sync_repo_permission}}
 
-{{#if organizations}}
+{{#if_user_type_is_user}}
   <div class="user-organization-list-container">
     <h4>Organizations</h4>
     <div class="user-organization-list">
@@ -28,7 +30,7 @@
       {{/each}}
     </div>
   </div>
-{{/if}}
+{{/if_user_type_is_user}}
 
 <div class="user-repo-list-container">
   <h4>Repositories</h4>
