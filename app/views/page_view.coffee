@@ -1,5 +1,6 @@
 mediator = require 'mediator'
 View = require 'views/view'
+socket = require 'lib/socket'
 
 module.exports = class PageView extends View
   renderedSubviews: no
@@ -25,3 +26,7 @@ module.exports = class PageView extends View
       @renderSubviews()
       @renderedSubviews = yes
     mediator.publish 'navigation:change', @getNavigationData()
+
+  dispose: ->
+    super
+    socket.removeAllListeners()

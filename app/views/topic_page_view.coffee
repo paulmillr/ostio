@@ -4,6 +4,7 @@ Collection = require 'models/collection'
 Post = require 'models/post'
 PostsView = require 'views/posts_view'
 NewPostFormView = require 'views/new_post_form_view'
+socket = require 'lib/socket'
 
 module.exports = class TopicPageView extends PageView
   template: template
@@ -20,7 +21,9 @@ module.exports = class TopicPageView extends PageView
     @subview 'posts', new PostsView
       collection: posts,
       container: @$('.topic-posts-container')
-    posts.fetch()
+    posts.fetch().success =>
+      socket.on "post:new:#{@model.id}", (post) =>
+        posts.push post
     @subscribeEvent 'post:new', (post) =>
       posts.push post
 

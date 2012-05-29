@@ -4,6 +4,7 @@ Collection = require 'models/collection'
 Topic = require 'models/topic'
 NewTopicFormView = require 'views/new_topic_form_view'
 TopicsView = require 'views/topics_view'
+socket = require 'lib/socket'
 
 module.exports = class RepoPageView extends PageView
   template: template
@@ -19,7 +20,9 @@ module.exports = class RepoPageView extends PageView
     @subview 'topics', new TopicsView
       collection: topics,
       container: @$('.repo-topic-list-container')
-    topics.fetch()
+    topics.fetch().success =>
+      socket.on "topic:new:#{@model.id}", (topic) =>
+        topics.unshift topic
     @subscribeEvent 'topic:new', (topic) =>
       topics.unshift topic
 

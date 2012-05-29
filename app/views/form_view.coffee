@@ -1,5 +1,6 @@
 mediator = require 'mediator'
 View = require 'views/view'
+socket = require 'lib/socket'
 
 module.exports = class FormView extends View
   autoRender: yes
@@ -10,7 +11,9 @@ module.exports = class FormView extends View
     @delegate 'click', '.save-form-data', @save
 
   publishSave: (response) ->
-    mediator.publish @saveEvent, response if @saveEvent
+    return unless @saveEvent
+    socket.emit @saveEvent, response
+    mediator.publish @saveEvent, response
 
   save: (event) =>
     @model.save()
