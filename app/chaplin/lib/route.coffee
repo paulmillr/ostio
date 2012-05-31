@@ -43,7 +43,7 @@ module.exports = class Route
     # Save parameter name
     @paramNames.push paramName
     # Replace with a character class
-    '([\\w-]+)'
+    '([\\w.-]+)'
 
   # Test if the route matches to a path (called by Backbone.History#loadUrl)
   test: (path) ->
