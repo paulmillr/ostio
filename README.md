@@ -10,6 +10,8 @@ Ostio is a [Backbone.js](http://backbonejs.org/) + [Chaplin](https://github.com/
 * Open `localhost:3333`
 * Run [backend](https://github.com/paulmillr/ostio-api)
 
+Deploy via: `git pull && sudo ./bin/deploy`
+
 ## License
 The MIT License (MIT)
 
