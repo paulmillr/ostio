@@ -50,7 +50,7 @@ Handlebars.registerHelper 'without', (context, options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 # Make 'with' behave a little more mustachey
-Handlebars.registerHelper 'with_config', (context, options) ->
+Handlebars.registerHelper 'with_config', (options) ->
   context = config
   Handlebars.helpers.with.call(this, context, options)
 
