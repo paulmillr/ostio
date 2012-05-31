@@ -3,6 +3,7 @@ template = require 'views/templates/user_page'
 Collection = require 'models/collection'
 Repo = require 'models/repo'
 ReposView = require 'views/repos_view'
+UserRepoSyncView = require 'views/user_repo_sync_view'
 
 module.exports = class UserPageView extends PageView
   template: template
@@ -19,17 +20,14 @@ module.exports = class UserPageView extends PageView
       container: @$('.user-repo-list-container')
     repos.fetch()
 
-    syncRepos = new Collection null, model: Repo
-    syncRepos.url = @model.url('/sync_repos/')
-    syncRepos.fetch = (options) =>
-      $.post syncRepos.url
-
-    @delegate 'click', '.user-repo-sync-button', (event) =>
-      $button = $(event.currentTarget)
-      return if $button.attr('disabled')
-      $button.attr('disabled', 'disabled')
-      syncRepos.fetch()
-        .success =>
-          repos.fetch()
-            .success =>
-              $button.removeAttr('disabled')
+    repoSync = new Collection null, model: Repo
+    repoSync.url = @model.url('/sync_repos/')
+    repoSync.fetch = (options) =>
+      $.post repoSync.url
+    repoSyncView = new UserRepoSyncView
+      collection: repoSync,
+      container: @$('.user-repo-sync-container'),
+      login: @model.get('login')
+    @subview 'repoSync', repoSyncView
+    repoSyncView.on 'sync', =>
+      repos.fetch()
