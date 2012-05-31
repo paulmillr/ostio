@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 git pull && \
   brunch b -m && \
   sudo rm -rf /home/ostio/public && \
