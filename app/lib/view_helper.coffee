@@ -1,3 +1,4 @@
+config = require 'config'
 mediator = require 'mediator'
 utils = require 'chaplin/lib/utils'
 
@@ -46,6 +47,11 @@ Handlebars.registerHelper 'without', (context, options) ->
   inverse = options.inverse
   options.inverse = options.fn
   options.fn = inverse
+  Handlebars.helpers.with.call(this, context, options)
+
+# Make 'with' behave a little more mustachey
+Handlebars.registerHelper 'with_config', (context, options) ->
+  context = config
   Handlebars.helpers.with.call(this, context, options)
 
 # Evaluate block with context being current user

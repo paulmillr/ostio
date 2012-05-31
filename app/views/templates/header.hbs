@@ -6,6 +6,8 @@
       <a href="/{{login}}">{{login}}</a>
     {{/with_user}}
   {{else}}
-    <button class="header-login-button button go-to" data-href="http://ost.io:3000/auth/github">Login with GitHub</button>
+    {{#with_config}}
+      <button class="header-login-button button go-to" data-href="{{api.root}}/auth/github">Login with GitHub</button>
+    {{/with_config}}
   {{/if_logged_in}}
 </div>
