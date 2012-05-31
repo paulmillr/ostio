@@ -1,0 +1,4 @@
+git pull && \
+  brunch b -m && \
+  sudo rm -rf /home/ostio/public && \
+  sudo cp -r public /home/ostio
