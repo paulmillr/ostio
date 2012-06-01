@@ -4,6 +4,7 @@
     {{#with_user}}
       <a href="/{{login}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
       <a href="/{{login}}">{{login}}</a>
+      <a class="icon-logout" href="/logout/"></a>
     {{/with_user}}
   {{else}}
     {{#with_config}}

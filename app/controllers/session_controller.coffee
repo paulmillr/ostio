@@ -6,6 +6,8 @@ Ostio = require 'lib/services/ostio'
 LoginView = require 'views/login_view'
 
 module.exports = class SessionController extends Controller
+  historyURL: 'logout'
+
   # Service provider instances as static properties
   # This just hardcoded here to avoid async loading of service providers.
   # In the end you might want to do this.
