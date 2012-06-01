@@ -20,13 +20,15 @@ nav-button()
 
 slide-down($slided-height, $duration, $type = ease-in)
   height: 0
-  visibility: hidden
   opacity: 0
   transition: height $duration $type, visibility $duration $type, opacity $duration $type
+  input, textarea
+    display: none
   &.visible
     height: $slided-height
-    visibility: visible
     opacity: 1
+    input, textarea
+      display: inline
 
 .spinner
   width: 24px
@@ -151,3 +153,14 @@ textarea:disabled
     margin: 10px 0
   &-submit-button-container
     text-align: right
+
+@media all and (max-width: 700px)
+  .new-topic-form-toggle-fields-button-container,
+  .user-repo-sync-button-container
+    position: relative
+  .user-organization-list-container,
+  .user-owner-list-container
+    float: none
+    width: auto
+    text-align: left
+    direction: ltr
