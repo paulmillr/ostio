@@ -19,9 +19,14 @@ module.exports = class NewTopicFormView extends FormView
     @$('.new-topic-form-fields').toggleClass('visible')
 
   changeTitle: (event) =>
-    @model.set(title: $(event.currentTarget).val())
+    return unless event.currentTarget.validity.valid
+    if event.metaKey and event.keyCode is 13
+      @save()
+    else
+      @model.set(title: $(event.currentTarget).val())
 
   changeText: (event) =>
+    return unless event.currentTarget.validity.valid
     if event.metaKey and event.keyCode is 13
       @save()
     else

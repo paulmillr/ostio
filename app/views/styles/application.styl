@@ -8,6 +8,9 @@
 *
   box-sizing: border-box
 
+input:invalid, textarea:invalid
+  background-color: #f6f0f0
+
 nav-button()
   text-align: right
   position: absolute
@@ -24,6 +27,10 @@ slide-down($slided-height, $duration, $type = ease-in)
     height: $slided-height
     visibility: visible
     opacity: 1
+
+.spinner
+  background-image: url('../images/spinner.gif')
+  background-repeat: no-repeat
 
 textarea:disabled
   background-color: #d5d5d5

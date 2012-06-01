@@ -2,12 +2,18 @@ mediator = require 'mediator'
 View = require 'views/view'
 
 module.exports = class FormView extends View
+  tagName: 'form'
   autoRender: yes
 
   initialize: ->
     super
     @subscribeEvent 'loginStatus', @render
-    @delegate 'click', '.save-form-data', @save
+    @delegate 'submit', (event) =>
+      console.log 'Saving'
+      debugger
+      event.preventDefault()
+      @save event if event.currentTarget.checkValidity()
+    # @delegate 'click', '.save-form-data', @save
 
   publishSave: (response) ->
     mediator.publish @saveEvent, response if @saveEvent

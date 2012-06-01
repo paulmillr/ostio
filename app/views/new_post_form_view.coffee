@@ -4,7 +4,6 @@ template = require 'views/templates/new_post_form'
 module.exports = class NewPostFormView extends FormView
   template: template
   className: 'topic-post topic-post-create'
-  tagName: 'article'
   saveEvent: 'post:new'
 
   initialize: ->
