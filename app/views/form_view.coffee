@@ -1,5 +1,6 @@
 mediator = require 'mediator'
 View = require 'views/view'
+SpinnerView = require 'views/spinner_view'
 
 module.exports = class FormView extends View
   tagName: 'form'
@@ -9,18 +10,18 @@ module.exports = class FormView extends View
     super
     @subscribeEvent 'loginStatus', @render
     @delegate 'submit', (event) =>
-      console.log 'Saving'
-      debugger
       event.preventDefault()
       @save event if event.currentTarget.checkValidity()
-    # @delegate 'click', '.save-form-data', @save
 
   publishSave: (response) ->
     mediator.publish @saveEvent, response if @saveEvent
 
   save: (event) =>
+    spinner = new SpinnerView container: @$('.submit-form')
     @model.save()
       .success (response) =>
         @publishSave response
         @trigger 'dispose'
         @dispose()
+      .complete (response) =>
+        spinner.dispose()

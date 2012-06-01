@@ -1,6 +1,7 @@
 FormView = require 'views/form_view'
 template = require 'views/templates/new_topic_form'
 Post = require 'models/post'
+SpinnerView = require 'views/spinner_view'
 
 module.exports = class NewTopicFormView extends FormView
   template: template
@@ -33,6 +34,7 @@ module.exports = class NewTopicFormView extends FormView
       @post.set(text: $(event.currentTarget).val())
 
   save: (event) =>
+    spinner = new SpinnerView container: @$('.submit-form')
     @model.save()
       .success (response) =>
         @post.save()
@@ -46,3 +48,7 @@ module.exports = class NewTopicFormView extends FormView
           .error (error) =>
             console.error 'NewTopicFormView#save', error
             @model.destroy()
+          .complete =>
+            spinner.dispose()
+      .error =>
+        spinner.dispose()
