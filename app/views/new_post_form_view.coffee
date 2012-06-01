@@ -14,6 +14,6 @@ module.exports = class NewPostFormView extends FormView
   # Update model data by default, save on ⌘R.
   changeText: (event) =>
     if event.metaKey and event.keyCode is 13
-      @save()
+      @$el.trigger('submit')
     else
       @model.set(text: $(event.currentTarget).val())

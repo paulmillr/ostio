@@ -22,14 +22,14 @@ module.exports = class NewTopicFormView extends FormView
   changeTitle: (event) =>
     return unless event.currentTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @save()
+      @$el.trigger('submit')
     else
       @model.set(title: $(event.currentTarget).val())
 
   changeText: (event) =>
     return unless event.currentTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @save()
+      @$el.trigger('submit')
     else
       @post.set(text: $(event.currentTarget).val())
 
