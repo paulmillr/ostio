@@ -3,6 +3,8 @@ utils = require 'lib/utils'
 require 'lib/view_helper'
 
 module.exports = class View extends ChaplinView
+  dataset: ['id']
+
   # Override Chaplin.View::initialize in order to make stuff work.
   initialize: ->
     super
@@ -35,3 +37,9 @@ module.exports = class View extends ChaplinView
 
   getTemplateFunction: ->
     @template
+
+  render: ->
+    super
+    if @model?
+      @dataset.forEach (key) =>
+        @el.dataset[key] = @model.get(key)

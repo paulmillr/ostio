@@ -5,3 +5,4 @@ module.exports = class RepoView extends View
   template: template
   tagName: 'li'
   className: 'user-repo'
+  dataset: ['id', 'name']

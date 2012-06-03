@@ -5,3 +5,4 @@ module.exports = class UserView extends View
   template: template
   className: 'user'
   tagName: 'span'
+  dataset: ['id', 'login']
