@@ -1,6 +1,8 @@
 # Ostio
 Your open-source talks place.
 
+[![](http://brunch.io/images/screenshots/ostio.png)](http://ost.io/paulmillr)
+
 ## Getting started
 Ostio is a [Backbone.js](http://backbonejs.org/) + [Chaplin](https://github.com/chaplinjs/chaplin) application, that uses [Brunch](http://brunch.io/) for building.
 
