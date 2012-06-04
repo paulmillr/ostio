@@ -27,11 +27,11 @@ brunch plugins.
 structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 
 ### Other
-* HTML5Boilerplate: great template for html5 projects.
-* Underscore.js: needed for Backbone.js, a small set of utils.
-* Marked.js: renders GitHub-flavored Markdown.
-* Moment.js: lightweight javascript date library.
-* jQuery.
+* [HTML5Boilerplate](http://html5boilerplate.com): great template for html5 projects.
+* [Underscore.js](http://underscorejs.org): needed for Backbone.js, a small set of utils.
+* [Marked.js](https://github.com/chjj/marked): renders GitHub-flavored Markdown.
+* [Moment.js](http://momentjs.com): lightweight javascript date library.
+* [jQuery](http://jquery.com).
 
 ## Getting started
 * Clone the project.
