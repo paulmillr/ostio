@@ -50,8 +50,8 @@ module.exports = class Ostio extends ServiceProvider
   getLoginStatus: (callback = @loginStatusHandler, force = false) ->
     @getUserData().always(callback)
 
-  loginStatusHandler: (response) =>
-    if not response or response.error
+  loginStatusHandler: (response, status) =>
+    if not response or status is 'error'
       mediator.publish 'logout'
     else
       mediator.publish 'serviceProviderSession', _.extend response,

@@ -12,13 +12,13 @@ module.exports = class LoginView extends View
   # Expects the serviceProviders in the options
   initialize: (options) ->
     super
-    console.debug 'LoginView#initialize', @el, @$el, options, options.serviceProviders
+    # console.debug 'LoginView#initialize', @el, @$el, options, options.serviceProviders
     @initButtons options.serviceProviders
 
   # In this project we currently only have one service provider and therefore
   # one button. But this should allow for different service providers.
   initButtons: (serviceProviders) ->
-    console.debug 'LoginView#initButtons', serviceProviders
+    # console.debug 'LoginView#initButtons', serviceProviders
     
     for serviceProviderName, serviceProvider of serviceProviders
 
@@ -41,7 +41,7 @@ module.exports = class LoginView extends View
       serviceProvider.fail failed
 
   loginWith: (serviceProviderName, serviceProvider, e) ->
-    console.debug 'LoginView#loginWith', serviceProviderName, serviceProvider
+    # console.debug 'LoginView#loginWith', serviceProviderName, serviceProvider
     e.preventDefault()
     return unless serviceProvider.isLoaded()
     mediator.publish 'login:pickService', serviceProviderName
