@@ -1,9 +1,18 @@
 # Ostio
 Your open-source talks place.
 
+Ostio ("open-source talks") is a forum for open-source projects and the
+best place for discussing project stuff with other users. It is tightly
+integrated with GitHub. The main ostio mission is to replace mailing lists.
+
 [![](http://brunch.io/images/screenshots/ostio.png)](http://ost.io/paulmillr)
 
 ## Stack
+The stack is cloned from [brunch with chaplin](https://github.com/paulmillr/brunch-with-chaplin) skeleton.
+Use brunch with chaplin if you want to build new application:
+
+`brunch new <project name> --skeleton git://github.com/paulmillr/brunch-with-chaplin.git`
+
 ### Brunch
 [Brunch](http://brunch.io/) is a html5 application builder that's
 agnostic to programming langs and frameworks. In this case,
@@ -18,7 +27,11 @@ brunch plugins.
 structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 
 ### Other
-HTML5Boilerplate, 
+* HTML5Boilerplate: great template for html5 projects.
+* Underscore.js: needed for Backbone.js, a small set of utils.
+* Marked.js: renders GitHub-flavored Markdown.
+* Moment.js: lightweight javascript date library.
+* jQuery.
 
 ## Getting started
 * Clone the project.
