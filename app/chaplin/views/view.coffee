@@ -198,7 +198,7 @@ module.exports = class View extends Backbone.View
   pass: (attribute, selector) ->
     @modelBind "change:#{attribute}", (model, value) =>
       $el = @$(selector)
-      if $el.is(':input')
+      if $el.is('input')
         $el.val value
       else
         $el.text value
