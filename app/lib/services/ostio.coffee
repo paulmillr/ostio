@@ -18,10 +18,10 @@ module.exports = class Ostio extends ServiceProvider
   isLoaded: ->
     yes
 
-  ajax: (method, url, data) ->
+  ajax: (type, url, data) ->
     url = @baseUrl + url
     url += "?access_token=#{@accessToken}" if @accessToken
-    $[method] url, data
+    $.ajax {url, data, type, dataType: 'json'}
 
   # Trigger login popup
   triggerLogin: (loginContext) ->
