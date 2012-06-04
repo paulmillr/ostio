@@ -36,19 +36,19 @@ module.exports = class NewTopicFormView extends FormView
   save: (event) =>
     spinner = new SpinnerView container: @$('.submit-form')
     @model.save()
-      .success (response) =>
+      .done (response) =>
         @post.save()
-          .success (postResponse) =>
+          .done (postResponse) =>
             @$('.new-topic-form-toggle-fields-button').click()
             setTimeout =>
               @publishSave response
               @trigger 'dispose'
               @dispose()
             , 300
-          .error (error) =>
+          .fail (error) =>
             console.error 'NewTopicFormView#save', error
             @model.destroy()
-          .complete =>
+          .always =>
             spinner.dispose()
-      .error =>
+      .fail =>
         spinner.dispose()

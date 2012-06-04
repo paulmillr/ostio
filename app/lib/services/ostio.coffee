@@ -37,7 +37,7 @@ module.exports = class Ostio extends ServiceProvider
       # Publish the session
       @accessToken = response.accessToken
       localStorage.setItem 'accessToken', @accessToken
-      @getUserData().success(@processUserData)
+      @getUserData().done(@processUserData)
     else
       mediator.publish 'loginFail', provider: this, loginContext: loginContext
 

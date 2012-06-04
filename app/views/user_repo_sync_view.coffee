@@ -22,6 +22,6 @@ module.exports = class UserRepoSyncView extends View
     return if $button.attr('disabled')
     $button.attr('disabled', 'disabled')
     @collection.fetch()
-      .success =>
+      .done =>
         $button.removeAttr('disabled')
         @trigger 'sync'
