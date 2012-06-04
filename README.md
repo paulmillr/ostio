@@ -3,13 +3,28 @@ Your open-source talks place.
 
 [![](http://brunch.io/images/screenshots/ostio.png)](http://ost.io/paulmillr)
 
-## Getting started
-Ostio is a [Backbone.js](http://backbonejs.org/) + [Chaplin](https://github.com/chaplinjs/chaplin) application, that uses [Brunch](http://brunch.io/) for building.
+## Stack
+### Brunch
+[Brunch](http://brunch.io/) is a html5 application builder that's
+agnostic to programming langs and frameworks. In this case,
+CoffeeScript is used with Stylus, Handlebars.js templates and javascript libs.
 
+`config.coffee` contains brunch configuration, `package.json` contains
+brunch plugins.
+
+### Chaplin (+ Backbone.js)
+[Chaplin](https://github.com/chaplinjs/chaplin) is a framework on top of
+[Backbone.js](http://backbonejs.org/) that adds some great predefined
+structure, like `ModelView`, `Controller`, `mediator`, `Application`.
+
+### Other
+HTML5Boilerplate, 
+
+## Getting started
 * Clone the project.
 * Install brunch via nodejs: `npm install -g brunch`
 * Run `brunch w -s` (or `brunch b` if you'll listen webserver on `public/`)
-* Open `localhost:3333`
+* Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
 * Run [backend](https://github.com/paulmillr/ostio-api)
 
 Deploy via: `sudo sh bin/deploy`
