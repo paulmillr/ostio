@@ -74,5 +74,12 @@ Handlebars.registerHelper 'date', (options) ->
   new Handlebars.SafeString moment(date).fromNow()
 
 Handlebars.registerHelper 'markdown', (options) ->
-  string = options.fn(this).replace(/&#x60;/g, '`')
-  marked string
+  string = options.fn(this).replace /&(?:#x60|#x27|quot|lt|gt);/g, (substr, index) ->
+    switch substr
+      when '&#x60;' then '`'
+      when '&#x27;' then '\''
+      when '&quot;' then '"'
+      when '&lt;' then '<'
+      when '&gt;' then '>'
+      else substr
+  new Handlebars.SafeString marked string
