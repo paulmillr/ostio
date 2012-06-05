@@ -10,7 +10,7 @@
   font-weight: normal; font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+.icon-pencil-1, .icon-trash, .icon-logout, .icon-github {
   font-family: fontello;
   font-style: normal;
   speak: none;
