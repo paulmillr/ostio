@@ -3,13 +3,6 @@
 @import 'nib'
 @import '_theme'
 
-.screenshot
-  display: block
-  width: 580px
-  margin: 0 auto
-  &-container
-    display: block
-
 // Apply a natural box layout model to all elements.
 // http://paulirish.com/2012/box-sizing-border-box-ftw/
 *
@@ -20,6 +13,16 @@ input, textarea
 
 input:invalid, textarea:invalid
   background-color: #f6f0f0
+
+.screenshot
+  display: block
+  width: 580px
+  margin: 0 auto
+  &-container
+    display: block
+
+pre code
+  background: #191919
 
 nav-button()
   text-align: right

@@ -19,7 +19,11 @@ exports.config =
       defaultExtension: 'styl'
       joinTo: 'stylesheets/app.css'
       order:
-        before: ['vendor/styles/normalize.css', 'vendor/styles/fontello.css']
+        before: [
+          'vendor/styles/normalize.css',
+          'vendor/styles/fontello.css',
+          'vendor/styles/monokai.css'
+        ]
         after: ['vendor/styles/helpers.css']
 
     templates:
