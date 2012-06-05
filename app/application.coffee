@@ -7,7 +7,7 @@ routes = require 'routes'
 
 # The application bootstrapper.
 module.exports = class Application extends ChaplinApplication
-  title: 'Ostio'
+  title: 'Ost.io'
 
   initialize: ->
     ###console.debug 'ExampleApplication#initialize'###
