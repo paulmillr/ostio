@@ -73,7 +73,8 @@ Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
   new Handlebars.SafeString moment(date).fromNow()
 
-Handlebars.registerHelper 'markdown', (options) ->
+
+unescape = (string) ->
   re = /&(?:#x60|#x27|quot|lt|gt);/g
   replacements =
     '&#x60;': '`'
@@ -81,8 +82,11 @@ Handlebars.registerHelper 'markdown', (options) ->
     '&quot;': '"'
     '&lt;': '<'
     '&gt;': '>'
-  unescaped = options.fn(this).replace re, (substr, index) ->
+  unescaped = string.replace re, (substr, index) ->
     replacements[substr]
+
+Handlebars.registerHelper 'markdown', (options) ->
+  unescaped = unescape options.fn(this)
   markdown = marked unescaped, gfm: yes, highlight: (code, language) ->
     hljs.highlight(language, code).value
   new Handlebars.SafeString markdown
