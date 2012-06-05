@@ -3,9 +3,6 @@
 // This file is based on theme 'Midnight'
 // which was created by Matt Graham (https://github.com/mattgraham).
 
-*
-  box-sizing: border-box
-
 @font-face
   font-family: 'OpenSansLight'
   src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/OpenSans-Light-webfont.woff') format('woff'), url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'), url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg')
@@ -117,9 +114,6 @@ strong
   font-family: 'OpenSansBold', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-weight: normal
 
-.content-container img
-  max-width: 100%
-
 blockquote
   border-left: 3px solid #ffcc00
   margin: 0
@@ -127,7 +121,7 @@ blockquote
   font-style: italic
 
 code
-  // font-family: 'Lucida Sans', Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal
+  font-family: 'PragmataPro', monospace, serif
   color: #efefef
   font-size: 13px
   margin: 0 4px
@@ -144,10 +138,11 @@ pre
   overflow-y: hidden
 
 pre code
-  color: #efefef
-  text-shadow: 0px 1px 0px #000
   margin: 0
   padding: 0
+  color: #efefef
+  text-shadow: 0px 1px 0px #000
+  background: #191919
 
 table
   width: 100%
@@ -177,45 +172,3 @@ dt
   color: #F0E7D5
   font-family: 'OpenSansSemibold', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-weight: normal
-
-.header-container
-  z-index: 100
-  left: 0
-  top: 0px
-  height: 60px
-  width: 100%
-  position: absolute
-  background: url(../images/nav-bg.gif) #353535
-  border-bottom: 4px solid #434343
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25)
-
-.header
-  max-width: 950px
-  margin: 8px auto
-  padding: 0 20px
-  &-logo
-    float: left
-    font-family: 'OpenSansLight', 'Helvetica Neue', Helvetica, Arial, sans-serif
-    font-weight: normal
-    font-size: 40px
-    line-height: 36px
-
-.button
-  color: white
-  border: 1px solid #5d910b
-  background: linear-gradient(top, #93bd20, #659e10)
-  border-radius: 2px
-  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7)
-  background-color: #93bd20
-  padding: 10px 12px
-  line-height: 14px
-  font-size: 14px
-  display: inline-block
-  text-align: center
-  &:hover
-    box-shadow: inset 0px 3px 7px rgba(0, 0, 0, 0.3)
-  &:active, &.active
-    background: linear-gradient(top, #749619, #527f0e)
-    background-color: #659e10
-    border: 1px solid #527f0e
-    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0)

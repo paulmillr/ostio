@@ -8,68 +8,6 @@
 *
   box-sizing: border-box
 
-input, textarea
-  font-size: 16px
-
-input:invalid, textarea:invalid
-  background-color: #f6f0f0
-
-.screenshot
-  display: block
-  width: 580px
-  margin: 0 auto
-  &-container
-    display: block
-
-pre code
-  background: #191919
-
-nav-button()
-  text-align: right
-  position: absolute
-  top: 0
-  right: 0
-  margin: 9px 0
-
-slide-down($slided-height, $duration, $type = ease-in)
-  height: 0
-  opacity: 0
-  transition: height $duration $type, visibility $duration $type, opacity $duration $type
-  input, textarea
-    display: none
-  &.visible
-    height: $slided-height
-    opacity: 1
-    input, textarea
-      display: inline
-
-.spinner
-  width: 24px
-
-textarea:disabled
-  background-color: #d5d5d5
-
-.avatar
-  width: 60px
-  height: 60px
-  border-radius: 5px
-
-.organization-avatar
-  width: 60px
-  height: 60px
-
-.header
-  &-auth
-    float: right
-    margin-top: 2px
-    .logged-out &
-      margin-top: 7px
-    // &-button
-      
-  &-avatar
-    width: 30px
-    height: 30px
-
 .outer-container
   max-width: 950px
   margin: auto
@@ -80,103 +18,20 @@ textarea:disabled
 
 .content-container
   padding-top: 10px
-
-.navigation
-  > h2
-    margin-bottom: 0
-
-.topic
-  &-post
-    position: relative
-    padding: 5px 0
-    clearfix()
-    &-avatar-container
-      position: relative
-      display: block
-      float: left
-    &-content
-      min-height: 60px
-      margin-left: 70px
-      padding: 0 5px 5px 5px
-    &-author
-      margin-right: 3px
-      font-family: 'OpenSansBold', "Helvetica Neue", Helvetica, Arial, sans-serif
-      font-weight: normal
-    &-metadata
-      float: right
-      font-style: italic
-  &-new-post
-    &-body
-      width: 100%
-      height: 100px
-      margin-top: 5px
-      padding: 5px
-    &-create-button
-      margin-top: 10px
-      float: right
+  img
+    max-width: 100%
 
 .opacity-transitionable
   opacity: 0
 
-.user
-  &-repo-sync-button
-    &-container
-      nav-button()
-  &-repo-list
-    padding-left: 20px
-    li
-      font-size: 25px
-  &-organization-list-container
-    position: relative
-    float: right
-    width: 220px
-    text-align: right
-    direction: rtl
-    > h4
-      padding-left: 5px
-  &-organization
-    display: inline-block
-    width: 70px
-    height: 70px
-    padding: 5px
+.avatar
+  width: 60px
+  height: 60px
+  border-radius: 5px
 
-.repo
-  &-topic
-    padding: 10px 0
-    border-image: url('../images/hr.gif') 3 0 repeat
-    border-width: 3px 0 0 0
-    &:last-child
-      border-bottom-width: 3px
-
-.new-topic-form
-  &-fields
-    slide-down(311px, ease-in, 0.3s)
-    &.visible
-      padding-bottom: 10px
-  &-toggle-fields-button
-    &-container
-      nav-button()
-  &-title, &-text
-    padding: 6px
-  &-title
-    width: 50%
-    font-size: 25px
-    font-weight: bold
-    color: #444
-  &-text
-    width: 100%
-    height: 200px
-    margin: 10px 0
-  &-submit-button-container
-    text-align: right
-
-@media all and (max-width: 700px)
-  .new-topic-form-toggle-fields-button-container,
-  .user-repo-sync-button-container
-    position: relative
-  .user-organization-list-container,
-  .user-owner-list-container
-    float: none
-    width: auto
-    text-align: left
-    direction: ltr
+.screenshot
+  display: block
+  width: 580px
+  margin: 0 auto
+  &-container
+    display: block
