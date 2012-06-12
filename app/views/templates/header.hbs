@@ -1,6 +1,11 @@
 <h1 class="header-logo">
-  <a href="/{{#if_logged_in}}feed/{{/if_logged_in}}">Ost.io</a>
+  <a href="/">Ost.io</a>
 </h1>
+
+<div class="header-links">
+  <h4 class="header-link"><a href="/feed/">News feed</a></h4>
+</div>
+
 <div class="header-auth">
   {{#if_logged_in}}
     {{#with_user}}
