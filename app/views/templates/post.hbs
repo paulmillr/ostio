@@ -4,6 +4,7 @@
 <div class="topic-post-content">
   <div class="topic-post-header">
     <a class="topic-post-author" href="/{{user.login}}">{{user.login}}</a>
+    {{#if url}}in <a class="topic-post-url" href="{{url}}">{{url}}</a>{{/if}}
     <time class="topic-post-metadata topic-post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
   <div class="topic-post-text">

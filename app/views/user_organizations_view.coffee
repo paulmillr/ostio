@@ -3,3 +3,4 @@ template = require 'views/templates/user_organizations'
 
 module.exports = class UserOrganizationsView extends UsersView
   template: template
+  listSelector: '.users-list'
