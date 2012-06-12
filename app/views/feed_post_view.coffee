@@ -6,4 +6,3 @@ module.exports = class FeedPostView extends PostView
   initialize: ->
     super
     @model.setUrl()
-    console.log @$el

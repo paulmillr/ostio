@@ -11,9 +11,10 @@ module.exports = class Post extends Model
 /posts/"
 
   parse: (response) ->
-    user = new User _.extend response.user, {}
-    repo = new Repo _.extend response.topic.repo, {user}
+    repoUser = new User _.extend response.topic.repo.user, {}
+    repo = new Repo _.extend response.topic.repo, {user: repoUser}
     topic = new Topic _.extend response.topic, {repo}
+    user = new User _.extend response.user, {}
     _.extend response, {topic}
 
   setUrl: ->
