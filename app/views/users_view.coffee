@@ -4,5 +4,8 @@ User = require 'views/user_view'
 module.exports = class UsersView extends CollectionView
   className: 'users'
 
+  getTemplateFunction: ->
+    @template
+
   getView: (item) ->
     new User model: item
