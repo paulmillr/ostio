@@ -34,8 +34,6 @@ module.exports = class ApplicationView # This class does not extend View
 
   # Controller startup and disposal
   # -------------------------------
-  hiddenViewClass: 'fadeOutLeftBig'
-  shownViewClass: 'fadeInRightBig'
 
   # Handler for the global beforeControllerDispose event
   hideOldView: (controller) ->
@@ -45,15 +43,14 @@ module.exports = class ApplicationView # This class does not extend View
     # Hide the current view
     view = controller.view
     if view
-      view.$el.addClass @hiddenViewClass
+      view.$el.css 'display', 'none'
 
   # Handler for the global startupController event
   # Show the new view
   showNewView: (context) ->
     view = context.controller.view
-    view.$el.addClass 'animated fast'
     if view
-      view.$el.addClass @shownViewClass
+      view.$el.css display: 'block', opacity: 1, visibility: 'visible'
 
   # Handler for the global startupController event
   # Change the document title to match the new controller
