@@ -1,10 +1,10 @@
 utils = require 'lib/utils'
-Subscriber = require 'chaplin/lib/subscriber'
+Chaplin = require 'chaplin'
 
 module.exports = class ServiceProvider
 
   # Mixin a Subscriber
-  _(@prototype).extend Subscriber
+  _(@prototype).extend Chaplin.Subscriber
 
   loading: false
 
