@@ -1,17 +1,16 @@
 mediator = require 'mediator'
-utils = require 'lib/utils'
-User = require 'models/user'
 Controller = require 'controllers/base/controller'
-Ostio = require 'lib/services/ostio'
+User = require 'models/user'
 LoginView = require 'views/login_view'
+Ostio = require 'lib/services/ostio'
 
 module.exports = class SessionController extends Controller
-  historyURL: 'logout'
-
   # Service provider instances as static properties
   # This just hardcoded here to avoid async loading of service providers.
   # In the end you might want to do this.
-  @serviceProviders = ostio: new Ostio()
+  @serviceProviders = {
+    ostio: new Ostio()
+  }
 
   # Was the login status already determined?
   loginStatusDetermined: false
@@ -49,8 +48,7 @@ module.exports = class SessionController extends Controller
 
   # Instantiate the user with the given data
   createUser: (userData) ->
-    user = new User userData
-    mediator.user = user
+    mediator.user = new User userData
 
   # Try to get an existing session from one of the login providers
   getSession: ->

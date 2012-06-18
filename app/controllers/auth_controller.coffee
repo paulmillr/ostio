@@ -5,12 +5,13 @@ module.exports = class AuthController extends Controller
   historyURL: 'auth'
 
   callback: (params) ->
+    console.log 'AuthController'
     localStorage.setItem 'accessToken', params.accessToken
-    Backbone.history.navigate "/#{params.login}"
+    @redirectTo "/#{params.login}"
     window.location.reload()
 
   logout: ->
-    Backbone.history.navigate '/'
+    @redirectTo '/'
     localStorage.clear()
     mediator.publish '!logout'
-    window.location.reload()
+    # window.location.reload()
