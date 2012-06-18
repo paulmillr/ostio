@@ -1,5 +1,5 @@
 ChaplinCollection = require 'chaplin/models/collection'
-Model = require 'models/model'
+Model = require 'models/base/model'
 
 module.exports = class Collection extends ChaplinCollection
   model: Model

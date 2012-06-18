@@ -8,7 +8,7 @@ module.exports = class View extends ChaplinView
     super
 
   getTemplateData: ->
-    Model = require 'models/model'
+    Model = require 'models/base/model'
     serialize = (object) ->
       result = {}
       for key, value of object
