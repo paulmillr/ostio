@@ -1,4 +1,4 @@
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/topic'
 
 module.exports = class TopicView extends View

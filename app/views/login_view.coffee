@@ -1,12 +1,12 @@
 mediator = require 'mediator'
 utils = require 'lib/utils'
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/login'
 
 module.exports = class LoginView extends View
   template: template
   id: 'login'
-  containerSelector: '#content-container'
+  container: '#content-container'
   autoRender: true
 
   # Expects the serviceProviders in the options

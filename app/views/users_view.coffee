@@ -1,4 +1,4 @@
-CollectionView = require 'chaplin/views/collection_view'
+CollectionView = require 'views/base/collection_view'
 User = require 'views/user_view'
 
 module.exports = class UsersView extends CollectionView
@@ -7,5 +7,4 @@ module.exports = class UsersView extends CollectionView
   getTemplateFunction: ->
     @template
 
-  getView: (item) ->
-    new User model: item
+  itemView: User

@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 Navigation = require 'models/navigation'
 NavigationView = require 'views/navigation_view'
 

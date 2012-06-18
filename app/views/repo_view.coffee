@@ -1,4 +1,4 @@
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/repo'
 
 module.exports = class RepoView extends View

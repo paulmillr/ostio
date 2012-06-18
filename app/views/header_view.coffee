@@ -1,5 +1,5 @@
 mediator = require 'mediator'
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/header'
 
 module.exports = class HeaderView extends View
@@ -7,7 +7,7 @@ module.exports = class HeaderView extends View
   tagName: 'header'
   id: 'header'
   className: 'header'
-  containerSelector: '#header-container'
+  container: '#header-container'
   autoRender: true
 
   initialize: ->

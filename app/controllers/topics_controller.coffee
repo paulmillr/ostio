@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 Topic = require 'models/topic'
 TopicPageView = require 'views/topic_page_view'
 User = require 'models/user'

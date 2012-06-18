@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 FeedPageView = require 'views/feed_page_view'
 
 module.exports = class FeedController extends Controller

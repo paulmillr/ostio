@@ -1,4 +1,4 @@
-Model = require 'models/model'
+Model = require 'models/base/model'
 User = require 'models/user'
 Repo = require 'models/repo'
 Topic = require 'models/topic'

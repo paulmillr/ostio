@@ -1,5 +1,5 @@
 mediator = require 'mediator'
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 
 module.exports = class AuthController extends Controller
   historyURL: 'auth'

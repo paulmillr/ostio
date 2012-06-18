@@ -1,4 +1,4 @@
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/user_repo_sync'
 
 module.exports = class UserRepoSyncView extends View

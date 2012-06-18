@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 Post = require 'models/post'
 PostView = require 'views/post_view'
 

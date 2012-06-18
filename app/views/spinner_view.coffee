@@ -1,4 +1,4 @@
-View = require 'views/view'
+View = require 'views/base/view'
 template = require 'views/templates/spinner'
 
 module.exports = class SpinnerView extends View
@@ -11,5 +11,5 @@ module.exports = class SpinnerView extends View
     @previous = options.container.html()
 
   dispose: ->
-    $(@containerSelector).html @previous
+    $(@container).html @previous
     super

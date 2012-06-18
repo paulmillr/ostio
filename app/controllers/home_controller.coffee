@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 HomePageView = require 'views/home_page_view'
 
 module.exports = class HomeController extends Controller

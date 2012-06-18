@@ -1,4 +1,4 @@
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 Repo = require 'models/repo'
 RepoPageView = require 'views/repo_page_view'
 User = require 'models/user'
