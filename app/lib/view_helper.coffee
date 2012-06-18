@@ -1,6 +1,6 @@
 config = require 'config'
 mediator = require 'mediator'
-utils = require 'chaplin/lib/utils'
+utils = require 'lib/utils'
 
 # Application-specific view helpers
 # ---------------------------------
@@ -87,7 +87,10 @@ unescapeTags = (string) ->
   unescape string, re, replacements
 
 Handlebars.registerHelper 'markdown', (options) ->
-  unescaped = options.fn(this).replace(/&#x60;/g, '`')
+  unescaped = options.fn(this)
+    .replace(/&#x60;/g, '`')
+    .replace(/@([\w\.]+)/, '[**@$1**](/$1)')
+  
   markdown = marked unescaped, gfm: yes, highlight: (code, language) ->
     result = if language
       hljs.highlight(language, code).value
