@@ -1,7 +1,7 @@
 mediator = require 'mediator'
 utils = require 'lib/utils'
 User = require 'models/user'
-Controller = require 'controllers/controller'
+Controller = require 'controllers/base/controller'
 Ostio = require 'lib/services/ostio'
 LoginView = require 'views/login_view'
 
@@ -50,7 +50,7 @@ module.exports = class SessionController extends Controller
   # Instantiate the user with the given data
   createUser: (userData) ->
     user = new User userData
-    mediator.setUser user
+    mediator.user = user
 
   # Try to get an existing session from one of the login providers
   getSession: ->
@@ -145,4 +145,4 @@ module.exports = class SessionController extends Controller
     # Dispose the user model
     mediator.user.dispose()
     # Nullify property on the mediator
-    mediator.setUser null
+    mediator.user = null
