@@ -1,6 +1,6 @@
 config = {api: {}}
 
-production = yes
+production = no
 
 config.api.root = if production
   'http://api.ost.io'
