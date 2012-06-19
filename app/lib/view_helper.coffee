@@ -79,16 +79,16 @@ unescape = (string, re, replacements) ->
     replacements[substr]
 
 unescapeTags = (string) ->
-  re = /&(?:amp|#x27|quot);/g
+  re = /&(?:amp|#x27|#x60|quot);/g
   replacements =
     '&amp;': '&'
     '&#x27;': '\''
     '&quot;': '"'
+    '&#x60;': '`'
   unescape string, re, replacements
 
 Handlebars.registerHelper 'markdown', (options) ->
-  unescaped = options.fn(this)
-    .replace(/&#x60;/g, '`')
+  unescaped = unescapeTags(options.fn(this))
     .replace(/@([\w\.]+)/, '[**@$1**](/$1)')
   
   markdown = marked unescaped, gfm: yes, highlight: (code, language) ->
