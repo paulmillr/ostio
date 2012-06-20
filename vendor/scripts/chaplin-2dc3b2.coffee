@@ -673,7 +673,7 @@ require.define 'chaplin/views/layout': (exports, require, module) ->
     # Handler for the global beforeControllerDispose event
     hideOldView: (controller) ->
       # Jump to the top of the page
-      scrollTo @settings.scrollTo if @settings.scrollTo
+      window.scrollTo.apply window, @settings.scrollTo if @settings.scrollTo
 
       # Hide the current view
       view = controller.view
@@ -1502,8 +1502,10 @@ defined (or the getView() must be overridden)'
 
       if included
         # Make view transparent if animation is enabled
-        $viewEl.addClass 'opacity-transitionable' if animationDuration
-        $viewEl.css 'opacity', 0 if animationDuration
+        if @useCssAnimation
+          $viewEl.addClass 'animated-item-view' 
+        else
+          $viewEl.css 'opacity', 0 if animationDuration
       else
         # Hide the view if it’s filtered
         $viewEl.css 'display', 'none'
@@ -1535,8 +1537,13 @@ defined (or the getView() must be overridden)'
 
       # Fade the view in if it was made transparent before
       if animationDuration and included
-        $viewEl.addClass 'opacity-transitionable-end'
-        $viewEl.animate {opacity: 1}, animationDuration
+        if @useCssAnimation
+          # Wait for DOM state change.
+          setTimeout =>
+            $viewEl.addClass 'animated-item-view-end'
+          , 0
+        else
+          $viewEl.animate {opacity: 1}, animationDuration
 
     # Remove the view for an item
     removeViewForItem: (item) ->
