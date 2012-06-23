@@ -32,7 +32,6 @@ Handlebars.registerHelper 'if_user_type_is_user', (options) ->
   else
     options.inverse(this)
 
-
 Handlebars.registerHelper 'if_on_mac', (options) ->
   if /mac/i.test(navigator.userAgent)
     options.fn(this)
