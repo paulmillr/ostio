@@ -24,13 +24,13 @@ module.exports = class UserPageView extends PageView
       container: @$('.user-repo-list-container')
     repos.fetch()
 
-    if @model.get('type') is 'User'
-      organizations = new Collection @model.get('organizations'), model: User
+    organizations = @model.get('organizations')
+    owners = @model.get('owners')
+    if @model.get('type') is 'User' and organizations.length > 0
       @subview 'organizations', new UserOrganizationsView
         collection: organizations,
         container: @$('.user-organization-list-container')
-    else
-      owners = new Collection @model.get('owners'), model: User
+    else if owners.length > 0
       @subview 'owners', new OrganizationOwnersView
         collection: owners,
         container: @$('.user-owner-list-container')

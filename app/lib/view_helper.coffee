@@ -17,11 +17,24 @@ Handlebars.registerHelper 'if_logged_in', (options) ->
   else
     options.inverse(this)
 
-Handlebars.registerHelper 'if_has_sync_repo_permission', (options) ->
+Handlebars.registerHelper 'if_is_repo_admin', (options) ->
   user = mediator.user
   return options.inverse(this) unless user
-  organizations = _(user.get('organizations')).map((org) -> org.login)
-  if user.get('login') is @login or @login in organizations
+  organizations = user.get('organizations')?.pluck('login') ? []
+  repoOwner = @login
+  if user.get('login') is repoOwner or repoOwner in organizations
+    options.fn(this)
+  else
+    options.inverse(this)
+
+Handlebars.registerHelper 'if_can_edit_post', (options) ->
+  user = mediator.user
+  return options.inverse(this) unless user
+  organizations = user.get('organizations').pluck('login') ? []
+  postCreator = @user.login
+  repoOwner = @topic.repo.user.login
+  
+  if user.get('login') is postCreator or repoOwner in organizations
     options.fn(this)
   else
     options.inverse(this)

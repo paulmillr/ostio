@@ -1,6 +1,7 @@
 config = require 'config'
 mediator = require 'mediator'
 ServiceProvider = require 'lib/services/service_provider'
+User = require 'models/user'
 
 module.exports = class Ostio extends ServiceProvider
   baseUrl: config.api.root
@@ -54,7 +55,8 @@ module.exports = class Ostio extends ServiceProvider
     if not response or status is 'error'
       mediator.publish 'logout'
     else
-      mediator.publish 'serviceProviderSession', _.extend response,
+      parsed = User::parse.call(null, response)
+      mediator.publish 'serviceProviderSession', _.extend parsed,
         provider: this
         userId: response.id
         accessToken: @accessToken
