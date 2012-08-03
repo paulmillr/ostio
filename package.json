@@ -15,16 +15,16 @@
     "start": "brunch watch --server"
   },
   "dependencies": {
-    "javascript-brunch": ">= 1.0 < 1.4",
-    "coffee-script-brunch": ">= 1.0 < 1.4",
+    "javascript-brunch": ">= 1.0 < 1.5",
+    "coffee-script-brunch": ">= 1.0 < 1.5",
 
-    "css-brunch": ">= 1.0 < 1.4",
-    "stylus-brunch": ">= 1.0 < 1.4",
+    "css-brunch": ">= 1.0 < 1.5",
+    "stylus-brunch": ">= 1.0 < 1.5",
 
-    "handlebars-brunch": ">= 1.0 < 1.4",
+    "handlebars-brunch": ">= 1.0 < 1.5",
 
-    "uglify-js-brunch": ">= 1.0 < 1.4",
-    "clean-css-brunch": ">= 1.0 < 1.4"
+    "uglify-js-brunch": ">= 1.0 < 1.5",
+    "clean-css-brunch": ">= 1.0 < 1.5"
   },
   "devDependencies": {
     "chai": "1.0.4",
