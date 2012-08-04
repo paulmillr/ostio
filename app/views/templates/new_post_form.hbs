@@ -1,16 +1,18 @@
 {{#if_logged_in}}
   {{#with_user}}
-  <div class="topic-post-avatar-container">
-    <img class="topic-post-avatar avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}" alt="" />
+  <div class="post-avatar-container">
+    <img class="post-avatar avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}" alt="" />
   </div>
-  <div class="topic-post-content">
-    <div class="topic-post-header">
-      <a class="topic-post-author" href="/{{login}}">{{login}}</a>      
-      <em class="topic-post-metadata">Posts are parsed with <a href="http://github.github.com/github-flavored-markdown/" class="gfm-help">Markdown</a></em>
+  <div class="post-content">
+    <div class="post-header">
+      <a class="post-author" href="/{{login}}">{{login}}</a>      
+      <em class="post-metadata">Posts are parsed with <a href="http://github.github.com/github-flavored-markdown/" class="gfm-help">Markdown</a></em>
     </div>
-    <div class="topic-post-text">
-      <textarea class="topic-new-post-body" required></textarea>
-      <button class="topic-new-post-create-button submit-form button">Comment on this topic{{#if_on_mac}} (⌘↩){{/if_on_mac}}</button>
+    <div class="post-text">
+      <textarea class="new-post-body" required></textarea>
+      <div class="post-buttons">
+        <button class="new-post-create-button submit-form button">Comment on this topic{{#if_on_mac}} (⌘↩){{/if_on_mac}}</button>
+      </div>
     </div>
   </div>
   {{/with_user}}

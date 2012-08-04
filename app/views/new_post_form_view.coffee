@@ -3,13 +3,13 @@ template = require 'views/templates/new_post_form'
 
 module.exports = class NewPostFormView extends FormView
   template: template
-  className: 'topic-post topic-post-create'
+  className: 'post post-create'
   saveEvent: 'post:new'
 
   initialize: ->
     super
-    @pass 'text', '.topic-new-post-body'
-    @delegate 'keyup keydown', '.topic-new-post-body', @changeText
+    @pass 'text', '.new-post-body'
+    @delegate 'keyup keydown', '.new-post-body', @changeText
 
   # Update model data by default, save on ⌘R.
   changeText: (event) =>

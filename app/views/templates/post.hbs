@@ -1,19 +1,19 @@
-<a class="topic-post-avatar-container" href="/{{user.login}}">
-  <img class="topic-post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
+<a class="post-avatar-container" href="/{{user.login}}">
+  <img class="post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
 </a>
-<div class="topic-post-content">
-  <div class="topic-post-header">
-    <a class="topic-post-author" href="/{{user.login}}">{{user.login}}</a>
-    {{#if url}}in <a class="topic-post-url" href="{{url}}">{{url}}</a>{{/if}}
-    <time class="topic-post-metadata topic-post-date">{{#date}}{{created_at}}{{/date}}</time>
+<div class="post-content">
+  <div class="post-header">
+    <a class="post-author" href="/{{user.login}}">{{user.login}}</a>
+    {{#if url}}in <a class="post-url" href="{{url}}">{{url}}</a>{{/if}}
+    <time class="post-metadata post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
   {{#if_can_edit_post}}
-    <div class="topic-post-icons">
-      <span class="icon-pencil-1" title="Edit"></span>
-      <span class="icon-trash" title="Delete"></span>
+    <div class="post-icons">
+      <span class="icon-pencil-1 post-edit-button" title="Edit"></span>
+      <span class="icon-trash post-delete-button" title="Delete"></span>
     </div>
   {{/if_can_edit_post}}
-  <div class="topic-post-text">
+  <div class="post-text">
     {{#markdown}}{{text}}{{/markdown}}
   </div>
 </div>
