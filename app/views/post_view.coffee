@@ -26,4 +26,4 @@ module.exports = class PostView extends View
     createNewPost()
 
   deletePost: (event) =>
-    console.log 'Deleting post...'
+    @model.destroy()
