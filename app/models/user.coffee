@@ -16,3 +16,7 @@ module.exports = class User extends Model
       owners = new Collection response.owners, options
       _.extend response, {owners}
     response
+
+  # Ideally, there should be a special model field for this.
+  isAdmin: ->
+    @get('login') is 'paulmillr'

@@ -20,9 +20,9 @@ Handlebars.registerHelper 'if_logged_in', (options) ->
 Handlebars.registerHelper 'if_is_repo_admin', (options) ->
   user = mediator.user
   return options.inverse(this) unless user
-  organizations = user.get('organizations')?.pluck('login') ? []
+  orgs = user.get('organizations')?.pluck('login') ? []
   repoOwner = @login
-  if user.get('login') is repoOwner or repoOwner in organizations
+  if user.isAdmin() or user.get('login') is repoOwner or repoOwner in orgs
     options.fn(this)
   else
     options.inverse(this)
@@ -30,11 +30,11 @@ Handlebars.registerHelper 'if_is_repo_admin', (options) ->
 Handlebars.registerHelper 'if_can_edit_post', (options) ->
   user = mediator.user
   return options.inverse(this) unless user
-  organizations = user.get('organizations').pluck('login') ? []
+  orgs = user.get('organizations')?.pluck('login') ? []
   postCreator = @user.login
   repoOwner = @topic.repo.user.login
   
-  if user.get('login') is postCreator or repoOwner in organizations
+  if user.isAdmin() or user.get('login') is postCreator or repoOwner in orgs
     options.fn(this)
   else
     options.inverse(this)
