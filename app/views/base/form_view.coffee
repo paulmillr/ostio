@@ -9,6 +9,7 @@ module.exports = class FormView extends View
   initialize: ->
     super
     @subscribeEvent 'loginStatus', @render
+    @delegate 'click', '.cancel-form', @dismiss
     @delegate 'submit', (event) =>
       event.preventDefault()
       @save event if event.currentTarget.checkValidity()
@@ -16,13 +17,16 @@ module.exports = class FormView extends View
   publishSave: (response) ->
     mediator.publish @saveEvent, response if @saveEvent
 
+  dismiss: (event) =>
+    event?.preventDefault()
+    @trigger 'dispose'
+    @dispose()
+
   save: (event) =>
     spinner = new SpinnerView container: @$('.submit-form')
     @model.save()
       .done (response) =>
-        console.log 'done'
         @publishSave response
-        @trigger 'dispose'
-        @dispose()
+        @dismiss()
       .fail (response) =>
         spinner.dispose()

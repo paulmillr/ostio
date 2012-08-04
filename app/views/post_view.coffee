@@ -13,13 +13,11 @@ module.exports = class PostView extends View
     @delegate 'click', '.post-delete-button', @deletePost
 
   editPost: (event) =>
-    @$previous = @$('.post-text').remove()
-
+    @$('.post-text').remove()
     createNewPost = =>
       editPostView = new EditPostFormView
         model: @model,
-        container: @$('.post-content'),
-        previous: @$previous
+        container: @$('.post-content')
       editPostView.on 'dispose', =>
         @render()
       @subview 'editPostForm', editPostView
