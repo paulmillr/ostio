@@ -23,6 +23,8 @@ module.exports = class TopicPageView extends PageView
     posts.fetch()
     @subscribeEvent 'post:new', (post) =>
       posts.push post
+    @subscribeEvent 'post:edit', (post) =>
+      index = posts.indexOf post
 
     createNewPost = =>
       newPost = new Post({topic: @model})

@@ -1,4 +1,4 @@
-FormView = require 'views/form_view'
+FormView = require 'views/base/form_view'
 template = require 'views/templates/new_topic_form'
 Post = require 'models/post'
 SpinnerView = require 'views/spinner_view'

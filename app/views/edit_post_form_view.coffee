@@ -1,12 +1,13 @@
-FormView = require 'views/form_view'
+mediator = require 'mediator'
+FormView = require 'views/base/form_view'
 template = require 'views/templates/edit_post_form'
 
 module.exports = class EditPostFormView extends FormView
   template: template
   className: 'post post-create'
-  saveEvent: 'post:new'
+  saveEvent: 'post:edit'
 
-  initialize: ->
+  initialize: (options) ->
     super
     @pass 'text', '.edit-post-body'
     @delegate 'keyup keydown', '.edit-post-body', @changeText
@@ -28,3 +29,6 @@ module.exports = class EditPostFormView extends FormView
   render: ->
     super
     @resizeTextArea()
+
+  publishSave: (response) ->
+    mediator.publish @saveEvent, @model if @saveEvent

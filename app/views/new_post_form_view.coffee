@@ -1,4 +1,4 @@
-FormView = require 'views/form_view'
+FormView = require 'views/base/form_view'
 template = require 'views/templates/new_post_form'
 
 module.exports = class NewPostFormView extends FormView

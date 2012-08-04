@@ -20,6 +20,7 @@ module.exports = class FormView extends View
     spinner = new SpinnerView container: @$('.submit-form')
     @model.save()
       .done (response) =>
+        console.log 'done'
         @publishSave response
         @trigger 'dispose'
         @dispose()
