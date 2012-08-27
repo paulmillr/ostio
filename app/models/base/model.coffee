@@ -45,6 +45,8 @@ module.exports = class Model extends Chaplin.Model
 
   fetch: (options) ->
     @trigger 'loadStart'
-    (options ?= {}).success = =>
+    options ?= {}
+    options.success = _.wrap (options.success ? ->), (func, args...) =>
+      func args...
       @trigger 'load'
     super
