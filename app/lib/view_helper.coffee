@@ -108,11 +108,10 @@ addMarkdownExtensions = (login, repoName, string) ->
     .replace(/@([\w\.]+)/, '[**@$1**](/$1)')
 
 Handlebars.registerHelper 'markdown', (options) ->
-  repo = this.topic.repo
-  user = repo.user
+  repo = @topic.repo
 
   unescaped = unescapeTags options.fn this
-  string = addMarkdownExtensions user.login, repo.name, unescaped
+  string = addMarkdownExtensions repo.user.login, repo.name, unescaped
 
   markdown = marked string, gfm: yes, highlight: (code, language) ->
     result = if language
