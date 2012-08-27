@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-git pull && \
-  brunch b -m && \
-  rm -rf /home/ostio/public && \
-  cp -r public /home/ostio
+brunch b -m && \
+  sudo rm -rf /usr/share/nginx/www/* && \
+  sudo cp -r public/* /usr/share/nginx/www
