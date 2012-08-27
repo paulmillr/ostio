@@ -99,11 +99,22 @@ unescapeTags = (string) ->
     '&#x60;': '`'
   unescape string, re, replacements
 
-Handlebars.registerHelper 'markdown', (options) ->
-  unescaped = unescapeTags(options.fn(this))
+# Replace patterns:
+# * `gh-143` with link to github issue 143.
+# * `@name` with link to ost.io user.
+addMarkdownExtensions = (login, repoName, string) ->
+  string
+    .replace(/gh\-?(\d+)/g, "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)")
     .replace(/@([\w\.]+)/, '[**@$1**](/$1)')
-  
-  markdown = marked unescaped, gfm: yes, highlight: (code, language) ->
+
+Handlebars.registerHelper 'markdown', (options) ->
+  repo = this.topic.repo
+  user = repo.user
+
+  unescaped = unescapeTags options.fn this
+  string = addMarkdownExtensions user.login, repo.name, unescaped
+
+  markdown = marked string, gfm: yes, highlight: (code, language) ->
     result = if language
       hljs.highlight(language, code).value
     else
