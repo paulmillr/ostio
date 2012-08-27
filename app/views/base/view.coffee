@@ -1,8 +1,8 @@
-ChaplinView = require 'chaplin/views/view'
+Chaplin = require 'chaplin'
 utils = require 'lib/utils'
 require 'lib/view_helper'
 
-module.exports = class View extends ChaplinView
+module.exports = class View extends Chaplin.View
   # Override Chaplin.View::initialize in order to make stuff work.
   initialize: ->
     super

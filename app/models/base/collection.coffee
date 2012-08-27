@@ -1,7 +1,7 @@
-ChaplinCollection = require 'chaplin/models/collection'
+Chaplin = require 'chaplin'
 Model = require 'models/base/model'
 
-module.exports = class Collection extends ChaplinCollection
+module.exports = class Collection extends Chaplin.Collection
   model: Model
 
   initialize: (models, options) ->

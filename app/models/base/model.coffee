@@ -1,8 +1,8 @@
 mediator = require 'mediator'
-ChaplinModel = require 'chaplin/models/model'
+Chaplin = require 'chaplin'
 config = require 'config'
 
-module.exports = class Model extends ChaplinModel
+module.exports = class Model extends Chaplin.Model
   apiRoot: config.api.versionRoot
   urlKey: 'id'
 
