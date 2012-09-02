@@ -33,7 +33,7 @@ Handlebars.registerHelper 'if_can_edit_post', (options) ->
   orgs = user.get('organizations')?.pluck('login') ? []
   postCreator = @user.login
   repoOwner = @topic.repo.user.login
-  
+
   if user.isAdmin() or user.get('login') is postCreator or repoOwner in orgs
     options.fn(this)
   else
@@ -79,7 +79,7 @@ Handlebars.registerHelper 'with_user', (options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 Handlebars.registerHelper 'gravatar', (options) ->
-  "https://secure.gravatar.com/avatar/#{options.fn this}?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png" 
+  "https://secure.gravatar.com/avatar/#{options.fn this}?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
 
 Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
@@ -115,7 +115,10 @@ Handlebars.registerHelper 'markdown', (options) ->
 
   markdown = marked string, gfm: yes, highlight: (code, language) ->
     result = if language
-      hljs.highlight(language, code).value
+      try
+        hljs.highlight(language, code).value
+      catch error
+        code
     else
       code
     unescapeTags result
