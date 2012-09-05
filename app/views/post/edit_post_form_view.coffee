@@ -19,7 +19,7 @@ module.exports = class EditPostFormView extends FormView
       @$edit.animate {height}, 250, 'ease'
     , 0
 
-  # Update model data by default, save on ⌘R.
+  # Update model data by default, save on ⌘R..
   changeText: (event) =>
     if event.metaKey and event.keyCode is 13
       @$el.trigger('submit')

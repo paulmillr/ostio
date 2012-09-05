@@ -20,6 +20,10 @@ module.exports = class PostView extends View
         container: @$('.post-content')
       editPostView.on 'dispose', =>
         @render()
+      # editPostView = new EditPostFormView {
+      #   @model, container: @$('.post-content')
+      # }
+      # editPostView.on 'dispose', @render
       @subview 'editPostForm', editPostView
     createNewPost()
 
