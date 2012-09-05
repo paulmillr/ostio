@@ -1,11 +1,11 @@
-PageView = require 'views/base/page_view'
-template = require 'views/templates/feed_page'
-config = require 'config'
 Collection = require 'models/base/collection'
+config = require 'config'
+FeedPostsView = require 'views/feed/feed_posts_view'
+PageView = require 'views/base/page_view'
 Post = require 'models/post'
-FeedPostsView = require 'views/feed_posts_view'
+template = require 'views/templates/feed_page'
 User = require 'models/user'
-UsersView = require 'views/users_view'
+UsersView = require 'views/user/users_view'
 
 module.exports = class FeedPageView extends PageView
   template: template

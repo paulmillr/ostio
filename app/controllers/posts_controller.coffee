@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 Post = require 'models/post'
-PostView = require 'views/post_view'
+PostView = require 'views/post/post_view'
 
 module.exports = class PostsController extends Controller
   historyURL: 'posts'

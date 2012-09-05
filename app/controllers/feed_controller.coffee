@@ -1,5 +1,5 @@
 Controller = require 'controllers/base/controller'
-FeedPageView = require 'views/feed_page_view'
+FeedPageView = require 'views/feed/feed_page_view'
 
 module.exports = class FeedController extends Controller
   historyURL: 'feed'

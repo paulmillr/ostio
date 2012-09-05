@@ -1,5 +1,5 @@
-mediator = require 'mediator'
 FormView = require 'views/base/form_view'
+mediator = require 'mediator'
 template = require 'views/templates/edit_post_form'
 
 module.exports = class EditPostFormView extends FormView

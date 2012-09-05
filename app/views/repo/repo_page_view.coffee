@@ -1,9 +1,9 @@
+Collection = require 'models/base/collection'
+NewTopicFormView = require 'views/topic/new_topic_form_view'
 PageView = require 'views/base/page_view'
 template = require 'views/templates/repo_page'
-Collection = require 'models/base/collection'
 Topic = require 'models/topic'
-NewTopicFormView = require 'views/new_topic_form_view'
-TopicsView = require 'views/topics_view'
+TopicsView = require 'views/topic/topics_view'
 
 module.exports = class RepoPageView extends PageView
   template: template

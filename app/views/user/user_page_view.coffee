@@ -1,13 +1,14 @@
-PageView = require 'views/base/page_view'
-template = require 'views/templates/user_page'
 Collection = require 'models/base/collection'
+OrganizationOwnersView = require 'views/user/organization_owners_view'
+PageView = require 'views/base/page_view'
 Repo = require 'models/repo'
+ReposView = require 'views/repo/repos_view'
+template = require 'views/templates/user_page'
 User = require 'models/user'
-ReposView = require 'views/repos_view'
-UsersView = require 'views/users_view'
-UserOrganizationsView = require 'views/user_organizations_view'
-OrganizationOwnersView = require 'views/organization_owners_view'
-UserRepoSyncView = require 'views/user_repo_sync_view'
+UserOrganizationsView = require 'views/user/user_organizations_view'
+UsersView = require 'views/user/users_view'
+
+UserRepoSyncView = require 'views/user/user_repo_sync_view'
 
 module.exports = class UserPageView extends PageView
   template: template
