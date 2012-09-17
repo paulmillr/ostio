@@ -8,6 +8,7 @@ module.exports = class User extends Model
     '/users/'
 
   parse: (response) ->
+    return {} unless response?
     options = {model: User}
     if response.organizations?
       organizations = new Collection response.organizations, options
