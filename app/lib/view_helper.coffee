@@ -79,7 +79,9 @@ Handlebars.registerHelper 'with_user', (options) ->
   Handlebars.helpers.with.call(this, context, options)
 
 Handlebars.registerHelper 'gravatar', (options) ->
-  "https://secure.gravatar.com/avatar/#{options.fn this}?s=140&d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png"
+  "https://secure.gravatar.com/avatar/#{options.fn this}?s=140
+&d=https://a248.e.akamai.net/assets.github.com
+%2Fimages%2Fgravatars%2Fgravatar-140.png"
 
 Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
@@ -103,9 +105,10 @@ unescapeTags = (string) ->
 # * `gh-143` with link to github issue 143.
 # * `@name` with link to ost.io user.
 addMarkdownExtensions = (login, repoName, string) ->
+  str = "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)"
   string
-    .replace(/gh\-?(\d+)/g, "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)")
-    .replace(/@([\w\.]+)/, '[**@$1**](/$1)')
+    .replace(/gh\-?(\d+)/g, str)
+    .replace(/@([\w\.]+)/g, '[**@$1**](/$1)')
 
 Handlebars.registerHelper 'markdown', (options) ->
   repo = @topic.repo
