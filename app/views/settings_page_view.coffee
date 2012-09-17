@@ -3,6 +3,7 @@ template = require 'views/templates/settings_page'
 
 module.exports = class SettingsPageView extends PageView
   template: template
+  autoRender: yes
 
   initialize: ->
     super

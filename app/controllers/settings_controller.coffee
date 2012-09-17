@@ -4,8 +4,8 @@ SettingsPageView = require 'views/settings_page_view'
 
 module.exports = class SettingsController extends Controller
   _show: =>
-    @model = mediator.user
-    @view = new SettingsPageView {@model, autoRender: yes}
+    model = mediator.user
+    @view = new SettingsPageView {model}
 
   show: ->
     if mediator.user?
