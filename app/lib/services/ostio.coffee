@@ -33,30 +33,30 @@ module.exports = class Ostio extends ServiceProvider
   loginHandler: (loginContext, response) =>
     if response
       # Publish successful login
-      mediator.publish 'loginSuccessful', {provider: this, loginContext}
+      @publishEvent 'loginSuccessful', {provider: this, loginContext}
 
       # Publish the session
       @accessToken = response.accessToken
       localStorage.setItem 'accessToken', @accessToken
       @getUserData().done(@processUserData)
     else
-      mediator.publish 'loginFail', provider: this, loginContext: loginContext
+      @publishEvent 'loginFail', provider: this, loginContext: loginContext
 
   getUserData: ->
     @ajax('get', '/v1/users/me')
 
   processUserData: (response) ->
-    mediator.publish 'userData', response
+    @publishEvent 'userData', response
 
   getLoginStatus: (callback = @loginStatusHandler, force = false) ->
     @getUserData().always(callback)
 
   loginStatusHandler: (response, status) =>
     if not response or status is 'error'
-      mediator.publish 'logout'
+      @publishEvent 'logout'
     else
       parsed = User::parse.call(null, response)
-      mediator.publish 'serviceProviderSession', _.extend parsed,
+      @publishEvent 'serviceProviderSession', _.extend parsed,
         provider: this
         userId: response.id
         accessToken: @accessToken

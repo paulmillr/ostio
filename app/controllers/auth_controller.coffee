@@ -1,4 +1,3 @@
-mediator = require 'mediator'
 Controller = require 'controllers/base/controller'
 
 module.exports = class AuthController extends Controller
@@ -13,5 +12,5 @@ module.exports = class AuthController extends Controller
   logout: ->
     @redirectTo '/'
     localStorage.clear()
-    mediator.publish '!logout'
+    @publishEvent '!logout'
     # window.location.reload()

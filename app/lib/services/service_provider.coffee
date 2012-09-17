@@ -3,8 +3,8 @@ Chaplin = require 'chaplin'
 
 module.exports = class ServiceProvider
 
-  # Mixin a Subscriber
-  _(@prototype).extend Chaplin.Subscriber
+  # Mixin an Event Broker
+  _(@prototype).extend Chaplin.EventBroker
 
   loading: false
 
@@ -65,24 +65,24 @@ module.exports = class ServiceProvider
     eventPayload = {provider: this, loginContext}
     if response
       # Publish successful login
-      mediator.publish 'loginSuccessful', eventPayload
+      @publishEvent 'loginSuccessful', eventPayload
 
       # Publish the session
-      mediator.publish 'serviceProviderSession',
+      @publishEvent 'serviceProviderSession',
         provider: this
         userId: response.userId
         accessToken: response.accessToken
         # etc.
 
     else
-      mediator.publish 'loginFail', eventPayload
+      @publishEvent 'loginFail', eventPayload
 
   getLoginStatus: (callback = @loginStatusHandler, force = false) ->
     ServiceProviderLibrary.getLoginStatus callback, force
 
   loginStatusHandler: (response) =>
     return unless response
-    mediator.publish 'serviceProviderSession',
+    @publishEvent 'serviceProviderSession',
       provider: this
       userId: response.userId
       accessToken: response.accessToken

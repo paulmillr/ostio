@@ -1,4 +1,3 @@
-mediator = require 'mediator'
 View = require 'views/base/view'
 SpinnerView = require 'views/spinner_view'
 
@@ -15,7 +14,7 @@ module.exports = class FormView extends View
       @save event if event.currentTarget.checkValidity()
 
   publishSave: (response) ->
-    mediator.publish @saveEvent, response if @saveEvent
+    @publishEvent @saveEvent, response if @saveEvent
 
   dismiss: (event) =>
     event?.preventDefault()

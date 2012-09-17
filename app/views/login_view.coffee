@@ -1,4 +1,3 @@
-mediator = require 'mediator'
 utils = require 'lib/utils'
 View = require 'views/base/view'
 template = require 'views/templates/login'
@@ -43,8 +42,8 @@ module.exports = class LoginView extends View
     # console.debug 'LoginView#loginWith', serviceProviderName, serviceProvider
     e.preventDefault()
     return unless serviceProvider.isLoaded()
-    mediator.publish 'login:pickService', serviceProviderName
-    mediator.publish '!login', serviceProviderName
+    @publishEvent 'login:pickService', serviceProviderName
+    @publishEvent '!login', serviceProviderName
 
   serviceProviderLoaded: (serviceProviderName) ->
     #console.debug 'LoginView#serviceProviderLoaded', serviceProviderName

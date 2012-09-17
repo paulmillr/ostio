@@ -1,5 +1,4 @@
 FormView = require 'views/base/form_view'
-mediator = require 'mediator'
 template = require 'views/templates/edit_post_form'
 
 module.exports = class EditPostFormView extends FormView
@@ -31,4 +30,4 @@ module.exports = class EditPostFormView extends FormView
     @resizeTextArea()
 
   publishSave: (response) ->
-    mediator.publish @saveEvent, @model if @saveEvent
+    @publishEvent @saveEvent, @model if @saveEvent

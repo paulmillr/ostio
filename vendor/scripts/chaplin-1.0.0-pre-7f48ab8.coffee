@@ -106,17 +106,19 @@ require.define 'chaplin/mediator': (exports, require, module) ->
 
   # Mixin event methods from Backbone.Events,
   # create Publish/Subscribe aliases
-  mediator.subscribe   = mediator.on      = Backbone.Events.on
-  mediator.unsubscribe = mediator.off     = Backbone.Events.off
-  mediator.publish     = mediator.trigger = Backbone.Events.trigger
+  mediator.subscribe   = Backbone.Events.on
+  mediator.unsubscribe = Backbone.Events.off
+  mediator.publish     = Backbone.Events.trigger
+
+  # The `on` method should not be used,
+  # it is kept only for purpose of compatibility with Backbone.
+  mediator.on = mediator.subscribe
 
   # Initialize an empty callback list so we might seal the mediator later
   mediator._callbacks = null
 
   # Make properties readonly
-  utils.readonly mediator,
-    'subscribe', 'unsubscribe', 'publish',
-    'on', 'off', 'trigger'
+  utils.readonly mediator, 'subscribe', 'unsubscribe', 'publish', 'on'
 
   # Sealing the mediator
   # --------------------
@@ -137,17 +139,16 @@ require.define 'chaplin/mediator': (exports, require, module) ->
 require.define 'chaplin/dispatcher': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
-  mediator = require 'chaplin/mediator'
   utils = require 'chaplin/lib/utils'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
 
   module.exports = class Dispatcher
 
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     # The previous controller name
     previousControllerName: null
@@ -242,7 +243,7 @@ require.define 'chaplin/dispatcher': (exports, require, module) ->
       # Dispose the current controller
       if currentController
         # Notify the rest of the world beforehand
-        mediator.publish 'beforeControllerDispose', currentController
+        @publishEvent 'beforeControllerDispose', currentController
         # Passing the params and the new controller name
         currentController.dispose params, controllerName
 
@@ -267,7 +268,7 @@ require.define 'chaplin/dispatcher': (exports, require, module) ->
       @adjustURL controller, params
 
       # We're done! Spread the word!
-      mediator.publish 'startupController',
+      @publishEvent 'startupController',
         previousControllerName: @previousControllerName
         controller: @currentController
         controllerName: @currentControllerName
@@ -293,8 +294,7 @@ require.define 'chaplin/dispatcher': (exports, require, module) ->
           "#{@currentControllerName} does not provide a historyURL"
 
       # Tell the router to actually change the current URL
-      if params.changeURL
-        mediator.publish '!router:changeURL', url
+      @publishEvent '!router:changeURL', url if params.changeURL
 
       # Save the URL
       @url = url
@@ -317,16 +317,15 @@ require.define 'chaplin/dispatcher': (exports, require, module) ->
 require.define 'chaplin/controllers/controller': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
-  mediator = require 'chaplin/mediator'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
 
   module.exports = class Controller
 
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     view: null
     currentId: null
@@ -354,12 +353,12 @@ require.define 'chaplin/controllers/controller': (exports, require, module) ->
       @redirected = true
       if arguments.length is 1
         # URL was passed, try to route it
-        mediator.publish '!router:route', arg1, (routed) ->
+        @publishEvent '!router:route', arg1, (routed) ->
           unless routed
             throw new Error 'Controller#redirectTo: no route matched'
       else
         # Assume controller and action names were passed
-        mediator.publish '!startupController', arg1, action, params
+        @publishEvent '!startupController', arg1, action, params
 
     # Disposal
     # --------
@@ -392,16 +391,15 @@ require.define 'chaplin/controllers/controller': (exports, require, module) ->
 require.define 'chaplin/models/collection': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
-  Subscriber = require 'chaplin/lib/subscriber'
-  SyncMachine = require 'chaplin/lib/sync_machine'
+  EventBroker = require 'chaplin/lib/event_broker'
   Model = require 'chaplin/models/model'
 
   # Abstract class which extends the standard Backbone collection
   # in order to add some functionality
   module.exports = class Collection extends Backbone.Collection
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     # Use the Chaplin model per default, not Backbone.Model
     model: Model
@@ -409,10 +407,6 @@ require.define 'chaplin/models/collection': (exports, require, module) ->
     # Mixin a Deferred
     initDeferred: ->
       _(this).extend $.Deferred()
-
-    # Mixin a synchronization state machine
-    initSyncMachine: ->
-      _(this).extend SyncMachine
 
     # Adds a collection atomically, i.e. throws no event until
     # all members have been added
@@ -506,21 +500,16 @@ require.define 'chaplin/models/model': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
   utils = require 'chaplin/lib/utils'
-  Subscriber = require 'chaplin/lib/subscriber'
-  SyncMachine = require 'chaplin/lib/sync_machine'
+  EventBroker = require 'chaplin/lib/event_broker'
 
   module.exports = class Model extends Backbone.Model
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     # Mixin a Deferred
     initDeferred: ->
       _(this).extend $.Deferred()
-
-    # Mixin a synchronization state machine
-    initSyncMachine: ->
-      _(this).extend SyncMachine
 
     # This method is used to get the attributes for the view template
     # and might be overwritten by decorators which cannot create a
@@ -541,7 +530,7 @@ require.define 'chaplin/models/model': (exports, require, module) ->
         modelStack.push model
       # Map model/collection to their attributes
       for key, value of attributes
-        if value instanceof Model
+        if value instanceof Backbone.Model
           # Don’t change the original attribute, create a property
           # on the delegator which shadows the original attribute
           delegator ?= utils.beget attributes
@@ -614,17 +603,16 @@ require.define 'chaplin/views/layout': (exports, require, module) ->
   $ = require 'jquery'
   _ = require 'underscore'
   Backbone = require 'backbone'
-  mediator = require 'chaplin/mediator'
   utils = require 'chaplin/lib/utils'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
 
   module.exports = class Layout # This class does not extend View
 
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     # The site title used in the document title
     # This should be set in your app-specific Application class
@@ -759,7 +747,7 @@ require.define 'chaplin/views/layout': (exports, require, module) ->
       path = "/#{path}" if path.charAt(0) isnt '/'
 
       # Pass to the router, try to route internally
-      mediator.publish '!router:route', path, (routed) ->
+      @publishEvent '!router:route', path, (routed) ->
         # Prevent default handling if the URL could be routed
         event.preventDefault() if routed
         # Otherwise navigate to the URL normally
@@ -778,7 +766,7 @@ require.define 'chaplin/views/layout': (exports, require, module) ->
       return unless path
 
       # Pass to the router, try to route internally
-      mediator.publish '!router:route', path, (routed) ->
+      @publishEvent '!router:route', path, (routed) ->
         if routed
           # Prevent default handling if the URL could be routed
           event.preventDefault()
@@ -810,13 +798,13 @@ require.define 'chaplin/views/view': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
   utils = require 'chaplin/lib/utils'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
   Model = require 'chaplin/models/model'
 
   module.exports = class View extends Backbone.View
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     # Automatic rendering
     # -------------------
@@ -1009,7 +997,7 @@ require.define 'chaplin/views/view': (exports, require, module) ->
       modelOrCollection.off type, handler
 
     # Unbind all recorded model event handlers
-    modelUnbindAll: () ->
+    modelUnbindAll: ->
       # Get model/collection reference
       modelOrCollection = @model or @collection
       return unless modelOrCollection
@@ -1222,7 +1210,7 @@ require.define 'chaplin/views/collection_view': (exports, require, module) ->
 
     # By default, fading in is done by javascript function which can be
     # slow on mobile devices. CSS animations are faster,
-    # but require user's manual definitions.
+    # but require user’s manual definitions.
     # CSS classes used are: animated-item-view, animated-item-view-end.
     useCssAnimation: false
 
@@ -1345,7 +1333,7 @@ defined (or the getView() must be overridden)'
     render: ->
       super
 
-      # Set the $list property
+      # Set the $list property with the actual list container
       @$list = if @listSelector then @$(@listSelector) else @$el
 
       @initFallback()
@@ -1410,10 +1398,18 @@ defined (or the getView() must be overridden)'
 
     # Applies a filter to the collection view.
     # Expects an iterator function as parameter.
-    # Hides all items for which the iterator returns false.
-    filter: (filterer) ->
+    # If no callback, hides all items for which the iterator returns false.
+    filter: (filterer, callback) ->
       # Save the new filterer function
       @filterer = filterer
+
+      # Default callback (hides excluded items)
+      callback ?= (view, included) =>
+        display = if included then '' else 'none'
+        view.$el.stop(true, true).css('display', display)
+        # Update visibleItems list, but do not trigger
+        # a `visibilityChange` event immediately
+        @updateVisibleItems view.model, included, false
 
       # Show/hide existing views
       unless _(@viewsByCid).isEmpty()
@@ -1421,9 +1417,9 @@ defined (or the getView() must be overridden)'
 
           # Apply filter to the item
           included = if typeof filterer is 'function'
-              filterer item, index
-            else
-              true
+            filterer item, index
+          else
+            true
 
           # Show/hide the view accordingly
           view = @viewsByCid[item.cid]
@@ -1432,13 +1428,8 @@ defined (or the getView() must be overridden)'
             throw new Error 'CollectionView#filter: ' +
               "no view found for #{item.cid}"
 
-          view.$el
-            .stop(true, true)
-            .css('display', if included then '' else 'none')
-
-          # Update visibleItems list, but do not trigger
-          # a `visibilityChange` event immediately
-          @updateVisibleItems item, included, false
+          # Apply callback
+          callback view, included
 
       # Trigger a combined `visibilityChange` event
       @trigger 'visibilityChange', @visibleItems
@@ -1488,7 +1479,7 @@ defined (or the getView() must be overridden)'
       view = @renderItem item
       @insertView item, view, index
 
-    # Instantiate and render an item using the viewsByCid hash as a cache
+    # Instantiate and render an item using the `viewsByCid` hash as a cache
     renderItem: (item) ->
       # Get the existing view
       view = @viewsByCid[item.cid]
@@ -1514,9 +1505,9 @@ defined (or the getView() must be overridden)'
 
       # Is the item included in the filter?
       included = if typeof @filterer is 'function'
-          @filterer item, position
-        else
-          true
+        @filterer item, position
+      else
+        true
 
       # Get the view’s top element
       viewEl = view.el
@@ -1537,20 +1528,25 @@ defined (or the getView() must be overridden)'
       $list = @$list
 
       # Get the children which originate from item views
-      children = $list.children (@itemSelector or undefined)
-      length = children.length
-
-      if length is 0 or position is length
-        # Insert at the end
-        $list.append viewEl
+      children = if @itemSelector
+        $list.children @itemSelector
       else
-        # Insert at the right position
-        if position is 0
-          $next = children.eq position
-          $next.before viewEl
+        $list.children()
+
+      # Check if it needs to be inserted
+      unless children.get(position) is viewEl
+        length = children.length
+        if length is 0 or position is length
+          # Insert at the end
+          $list.append viewEl
         else
-          $previous = children.eq position - 1
-          $previous.after viewEl
+          # Insert at the right position
+          if position is 0
+            $next = children.eq position
+            $next.before viewEl
+          else
+            $previous = children.eq position - 1
+            $previous.after viewEl
 
       # Tell the view that it was added to the DOM
       view.trigger 'addedToDOM'
@@ -1637,13 +1633,16 @@ defined (or the getView() must be overridden)'
 require.define 'chaplin/lib/route': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
-  mediator = require 'chaplin/mediator'
+  EventBroker = require 'chaplin/lib/event_broker'
   Controller = require 'chaplin/controllers/controller'
 
   module.exports = class Route
 
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
+
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     reservedParams = ['path', 'changeURL']
     # Taken from Backbone.Router
@@ -1676,7 +1675,7 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
         # Escape magic characters
         .replace(escapeRegExp, '\\$&')
         # Replace named parameters, collecting their names
-        .replace(/:(\w+)/g, @addParamName)
+        .replace(/(?::|\*)(\w+)/g, @addParamName)
 
       # Create the actual regular expression
       # Match until the end of the URL or the begin of query string
@@ -1690,7 +1689,12 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
       # Save parameter name
       @paramNames.push paramName
       # Replace with a character class
-      '([^\/\?]+)'
+      if match.charAt(0) is ':'
+        # Regexp for :foo
+        '([^\/\?]+)'
+      else
+        # Regexp for *foo
+        '(.*?)'
 
     # Test if the route matches to a path (called by Backbone.History#loadUrl)
     test: (path) ->
@@ -1715,7 +1719,7 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
       params = @buildParams path, options
 
       # Publish a global matchRoute event passing the route and the params
-      mediator.publish 'matchRoute', this, params
+      @publishEvent 'matchRoute', this, params
 
     # Create a proper Rails-like params hash, not an array like Backbone
     # `matches` and `additionalParams` arguments are optional
@@ -1792,7 +1796,7 @@ require.define 'chaplin/lib/router': (exports, require, module) ->
   _ = require 'underscore'
   Backbone = require 'backbone'
   mediator = require 'chaplin/mediator'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
   Route = require 'chaplin/lib/route'
 
   # The router which is a replacement for Backbone.Router.
@@ -1804,8 +1808,8 @@ require.define 'chaplin/lib/router': (exports, require, module) ->
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
 
-    # Mixin a Subscriber
-    _(@prototype).extend Subscriber
+    # Mixin an EventBroker
+    _(@prototype).extend EventBroker
 
     constructor: (@options = {}) ->
       _(@options).defaults
@@ -1840,6 +1844,7 @@ require.define 'chaplin/lib/router': (exports, require, module) ->
       # Since we want routes to match in the order they were specified,
       # we’re appending the route at the end.
       Backbone.history.handlers.push {route, callback: route.handler}
+      route
 
     # Route a given URL path manually, returns whether a route matched
     # This looks quite like Backbone.History::loadUrl but it
@@ -1889,28 +1894,29 @@ require.define 'chaplin/lib/router': (exports, require, module) ->
       # You’re frozen when your heart’s not open
       Object.freeze? this
 
-require.define 'chaplin/lib/subscriber': (exports, require, module) ->
+require.define 'chaplin/lib/event_broker': (exports, require, module) ->
   mediator = require 'chaplin/mediator'
 
-  # Add functionality to subscribe to global Publish/Subscribe events
-  # so they can be removed afterwards when disposing the object.
+  # Add functionality to subscribe and publish to global
+  # Publish/Subscribe events so they can be removed afterwards
+  # when disposing the object.
   #
   # Mixin this object to add the subscriber capability to any object:
-  # _(object).extend Subscriber
+  # _(object).extend EventBroker
   # Or to a prototype of a class:
-  # _(@prototype).extend Subscriber
+  # _(@prototype).extend EventBroker
   #
   # Since Backbone 0.9.2 this abstraction just serves the purpose
   # that a handler cannot be registered twice for the same event.
 
-  Subscriber =
+  EventBroker =
 
     subscribeEvent: (type, handler) ->
       if typeof type isnt 'string'
-        throw new TypeError 'Subscriber#subscribeEvent: ' +
+        throw new TypeError 'EventBroker#subscribeEvent: ' +
           'type argument must be a string'
       if typeof handler isnt 'function'
-        throw new TypeError 'Subscriber#subscribeEvent: ' +
+        throw new TypeError 'EventBroker#subscribeEvent: ' +
           'handler argument must be a function'
 
       # Ensure that a handler isn’t registered twice
@@ -1921,10 +1927,10 @@ require.define 'chaplin/lib/subscriber': (exports, require, module) ->
 
     unsubscribeEvent: (type, handler) ->
       if typeof type isnt 'string'
-        throw new TypeError 'Subscriber#unsubscribeEvent: ' +
+        throw new TypeError 'EventBroker#unsubscribeEvent: ' +
           'type argument must be a string'
       if typeof handler isnt 'function'
-        throw new TypeError 'Subscriber#unsubscribeEvent: ' +
+        throw new TypeError 'EventBroker#unsubscribeEvent: ' +
           'handler argument must be a function'
 
       # Remove global handler
@@ -1935,10 +1941,18 @@ require.define 'chaplin/lib/subscriber': (exports, require, module) ->
       # Remove all handlers with a context of this subscriber
       mediator.unsubscribe null, null, this
 
-  # You’re frozen when your heart’s not open
-  Object.freeze? Subscriber
+    publishEvent: (type, args...) ->
+      if typeof type isnt 'string'
+        throw new TypeError 'EventBroker#publishEvent: ' +
+          'type argument must be a string'
 
-  module.exports = Subscriber
+      # Publish global handler
+      mediator.publish type, args...
+
+  # You’re frozen when your heart’s not open
+  Object.freeze? EventBroker
+
+  module.exports = EventBroker
 
 require.define 'chaplin/lib/support': (exports, require, module) ->
 
@@ -2129,7 +2143,7 @@ require.define 'chaplin': (exports, require, module) ->
   CollectionView = require 'chaplin/views/collection_view'
   Route = require 'chaplin/lib/route'
   Router = require 'chaplin/lib/router'
-  Subscriber = require 'chaplin/lib/subscriber'
+  EventBroker = require 'chaplin/lib/event_broker'
   support = require 'chaplin/lib/support'
   SyncMachine = require 'chaplin/lib/sync_machine'
   utils = require 'chaplin/lib/utils'
@@ -2146,10 +2160,9 @@ require.define 'chaplin': (exports, require, module) ->
     CollectionView,
     Route,
     Router,
-    Subscriber,
+    EventBroker,
     support,
     SyncMachine,
     utils
   }
-
 
