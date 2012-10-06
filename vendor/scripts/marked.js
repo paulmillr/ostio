@@ -618,6 +618,9 @@ function tok() {
         : token.text;
     }
     case 'paragraph': {
+      if (options.inlineAdditions) {
+        token.text = options.inlineAdditions(token.text);
+      }
       return '<p>'
         + inline.lexer(token.text)
         + '</p>\n';

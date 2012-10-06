@@ -101,28 +101,29 @@ unescapeTags = (string) ->
     '&#x60;': '`'
   unescape string, re, replacements
 
-# Replace patterns:
-# * `gh-143` with link to github issue 143.
-# * `@name` with link to ost.io user.
-addMarkdownExtensions = (login, repoName, string) ->
-  str = "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)"
-  string
-    .replace(/gh\-?(\d+)/g, str)
-    .replace(/@([\w\.]+)/g, '[**@$1**](/$1)')
-
 Handlebars.registerHelper 'markdown', (options) ->
   repo = @topic.repo
+  login = repo.user.login
+  repoName = repo.name
+  string = unescapeTags options.fn this
 
-  unescaped = unescapeTags options.fn this
-  string = addMarkdownExtensions repo.user.login, repo.name, unescaped
-
-  markdown = marked string, gfm: yes, highlight: (code, language) ->
-    result = if language
-      try
-        hljs.highlight(language, code).value
-      catch error
+  markdown = marked string,
+    gfm: yes,
+    inlineAdditions: (text) ->
+      # Replace patterns:
+      # * `gh-143` with link to github issue 143.
+      # * `@name` with link to ost.io user.
+      repl = "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)"
+      text
+        .replace(/gh\-?(\d+)/g, repl)
+        .replace(/@([\w\.]+)/g, '[**@$1**](/$1)')
+    highlight: (code, language) ->
+      result = if language
+        try
+          hljs.highlight(language, code).value
+        catch error
+          code
+      else
         code
-    else
-      code
-    unescapeTags result
+      unescapeTags result
   new Handlebars.SafeString markdown
