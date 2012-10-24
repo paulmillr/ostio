@@ -87,29 +87,15 @@ Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
   new Handlebars.SafeString moment(date).fromNow()
 
-
-unescape = (string, re, replacements) ->
-  string.replace re, (substr, index) ->
-    replacements[substr]
-
-unescapeTags = (string) ->
-  re = /&(?:amp|#x27|#x60|quot);/g
-  replacements =
-    '&amp;': '&'
-    '&#x27;': '\''
-    '&quot;': '"'
-    '&#x60;': '`'
-  unescape string, re, replacements
-
 Handlebars.registerHelper 'markdown', (options) ->
   repo = @topic.repo
   login = repo.user.login
   repoName = repo.name
-  string = unescapeTags options.fn this
+  string = options.fn(this)
 
   markdown = marked string,
     gfm: yes,
-    inlineAdditions: (text) ->
+    inlineModifier: (text) ->
       # Replace patterns:
       # * `gh-143` with link to github issue 143.
       # * `@name` with link to ost.io user.
@@ -118,12 +104,11 @@ Handlebars.registerHelper 'markdown', (options) ->
         .replace(/gh\-?(\d+)/g, repl)
         .replace(/@([\w\.]+)/g, '[**@$1**](/$1)')
     highlight: (code, language) ->
-      result = if language
+      if language
         try
           hljs.highlight(language, code).value
         catch error
           code
       else
         code
-      unescapeTags result
   new Handlebars.SafeString markdown

@@ -606,6 +606,9 @@ function tok() {
         : token.text;
     }
     case 'paragraph': {
+      var modifier = options.inlineModifier;
+      if (modifier) token.text = modifier(token.text);
+
       return '<p>'
         + inline.lexer(token.text)
         + '</p>\n';
