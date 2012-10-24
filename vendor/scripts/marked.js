@@ -20,7 +20,7 @@ var block = {
   list: /^( *)(bull) [^\0]+?(?:hr|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,
   html: /^ *(?:comment|closed|closing) *(?:\n{2,}|\s*$)/,
   def: /^ *\[([^\]]+)\]: *([^\s]+)(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,
-  paragraph: /^([^\n]+\n?(?!body))+\n*/,
+  paragraph: /^([^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+\n*/,
   text: /^[^\n]+/
 };
 
@@ -38,29 +38,18 @@ block.list = replace(block.list)
 block.html = replace(block.html)
   ('comment', /<!--[^\0]*?-->/)
   ('closed', /<(tag)[^\0]+?<\/\1>/)
-  ('closing', /<tag(?!:\/|@)\b(?:"[^"]*"|'[^']*'|[^'">])*?>/)
+  ('closing', /<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)
   (/tag/g, tag())
   ();
 
-block.paragraph = (function() {
-  var paragraph = block.paragraph.source
-    , body = [];
-
-  (function push(rule) {
-    rule = block[rule] ? block[rule].source : rule;
-    body.push(rule.replace(/(^|[^\[])\^/g, '$1'));
-    return push;
-  })
-  ('hr')
-  ('heading')
-  ('lheading')
-  ('blockquote')
-  ('<' + tag())
-  ('def');
-
-  return new
-    RegExp(paragraph.replace('body', body.join('|')));
-})();
+block.paragraph = replace(block.paragraph)
+  ('hr', block.hr)
+  ('heading', block.heading)
+  ('lheading', block.lheading)
+  ('blockquote', block.blockquote)
+  ('tag', '<' + tag())
+  ('def', block.def)
+  ();
 
 block.normal = {
   fences: block.fences,
@@ -68,12 +57,12 @@ block.normal = {
 };
 
 block.gfm = {
-  fences: /^ *``` *(\w+)? *\n([^\0]+?)\s*``` *(?:\n+|$)/,
+  fences: /^ *(```|~~~) *(\w+)? *\n([^\0]+?)\s*\1 *(?:\n+|$)/,
   paragraph: /^/
 };
 
 block.gfm.paragraph = replace(block.paragraph)
-  ('(?!', '(?!' + block.gfm.fences.source.replace(/(^|[^\[])\^/g, '$1') + '|')
+  ('(?!', '(?!' + block.gfm.fences.source.replace('\\1', '\\2') + '|')
   ();
 
 /**
@@ -131,8 +120,8 @@ block.token = function(src, tokens, top) {
       src = src.substring(cap[0].length);
       tokens.push({
         type: 'code',
-        lang: cap[1],
-        text: cap[2]
+        lang: cap[2],
+        text: cap[3]
       });
       continue;
     }
@@ -257,7 +246,9 @@ block.token = function(src, tokens, top) {
     if (cap = block.html.exec(src)) {
       src = src.substring(cap[0].length);
       tokens.push({
-        type: 'html',
+        type: options.sanitize
+          ? 'paragraph'
+          : 'html',
         pre: cap[1] === 'pre',
         text: cap[0]
       });
@@ -610,17 +601,11 @@ function tok() {
         + '</li>\n';
     }
     case 'html': {
-      if (options.sanitize) {
-        return inline.lexer(token.text);
-      }
       return !token.pre && !options.pedantic
         ? inline.lexer(token.text)
         : token.text;
     }
     case 'paragraph': {
-      if (options.inlineAdditions) {
-        token.text = options.inlineAdditions(token.text);
-      }
       return '<p>'
         + inline.lexer(token.text)
         + '</p>\n';
@@ -693,7 +678,7 @@ function tag() {
   var tag = '(?!(?:'
     + 'a|em|strong|small|s|cite|q|dfn|abbr|data|time|code'
     + '|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo'
-    + '|span|br|wbr|ins|del|img)\\b)\\w+';
+    + '|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|@)\\b';
 
   return tag;
 }
@@ -703,7 +688,9 @@ function replace(regex, opt) {
   opt = opt || '';
   return function self(name, val) {
     if (!name) return new RegExp(regex, opt);
-    regex = regex.replace(name, val.source || val);
+    val = val.source || val;
+    val = val.replace(/(^|[^\[])\^/g, '$1');
+    regex = regex.replace(name, val);
     return self;
   };
 }
