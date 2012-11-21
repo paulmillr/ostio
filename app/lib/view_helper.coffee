@@ -87,28 +87,48 @@ Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this
   new Handlebars.SafeString moment(date).fromNow()
 
+escape =
+  "&amp;": "&"
+  "&lt;": "<"
+  "&gt;": ">"
+  "&quot;": '"'
+  "&#x27;": "'"
+  "&#x60;": "`"
+
+badChars = /&(?:amp|lt|gt|quot|#x27|x60);/g
+possible = /&(?:amp|lt|gt|quot|#x27|x60);/
+
+escapeChar = (chr) ->
+  escape[chr] ? "&"
+
+escapeExpression = Handlebars.Utils.escapeExpression
+
+unescapeExpression = (string) ->
+  if string instanceof Handlebars.SafeString
+    string.toString()
+  else if not string
+    ''
+  else if not possible.test(string)
+    string
+  else
+    string.replace(badChars, escapeChar)
+
 Handlebars.registerHelper 'markdown', (options) ->
   repo = @topic.repo
   login = repo.user.login
   repoName = repo.name
-  string = options.fn(this)
+  string = escapeExpression(options.fn this).replace /&#x60;/g, '`'
 
   markdown = marked string,
     gfm: yes,
-    inlineModifier: (text) ->
-      # Replace patterns:
-      # * `gh-143` with link to github issue 143.
-      # * `@name` with link to ost.io user.
-      repl = "[**gh-$1**](https://github.com/#{login}/#{repoName}/issues/$1)"
-      text
-        .replace(/gh\-?(\d+)/g, repl)
-        .replace(/@([\w\.]+)/g, '[**@$1**](/$1)')
     highlight: (code, language) ->
+      # ಠ_ಠ
+      reEscaped = escapeExpression unescapeExpression code
       if language
         try
-          hljs.highlight(language, code).value
+          hljs.highlight(language, unescapeExpression reEscaped).value
         catch error
-          code
+          reEscaped
       else
-        code
+        reEscaped
   new Handlebars.SafeString markdown

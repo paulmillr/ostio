@@ -306,6 +306,7 @@ var inline = {
   em: /^\b_((?:__|[^\0])+?)_\b|^\*((?:\*\*|[^\0])+?)\*(?!\*)/,
   code: /^(`+)([^\0]*?[^`])\1(?!`)/,
   br: /^ {2,}\n(?!\s*$)/,
+  mention: /^@([\w\.]+)/,
   text: /^[^\0]+?(?=[\\<!\[_*`]| {2,}\n|$)/
 };
 
@@ -342,7 +343,7 @@ inline.gfm = {
  * Inline Lexer
  */
 
-inline.lexer = function(src) {
+inline.lexer = function(src, modifier) {
   var out = ''
     , links = tokens.links
     , link
@@ -355,6 +356,12 @@ inline.lexer = function(src) {
     if (cap = inline.escape.exec(src)) {
       src = src.substring(cap[0].length);
       out += cap[1];
+      continue;
+    }
+
+    if (cap = inline.mention.exec(src)) {
+      src = src.substring(cap[0].length);
+      out += '<a href="/' + cap[1] + '"><strong>@' + cap[1] + '</strong></a>';
       continue;
     }
 
@@ -447,7 +454,7 @@ inline.lexer = function(src) {
     if (cap = inline.code.exec(src)) {
       src = src.substring(cap[0].length);
       out += '<code>'
-        + escape(cap[2], true)
+        + escape(cap[2], false)
         + '</code>';
       continue;
     }
@@ -606,11 +613,8 @@ function tok() {
         : token.text;
     }
     case 'paragraph': {
-      var modifier = options.inlineModifier;
-      if (modifier) token.text = modifier(token.text);
-
       return '<p>'
-        + inline.lexer(token.text)
+        + inline.lexer(token.text, options.inlineModifier)
         + '</p>\n';
     }
     case 'text': {
