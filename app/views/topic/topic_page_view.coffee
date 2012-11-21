@@ -15,19 +15,18 @@ module.exports = class TopicPageView extends PageView
     topic_number: @model.get('number')
 
   renderSubviews: ->
-    posts = new Collection null, model: Post
-    posts.url = @model.url('/posts/')
+    @posts = new Collection null, model: Post
+    @posts.url = @model.url('/posts/')
     @subview 'posts', new PostsView
-      collection: posts,
+      collection: @posts,
       container: @$('.topic-posts-container')
-    posts.fetch()
+    @posts.fetch()
+
     @subscribeEvent 'post:new', (post) =>
-      posts.push post
-    @subscribeEvent 'post:edit', (post) =>
-      index = posts.indexOf post
+      @posts.push post
 
     createNewPost = =>
-      newPost = new Post({topic: @model})
+      newPost = new Post topic: @model
       newPostView = new NewPostFormView
         model: newPost,
         container: @$('.new-post-form-container')
@@ -35,3 +34,9 @@ module.exports = class TopicPageView extends PageView
         setTimeout createNewPost, 0
       @subview 'newPostForm', newPostView
     createNewPost()
+
+  dispose: ->
+    return if @disposed
+    @posts.dispose()
+    delete @posts
+    super

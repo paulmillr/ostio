@@ -18,36 +18,43 @@ module.exports = class UserPageView extends PageView
 
   renderSubviews: ->
     # Main repositories collection.
-    repos = new Collection null, model: Repo
-    repos.url = @model.url('/repos/')
+    @repos = new Collection null, model: Repo
+    @repos.url = @model.url('/repos/')
     @subview 'repos', new ReposView
-      collection: repos,
+      collection: @repos,
       container: @$('.user-repo-list-container')
-    repos.fetch()
+    @repos.fetch()
 
-    organizations = @model.get('organizations')
-    owners = @model.get('owners')
+    @organizations = @model.get('organizations')
+    @owners = @model.get('owners')
 
     # If current page is user’s page, create organizations subview.
     # Otherwise, create organization managers subview.
-    if @model.get('type') is 'User' and organizations.length > 0
+    if @model.get('type') is 'User' and @organizations.length > 0
       @subview 'organizations', new UserOrganizationsView
-        collection: organizations,
+        collection: @organizations,
         container: @$('.user-organization-list-container')
-    else if owners.length > 0
+    else if @owners.length > 0
       @subview 'owners', new OrganizationOwnersView
-        collection: owners,
+        collection: @owners,
         container: @$('.user-owner-list-container')
 
     # “Sync repos” button.
-    repoSync = new Collection null, model: Repo
-    repoSync.url = @model.url('/sync_repos/')
-    repoSync.fetch = (options) =>
-      $.post repoSync.url
+    @repoSync = new Collection null, model: Repo
+    @repoSync.url = @model.url('/sync_repos/')
+    @repoSync.fetch = (options) =>
+      $.post @repoSync.url
     repoSyncView = new UserRepoSyncView
-      collection: repoSync,
+      collection: @repoSync,
       container: @$('.user-repo-sync-container'),
       login: @model.get('login')
     @subview 'repoSync', repoSyncView
     repoSyncView.on 'sync', =>
-      repos.fetch()
+      @repos.fetch()
+
+  dispose: ->
+    return if @disposed
+    ['repos', 'organizations', 'owners', 'repoSync'].forEach (attr) =>
+      this[attr].dispose()
+      delete this[attr]
+    super

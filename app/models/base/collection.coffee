@@ -14,3 +14,8 @@ module.exports = class Collection extends Chaplin.Collection
 /repos/#{@urlParams.repoName}
 /topics/#{@urlParams.topicNumber}
 /posts/"
+
+  dispose: ->
+    return if @disposed
+    delete @url
+    super

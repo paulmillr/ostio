@@ -14,14 +14,14 @@ module.exports = class RepoPageView extends PageView
     repo_name: @model.get('name')
 
   renderSubviews: ->
-    topics = new Collection null, model: Topic
-    topics.url = @model.url('/topics/')
+    @topics = new Collection null, model: Topic
+    @topics.url = @model.url('/topics/')
     @subview 'topics', new TopicsView
-      collection: topics,
+      collection: @topics,
       container: @$('.repo-topic-list-container')
-    topics.fetch()
+    @topics.fetch()
     @subscribeEvent 'topic:new', (topic) =>
-      topics.unshift topic
+      @topics.unshift topic
 
     createNewTopic = =>
       newTopic = new Topic({repo: @model})
@@ -32,3 +32,9 @@ module.exports = class RepoPageView extends PageView
         setTimeout createNewTopic, 0
       @subview 'newTopicForm', newTopicView
     createNewTopic()
+
+  dispose: ->
+    return if @disposed
+    @topics.dispose()
+    delete @topics
+    super
