@@ -7,7 +7,6 @@ template = require 'views/templates/user_page'
 User = require 'models/user'
 UserOrganizationsView = require 'views/user/user_organizations_view'
 UsersView = require 'views/user/users_view'
-
 UserRepoSyncView = require 'views/user/user_repo_sync_view'
 
 module.exports = class UserPageView extends PageView
@@ -18,6 +17,7 @@ module.exports = class UserPageView extends PageView
     user_login: @model.get('login')
 
   renderSubviews: ->
+    # Main repositories collection.
     repos = new Collection null, model: Repo
     repos.url = @model.url('/repos/')
     @subview 'repos', new ReposView
@@ -27,6 +27,9 @@ module.exports = class UserPageView extends PageView
 
     organizations = @model.get('organizations')
     owners = @model.get('owners')
+
+    # If current page is user’s page, create organizations subview.
+    # Otherwise, create organization managers subview.
     if @model.get('type') is 'User' and organizations.length > 0
       @subview 'organizations', new UserOrganizationsView
         collection: organizations,
@@ -36,6 +39,7 @@ module.exports = class UserPageView extends PageView
         collection: owners,
         container: @$('.user-owner-list-container')
 
+    # “Sync repos” button.
     repoSync = new Collection null, model: Repo
     repoSync.url = @model.url('/sync_repos/')
     repoSync.fetch = (options) =>

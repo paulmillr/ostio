@@ -2,10 +2,10 @@ View = require 'views/base/view'
 template = require 'views/templates/navigation'
 
 module.exports = class NavigationView extends View
-  template: template
-  tagName: 'nav'
   className: 'navigation'
   container: '#navigation-container'
+  tagName: 'nav'
+  template: template
 
   initialize: ->
     super

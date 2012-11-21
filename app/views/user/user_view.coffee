@@ -1,7 +1,7 @@
-View = require 'views/base/view'
 template = require 'views/templates/user'
+View = require 'views/base/view'
 
 module.exports = class UserView extends View
-  template: template
   className: 'user'
   tagName: 'span'
+  template: template

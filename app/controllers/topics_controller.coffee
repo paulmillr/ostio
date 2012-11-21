@@ -11,8 +11,8 @@ module.exports = class TopicsController extends Controller
     Backbone.history.navigate "/#{params.login}/#{params.repoName}"
 
   show: (params) ->
-    user = new User({login: params.login})
-    repo = new Repo({user, name: params.repoName})
-    @model = new Topic({repo, number: params.topicNumber})
+    @user = new User({login: params.login})
+    @repo = new Repo({@user, name: params.repoName})
+    @model = new Topic({@repo, number: params.topicNumber})
     @view = new TopicPageView({@model})
     @model.fetch()

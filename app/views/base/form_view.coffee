@@ -2,8 +2,8 @@ View = require 'views/base/view'
 SpinnerView = require 'views/spinner_view'
 
 module.exports = class FormView extends View
-  tagName: 'form'
   autoRender: yes
+  tagName: 'form'
 
   initialize: ->
     super
@@ -27,5 +27,5 @@ module.exports = class FormView extends View
       .done (response) =>
         @publishSave response
         @dismiss()
-      .fail (response) =>
+      .always (response) =>
         spinner.dispose()

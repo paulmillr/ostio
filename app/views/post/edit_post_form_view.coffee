@@ -2,9 +2,9 @@ FormView = require 'views/base/form_view'
 template = require 'views/templates/edit_post_form'
 
 module.exports = class EditPostFormView extends FormView
-  template: template
   className: 'post post-create'
   saveEvent: 'post:edit'
+  template: template
 
   initialize: (options) ->
     super

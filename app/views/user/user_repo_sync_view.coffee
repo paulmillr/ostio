@@ -2,9 +2,9 @@ View = require 'views/base/view'
 template = require 'views/templates/user_repo_sync'
 
 module.exports = class UserRepoSyncView extends View
-  template: template
-  className: 'user-repo-sync'
   autoRender: yes
+  className: 'user-repo-sync'
+  template: template
 
   initialize: (args) ->
     super

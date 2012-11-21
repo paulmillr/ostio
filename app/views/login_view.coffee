@@ -3,12 +3,12 @@ View = require 'views/base/view'
 template = require 'views/templates/login'
 
 module.exports = class LoginView extends View
-  template: template
+  autoRender: yes
+  container: '#page-container'
   id: 'login'
-  container: '#content-container'
-  autoRender: true
+  template: template
 
-  # Expects the serviceProviders in the options
+  # Expects the serviceProviders in the options.
   initialize: (options) ->
     super
     @initButtons options.serviceProviders
@@ -16,41 +16,27 @@ module.exports = class LoginView extends View
   # In this project we currently only have one service provider and therefore
   # one button. But this should allow for different service providers.
   initButtons: (serviceProviders) ->
-    # console.debug 'LoginView#initButtons', serviceProviders
-
-    for serviceProviderName, serviceProvider of serviceProviders
+    _.each serviceProviders, (serviceProvider, serviceProviderName) =>
+      bind = (fn) =>
+        _(fn).bind this, serviceProviderName, serviceProvider
 
       buttonSelector = ".#{serviceProviderName}"
       @$(buttonSelector).addClass('service-loading')
 
-      loginHandler = _(@loginWith).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      @delegate 'click', buttonSelector, loginHandler
+      @delegate 'click', buttonSelector, bind @loginWith
+      serviceProvider.done bind @serviceProviderLoaded
+      serviceProvider.fail bind @serviceProviderFailed
 
-      loaded = _(@serviceProviderLoaded).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      serviceProvider.done loaded
-
-      failed = _(@serviceProviderFailed).bind(
-        this, serviceProviderName, serviceProvider
-      )
-      serviceProvider.fail failed
-
-  loginWith: (serviceProviderName, serviceProvider, e) ->
-    # console.debug 'LoginView#loginWith', serviceProviderName, serviceProvider
-    e.preventDefault()
+  loginWith: (serviceProviderName, serviceProvider, event) ->
+    event.preventDefault()
     return unless serviceProvider.isLoaded()
     @publishEvent 'login:pickService', serviceProviderName
     @publishEvent '!login', serviceProviderName
 
   serviceProviderLoaded: (serviceProviderName) ->
-    #console.debug 'LoginView#serviceProviderLoaded', serviceProviderName
     @$(".#{serviceProviderName}").removeClass('service-loading')
 
   serviceProviderFailed: (serviceProviderName) ->
-    #console.debug 'LoginView#serviceProviderFailed', serviceProviderName
     @$(".#{serviceProviderName}")
       .removeClass('service-loading')
       .addClass('service-unavailable')

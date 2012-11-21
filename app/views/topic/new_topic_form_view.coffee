@@ -4,9 +4,9 @@ Post = require 'models/post'
 SpinnerView = require 'views/spinner_view'
 
 module.exports = class NewTopicFormView extends FormView
-  template: template
   className: 'new-topic-form'
   saveEvent: 'topic:new'
+  template: template
 
   initialize: ->
     super

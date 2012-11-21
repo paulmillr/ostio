@@ -8,8 +8,8 @@ User = require 'models/user'
 UsersView = require 'views/user/users_view'
 
 module.exports = class FeedPageView extends PageView
-  template: template
   autoRender: yes
+  template: template
 
   renderSubviews: ->
     users = new Collection null, model: User

@@ -3,9 +3,9 @@ template = require 'views/templates/post'
 View = require 'views/base/view'
 
 module.exports = class PostView extends View
-  template: template
   className: 'post'
   tagName: 'article'
+  template: template
 
   initialize: ->
     super

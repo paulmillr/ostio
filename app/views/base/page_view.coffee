@@ -1,8 +1,8 @@
 View = require 'views/base/view'
 
 module.exports = class PageView extends View
-  renderedSubviews: no
   container: '#content-container'
+  renderedSubviews: no
 
   initialize: ->
     super

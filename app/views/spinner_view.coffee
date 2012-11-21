@@ -2,9 +2,9 @@ View = require 'views/base/view'
 template = require 'views/templates/spinner'
 
 module.exports = class SpinnerView extends View
-  template: template
-  containerMethod: 'html'
   autoRender: yes
+  containerMethod: 'html'
+  template: template
 
   initialize: (options) ->
     super
@@ -12,4 +12,5 @@ module.exports = class SpinnerView extends View
 
   dispose: ->
     $(@container).html @previous
+    delete @previous
     super
