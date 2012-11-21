@@ -3,11 +3,11 @@
     <a class="navigation-link" href="/{{user_login}}">
       <img class="avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}" alt="" />
     </a>
-    <a class="navigation-link" href="/{{user_login}}">{{user_login}}</a>
+    <a class="navigation-link" data-type="login" href="/{{user_login}}">{{user_login}}</a>
     {{#if repo_name}}
-      / <a class="navigation-link" href="/{{user_login}}/{{repo_name}}">{{repo_name}}</a>
+      / <a class="navigation-link" data-type="repo" href="/{{user_login}}/{{repo_name}}">{{repo_name}}</a>
       {{#if topic_number}}
-        / <a class="navigation-link" href="/{{user_login}}/{{repo_name}}/topics/{{topic_number}}">#{{topic_number}}</a>
+        / <a class="navigation-link" data-type="topic" href="/{{user_login}}/{{repo_name}}/topics/{{topic_number}}">#{{topic_number}}</a>
       {{/if}}
     {{/if}}
   </h2>
