@@ -1,5 +1,5 @@
 ###
-Chaplin 1.0.0-pre.
+Chaplin 0.5.0.
 
 Chaplin may be freely distributed under the MIT license.
 For all details and documentation:
@@ -884,7 +884,9 @@ require.define 'chaplin/views/view': (exports, require, module) ->
 
       # Copy some options to instance properties
       if options
-        _(this).extend _.pick options, ['autoRender', 'container', 'containerMethod']
+        for prop in ['autoRender', 'container', 'containerMethod']
+          if options[prop]?
+            @[prop] = options[prop]
 
       # Initialize subviews
       @subviews = []
@@ -1292,11 +1294,10 @@ require.define 'chaplin/views/collection_view': (exports, require, module) ->
       # Start observing the collection
       @addCollectionListeners()
 
-      # Apply options to view instance
-      _(this).extend _.pick options, ['renderItems', 'itemView']
-
-      # Apply a filter if one provided
-      @filter options.filterer if options.filterer?
+      # Apply options
+      @renderItems = options.renderItems if options.renderItems?
+      @itemView = options.itemView       if options.itemView?
+      @filter options.filterer           if options.filterer?
 
     # Binding of collection listeners
     addCollectionListeners: ->
@@ -1671,7 +1672,6 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
     createRegExp: ->
       if _.isRegExp(@pattern)
         @regExp = @pattern
-        @paramNames = @options.names if _.isArray @options.names
         return
 
       pattern = @pattern
