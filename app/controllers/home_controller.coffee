@@ -3,6 +3,7 @@ HomePageView = require 'views/home_page_view'
 
 module.exports = class HomeController extends Controller
   historyURL: ''
+  title: 'Home'
 
   show: (params) ->
     @view = new HomePageView()

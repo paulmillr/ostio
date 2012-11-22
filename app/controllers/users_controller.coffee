@@ -4,6 +4,7 @@ UserPageView = require 'views/user/user_page_view'
 
 module.exports = class UsersController extends Controller
   historyURL: 'users'
+  title: 'User'
 
   show: (params) ->
     @model = new User({login: params.login})

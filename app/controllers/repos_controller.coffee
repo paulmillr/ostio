@@ -5,6 +5,7 @@ User = require 'models/user'
 
 module.exports = class ReposController extends Controller
   historyURL: 'repos'
+  title: 'Repos'
 
   show: (params) ->
     @user = new User({login: params.login})
