@@ -24,8 +24,3 @@ module.exports = class PageView extends View
       @renderSubviews()
       @renderedSubviews = yes
     @publishEvent 'navigation:change', @getNavigationData()
-
-  dispose: ->
-    return if @disposed
-    delete this[attr] for attr in ['rendered', 'renderedSubviews']
-    super
