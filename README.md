@@ -14,7 +14,7 @@ Use brunch with chaplin if you want to build new application:
 `brunch new <project name> --skeleton git://github.com/paulmillr/brunch-with-chaplin.git`
 
 ### Brunch
-[Brunch](http://brunch.io/) is a html5 application builder that's
+[Brunch](http://brunch.io) is a html5 application builder that's
 agnostic to programming langs and frameworks. In this case,
 CoffeeScript is used with Stylus, Handlebars.js templates and javascript libs.
 
@@ -22,8 +22,8 @@ CoffeeScript is used with Stylus, Handlebars.js templates and javascript libs.
 brunch plugins.
 
 ### Chaplin (+ Backbone.js)
-[Chaplin](https://github.com/chaplinjs/chaplin) is a framework on top of
-[Backbone.js](http://backbonejs.org/) that adds some great predefined
+[Chaplin](http://chaplinjs.org) is a framework on top of
+[Backbone.js](http://backbonejs.org) that adds some great predefined
 structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 
 ### Other
