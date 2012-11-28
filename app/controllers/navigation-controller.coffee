@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 Navigation = require 'models/navigation'
-NavigationView = require 'views/navigation_view'
+NavigationView = require 'views/navigation-view'
 
 module.exports = class NavigationController extends Controller
   initialize: ->

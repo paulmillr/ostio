@@ -1,4 +1,4 @@
-PostView = require 'views/post/post_view'
+PostView = require 'views/post/post-view'
 
 module.exports = class FeedPostView extends PostView
   initialize: ->

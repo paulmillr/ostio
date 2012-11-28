@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 Topic = require 'models/topic'
-TopicPageView = require 'views/topic/topic_page_view'
+TopicPageView = require 'views/topic/topic-page-view'
 User = require 'models/user'
 Repo = require 'models/repo'
 

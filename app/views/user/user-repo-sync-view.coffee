@@ -1,5 +1,5 @@
 View = require 'views/base/view'
-template = require 'views/templates/user_repo_sync'
+template = require 'views/templates/user-repo-sync'
 
 module.exports = class UserRepoSyncView extends View
   autoRender: yes

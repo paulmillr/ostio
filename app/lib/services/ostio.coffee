@@ -1,6 +1,6 @@
 config = require 'config'
 mediator = require 'mediator'
-ServiceProvider = require 'lib/services/service_provider'
+ServiceProvider = require 'lib/services/service-provider'
 User = require 'models/user'
 
 module.exports = class Ostio extends ServiceProvider

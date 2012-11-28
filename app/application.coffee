@@ -1,9 +1,9 @@
 Chaplin = require 'chaplin'
 mediator = require 'mediator'
 routes = require 'routes'
-SessionController = require 'controllers/session_controller'
-HeaderController = require 'controllers/header_controller'
-NavigationController = require 'controllers/navigation_controller'
+SessionController = require 'controllers/session-controller'
+HeaderController = require 'controllers/header-controller'
+NavigationController = require 'controllers/navigation-controller'
 Layout = require 'views/layout'
 
 # The application bootstrapper.
@@ -16,7 +16,7 @@ module.exports = class Application extends Chaplin.Application
     super
 
     # Initialize core components
-    @initDispatcher()
+    @initDispatcher controllerSuffix: '-controller'
     @initLayout()
     @initMediator()
 

@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 mediator = require 'mediator'
-SettingsPageView = require 'views/settings_page_view'
+SettingsPageView = require 'views/settings-page-view'
 
 module.exports = class SettingsController extends Controller
   historyURL: 'settings'

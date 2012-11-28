@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
-UserPageView = require 'views/user/user_page_view'
+UserPageView = require 'views/user/user-page-view'
 
 module.exports = class UsersController extends Controller
   historyURL: 'users'

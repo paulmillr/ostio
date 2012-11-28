@@ -1,5 +1,5 @@
-UsersView = require 'views/user/users_view'
-template = require 'views/templates/user_organizations'
+UsersView = require 'views/user/users-view'
+template = require 'views/templates/user-organizations'
 
 module.exports = class UserOrganizationsView extends UsersView
   listSelector: '.users-list'

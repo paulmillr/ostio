@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 Repo = require 'models/repo'
-RepoPageView = require 'views/repo/repo_page_view'
+RepoPageView = require 'views/repo/repo-page-view'
 User = require 'models/user'
 
 module.exports = class ReposController extends Controller

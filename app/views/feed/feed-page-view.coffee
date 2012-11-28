@@ -1,11 +1,11 @@
 Collection = require 'models/base/collection'
 config = require 'config'
-FeedPostsView = require 'views/feed/feed_posts_view'
-PageView = require 'views/base/page_view'
+FeedPostsView = require 'views/feed/feed-posts-view'
+PageView = require 'views/base/page-view'
 Post = require 'models/post'
-template = require 'views/templates/feed_page'
+template = require 'views/templates/feed-page'
 User = require 'models/user'
-UsersView = require 'views/user/users_view'
+UsersView = require 'views/user/users-view'
 
 module.exports = class FeedPageView extends PageView
   autoRender: yes

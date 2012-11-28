@@ -1,7 +1,7 @@
-FormView = require 'views/base/form_view'
-template = require 'views/templates/new_topic_form'
+FormView = require 'views/base/form-view'
+template = require 'views/templates/new-topic-form'
 Post = require 'models/post'
-SpinnerView = require 'views/spinner_view'
+SpinnerView = require 'views/spinner-view'
 
 module.exports = class NewTopicFormView extends FormView
   className: 'new-topic-form'

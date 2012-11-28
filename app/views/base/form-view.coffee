@@ -1,5 +1,5 @@
 View = require 'views/base/view'
-SpinnerView = require 'views/spinner_view'
+SpinnerView = require 'views/spinner-view'
 
 module.exports = class FormView extends View
   autoRender: yes

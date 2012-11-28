@@ -1,5 +1,5 @@
-PageView = require 'views/base/page_view'
-template = require 'views/templates/settings_page'
+PageView = require 'views/base/page-view'
+template = require 'views/templates/settings-page'
 
 module.exports = class SettingsPageView extends PageView
   autoRender: yes

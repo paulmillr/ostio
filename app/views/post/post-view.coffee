@@ -1,4 +1,4 @@
-EditPostFormView = require 'views/post/edit_post_form_view'
+EditPostFormView = require 'views/post/edit-post-form-view'
 template = require 'views/templates/post'
 View = require 'views/base/view'
 

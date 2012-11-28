@@ -1,5 +1,5 @@
-CollectionView = require 'views/base/collection_view'
-User = require 'views/user/user_view'
+CollectionView = require 'views/base/collection-view'
+User = require 'views/user/user-view'
 
 module.exports = class UsersView extends CollectionView
   className: 'users'

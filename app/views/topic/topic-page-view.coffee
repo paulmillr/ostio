@@ -1,9 +1,9 @@
 Collection = require 'models/base/collection'
-NewPostFormView = require 'views/post/new_post_form_view'
-PageView = require 'views/base/page_view'
+NewPostFormView = require 'views/post/new-post-form-view'
+PageView = require 'views/base/page-view'
 Post = require 'models/post'
-PostsView = require 'views/post/posts_view'
-template = require 'views/templates/topic_page'
+PostsView = require 'views/post/posts-view'
+template = require 'views/templates/topic-page'
 
 module.exports = class TopicPageView extends PageView
   template: template

@@ -1,7 +1,7 @@
 mediator = require 'mediator'
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
-LoginView = require 'views/login_view'
+LoginView = require 'views/login-view'
 Ostio = require 'lib/services/ostio'
 
 module.exports = class SessionController extends Controller

@@ -1,6 +1,6 @@
 Controller = require 'controllers/base/controller'
 Header = require 'models/header'
-HeaderView = require 'views/header_view'
+HeaderView = require 'views/header-view'
 
 module.exports = class HeaderController extends Controller
   initialize: ->
