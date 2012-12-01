@@ -4,7 +4,7 @@ module.exports = class Layout extends Chaplin.Layout
   initialize: ->
     super
     @initialVisit = yes
-    @subscribeEvent '!router:route', @trackVisit
+    @subscribeEvent 'startupController', @trackVisit
 
   trackVisit: =>
     if @initialVisit
