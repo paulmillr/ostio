@@ -8,7 +8,7 @@ module.exports = class ReposController extends Controller
   title: 'Repos'
 
   show: (params) ->
-    @user = new User({login: params.login})
-    @model = new Repo({@user, name: params.repoName})
-    @view = new RepoPageView({@model})
+    @user = new User {login: params.login}
+    @model = new Repo {@user, name: params.repoName}
+    @view = new RepoPageView {@model}
     @model.fetch()

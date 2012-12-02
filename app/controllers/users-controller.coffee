@@ -7,6 +7,6 @@ module.exports = class UsersController extends Controller
   title: 'User'
 
   show: (params) ->
-    @model = new User({login: params.login})
-    @view = new UserPageView({@model})
+    @model = new User {login: params.login}
+    @view = new UserPageView {@model}
     @model.fetch()

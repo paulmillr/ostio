@@ -7,6 +7,6 @@ module.exports = class PostsController extends Controller
   title: 'Post'
 
   show: (params) ->
-    @model = new Post()
-    @view = new PostView({@model})
+    @model = new Post
+    @view = new PostView {@model}
     @model.fetch()

@@ -6,4 +6,4 @@ module.exports = class FeedController extends Controller
   title: 'Feed'
 
   show: (params) ->
-    @view = new FeedPageView()
+    @view = new FeedPageView

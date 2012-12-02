@@ -6,4 +6,4 @@ module.exports = class HomeController extends Controller
   title: 'Home'
 
   show: (params) ->
-    @view = new HomePageView()
+    @view = new HomePageView
