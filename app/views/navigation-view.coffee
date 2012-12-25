@@ -1,5 +1,5 @@
 View = require 'views/base/view'
-template = require 'views/templates/navigation'
+template = require './templates/navigation'
 
 module.exports = class NavigationView extends View
   className: 'navigation'
@@ -9,7 +9,7 @@ module.exports = class NavigationView extends View
 
   initialize: ->
     super
-    @modelBind 'change', @render
+    @listenTo @model, 'change', @render
     @subscribeEvent 'navigation:change', (attributes) =>
-      @model.clear(silent: yes)
+      @model.clear silent: yes
       @model.set attributes
