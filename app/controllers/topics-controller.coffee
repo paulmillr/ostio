@@ -5,9 +5,6 @@ User = require 'models/user'
 Repo = require 'models/repo'
 
 module.exports = class TopicsController extends Controller
-  historyURL: 'topics'
-  title: 'Topics'
-
   redirect_to_repo: (params) ->
     Backbone.history.navigate "/#{params.login}/#{params.repoName}"
 

@@ -1,8 +1,6 @@
 Controller = require 'controllers/base/controller'
 
 module.exports = class AuthController extends Controller
-  historyURL: 'auth'
-
   callback: (params) ->
     console.log 'AuthController'
     localStorage.setItem 'accessToken', params.accessToken
