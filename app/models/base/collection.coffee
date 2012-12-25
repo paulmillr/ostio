@@ -2,6 +2,8 @@ Chaplin = require 'chaplin'
 Model = require 'models/base/model'
 
 module.exports = class Collection extends Chaplin.Collection
+  _(@prototype).extend Chaplin.SyncMachine
+
   model: Model
 
   initialize: (models, options) ->
