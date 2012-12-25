@@ -10,7 +10,7 @@ module.exports = class NewTopicFormView extends FormView
 
   initialize: ->
     super
-    @post = new Post({topic: @model})
+    @post = new Post topic: @model
     @delegate 'click', '.new-topic-form-toggle-fields-button', @toggleFields
     @delegate 'keyup keydown', '.new-topic-form-title', @changeTitle
     @delegate 'keyup keydown', '.new-topic-form-text', @changeText
@@ -40,7 +40,7 @@ module.exports = class NewTopicFormView extends FormView
         @post.save()
           .done (postResponse) =>
             @$('.new-topic-form-toggle-fields-button').click()
-            setTimeout =>
+            @setTimeout 'save', =>
               @publishSave response
               @trigger 'dispose'
               @dispose()
@@ -52,3 +52,9 @@ module.exports = class NewTopicFormView extends FormView
             spinner.dispose()
       .fail =>
         spinner.dispose()
+
+  dispose: ->
+    return if @disposed
+    @post.dispose()
+    delete @post
+    super

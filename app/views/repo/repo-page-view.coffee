@@ -22,16 +22,16 @@ module.exports = class RepoPageView extends PageView
     @topics.fetch()
     @subscribeEvent 'topic:new', (topic) =>
       @topics.unshift topic
+    @createNewTopic()
 
-    createNewTopic = =>
-      newTopic = new Topic({repo: @model})
-      newTopicView = new NewTopicFormView
-        model: newTopic,
-        container: @$('.new-topic-form-container')
-      newTopicView.on 'dispose', =>
-        setTimeout createNewTopic, 0
-      @subview 'newTopicForm', newTopicView
-    createNewTopic()
+  createNewTopic: =>
+    topic = new Topic repo: @model
+    topicView = new NewTopicFormView
+      model: topic,
+      container: @$('.new-topic-form-container')
+    topicView.on 'dispose', =>
+      setTimeout @createNewTopic, 0
+    @subview 'newTopicForm', topicView
 
   dispose: ->
     return if @disposed

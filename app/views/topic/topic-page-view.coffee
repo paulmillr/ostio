@@ -25,15 +25,16 @@ module.exports = class TopicPageView extends PageView
     @subscribeEvent 'post:new', (post) =>
       @posts.push post
 
-    createNewPost = =>
-      newPost = new Post topic: @model
-      newPostView = new NewPostFormView
-        model: newPost,
-        container: @$('.new-post-form-container')
-      newPostView.on 'dispose', =>
-        setTimeout createNewPost, 0
-      @subview 'newPostForm', newPostView
-    createNewPost()
+    @createNewPost()
+
+  createNewPost: =>
+    newPost = new Post topic: @model
+    newPostView = new NewPostFormView
+      model: newPost,
+      container: @$('.new-post-form-container')
+    newPostView.on 'dispose', =>
+      setTimeout @createNewPost, 0
+    @subview 'newPostForm', newPostView
 
   dispose: ->
     return if @disposed
