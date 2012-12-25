@@ -3,4 +3,4 @@ PostView = require 'views/post/post-view'
 module.exports = class FeedPostView extends PostView
   initialize: ->
     super
-    @model.setUrl()
+    @model.set isFeedPost: yes

@@ -1678,10 +1678,15 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
       # From a params hash; we need to be able to return
       # the actual URL this route represents
       # Iterate and attempt to replace params in pattern
-      for name, value of params
-        url = url.replace ///:#{name}///g, value
-        url = url.replace ///\*#{name}///g, value
-
+      if _.isArray params
+        index = 0
+        url = url.replace /[:*][^\/\?]+/g, (match) ->
+          result = params[index]
+          index += 1
+          result
+      else
+        for name, value of params
+          url = url.replace ///[:*]#{name}///g, value
       # If the url tests out good; return the url; else, false
       if @test url then url else false
 

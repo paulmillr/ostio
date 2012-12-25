@@ -132,3 +132,10 @@ Handlebars.registerHelper 'markdown', (options) ->
       else
         reEscaped
   new Handlebars.SafeString markdown
+
+
+Handlebars.registerHelper 'url', (routeName, params..., options) ->
+  url = null
+  mediator.publish '!router:reverse', routeName, params, (result) ->
+    url = result
+  "/#{url}"

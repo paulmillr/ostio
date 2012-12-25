@@ -1,10 +1,10 @@
-<a class="post-avatar-container" href="/{{user.login}}">
+<a class="post-avatar-container" href="{{#url "user" "login" user.login}}{{/url}}">
   <img class="post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
 </a>
 <div class="post-content">
   <div class="post-header">
-    <a class="post-author" href="/{{user.login}}">{{user.login}}</a>
-    {{#if url}}in <a class="post-url" href="{{url}}">{{url}}</a>{{/if}}
+    <a class="post-author" href="{{#url "user" user.login}}{{/url}}">{{user.login}}</a>
+    {{#if isFeedPost}}in <a class="post-url" href="{{#url "topic" topic.repo.user.login topic.repo.name topic.number}}{{/url}}">{{#url "topic" topic.repo.user.login topic.repo.name topic.number}}{{/url}}</a>{{/if}}
     <time class="post-metadata post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
   {{#if_can_edit_post}}

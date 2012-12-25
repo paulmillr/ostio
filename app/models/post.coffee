@@ -17,9 +17,3 @@ module.exports = class Post extends Model
       topic = new Topic _.extend response.topic, {repo}
       user = new User _.extend response.user, {}
       _.extend response, {topic}
-
-  setUrl: ->
-    url = "/#{@get('topic').get('repo').get('user').get('login')}
-/#{@get('topic').get('repo').get('name')}
-/topics/#{@get('topic').get('number')}"
-    @set({url})

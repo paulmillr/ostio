@@ -1,7 +1,7 @@
 <div class="repo-topic-header">
-  <a href="{{repo.name}}/topics/{{number}}">#{{number}}</a>
-  <a href="{{repo.name}}/topics/{{number}}">{{title}}</a>
+  <a href="{{#url "topic" repo.user.login repo.name number}}{{/url}}">#{{number}}</a>
+  <a href="{{#url "topic" repo.user.login repo.name number}}{{/url}}">{{title}}</a>
 </div>
-by <a class="post-author" href="/{{user.login}}">{{user.login}}</a>
+by <a class="post-author" href="{{#url "user" user.login}}{{/url}} ">{{user.login}}</a>
 <time class="">{{#date}}{{created_at}}{{/date}}</time>
 <span class="post-metadata post-date">{{total_posts}} posts</span>
