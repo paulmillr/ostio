@@ -1,5 +1,5 @@
 FormView = require 'views/base/form-view'
-template = require 'views/templates/edit-post-form'
+template = require './templates/edit-post-form'
 
 module.exports = class EditPostFormView extends FormView
   className: 'post post-create'

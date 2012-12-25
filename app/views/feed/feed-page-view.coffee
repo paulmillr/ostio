@@ -3,7 +3,7 @@ config = require 'config'
 FeedPostsView = require 'views/feed/feed-posts-view'
 PageView = require 'views/base/page-view'
 Post = require 'models/post'
-template = require 'views/templates/feed-page'
+template = require './templates/feed-page'
 User = require 'models/user'
 UsersView = require 'views/user/users-view'
 

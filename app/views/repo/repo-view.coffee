@@ -1,5 +1,5 @@
 View = require 'views/base/view'
-template = require 'views/templates/repo'
+template = require './templates/repo'
 
 module.exports = class RepoView extends View
   className: 'user-repo'

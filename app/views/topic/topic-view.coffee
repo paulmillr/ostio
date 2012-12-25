@@ -1,5 +1,5 @@
 View = require 'views/base/view'
-template = require 'views/templates/topic'
+template = require './templates/topic'
 
 module.exports = class TopicView extends View
   className: 'repo-topic'

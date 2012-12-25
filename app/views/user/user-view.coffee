@@ -1,4 +1,4 @@
-template = require 'views/templates/user'
+template = require './templates/user'
 View = require 'views/base/view'
 
 module.exports = class UserView extends View

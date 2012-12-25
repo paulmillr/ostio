@@ -1,7 +1,7 @@
 Collection = require 'models/base/collection'
 NewTopicFormView = require 'views/topic/new-topic-form-view'
 PageView = require 'views/base/page-view'
-template = require 'views/templates/repo-page'
+template = require './templates/repo-page'
 Topic = require 'models/topic'
 TopicsView = require 'views/topic/topics-view'
 

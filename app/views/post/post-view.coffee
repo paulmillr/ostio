@@ -1,5 +1,5 @@
 EditPostFormView = require 'views/post/edit-post-form-view'
-template = require 'views/templates/post'
+template = require './templates/post'
 View = require 'views/base/view'
 
 module.exports = class PostView extends View

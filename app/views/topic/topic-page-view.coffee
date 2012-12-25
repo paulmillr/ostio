@@ -3,7 +3,7 @@ NewPostFormView = require 'views/post/new-post-form-view'
 PageView = require 'views/base/page-view'
 Post = require 'models/post'
 PostsView = require 'views/post/posts-view'
-template = require 'views/templates/topic-page'
+template = require './templates/topic-page'
 
 module.exports = class TopicPageView extends PageView
   template: template
