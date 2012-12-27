@@ -15,7 +15,7 @@ module.exports = class EditPostFormView extends FormView
     @$edit ?= @$('.edit-post-body')
     setTimeout =>
       height = "#{@$edit.prop('scrollHeight') + 10}px"
-      @$edit.animate {height}, 250, 'ease'
+      @$edit.animate {height}, 250
     , 0
 
   # Update model data by default, save on ⌘R..
