@@ -2,7 +2,7 @@ Controller = require 'controllers/base/controller'
 
 module.exports = class AuthController extends Controller
   callback: (params) ->
-    console.log 'AuthController'
+    console.log 'AuthController#callback', params
     localStorage.setItem 'accessToken', params.accessToken
     @redirectTo "/#{params.login}"
     window.location.reload()

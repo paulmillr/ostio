@@ -13,8 +13,8 @@
     {{#with_user}}
       <a href="{{#url "user" login}}{{/url}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
       <a href="{{#url "user" login}}{{/url}}">{{login}}</a>
-      <a class="icon-cog" href="/settings"></a>
-      <a class="icon-logout" href="/logout/"></a>
+      <a class="icon-cog" href="{{#url "settings"}}{{/url}}"></a>
+      <a class="icon-logout" href="{{#url "logout"}}{{/url}}"></a>
     {{/with_user}}
   {{else}}
     {{#with_config}}
