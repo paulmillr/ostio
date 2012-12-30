@@ -1,5 +1,5 @@
 ###
-Chaplin 0.6.0-pre.
+Chaplin 0.6.0.
 
 Chaplin may be freely distributed under the MIT license.
 For all details and documentation:
@@ -371,7 +371,8 @@ require.define 'chaplin/controllers/controller': (exports, require, module) ->
     # Borrow the static extend method from Backbone
     @extend = Backbone.Model.extend
 
-    # Mixin an EventBroker
+    # Mixin Backbone events and EventBroker.
+    _(@prototype).extend Backbone.Events
     _(@prototype).extend EventBroker
 
     view: null
@@ -1657,12 +1658,12 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
 
     # Create a route for a URL pattern and a controller action
     # e.g. new Route '/users/:id', 'users#show'
-    constructor: (pattern, @controller, @action, @options = {}) ->
-      # Save the raw pattern
-      @pattern = pattern
-
+    constructor: (@pattern, @controller, @action, @options = {}) ->
       # Store the name on the route if given
       @name = @options.name if @options.name?
+
+      # Initialise list of :params which the route will use.
+      @paramNames = []
 
       # Check if the action is a reserved name
       if _(Controller.prototype).has @action
@@ -1674,24 +1675,31 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
       url = @pattern
       # TODO: add support for regular expressions in reverser.
       return false if _.isRegExp url
+      notEnoughParams = 'Route#reverse: Not enough parameters to reverse'
 
-      # From a params hash; we need to be able to return
-      # the actual URL this route represents
-      # Iterate and attempt to replace params in pattern
       if _.isArray params
+        # Ensure we have enough parameters
+        throw new Error notEnoughParams if params.length < @paramNames.length
+
         index = 0
         url = url.replace /[:*][^\/\?]+/g, (match) ->
           result = params[index]
           index += 1
           result
       else
-        for name, value of params
+        # From a params hash; we need to be able to return
+        # the actual URL this route represents
+        # Iterate and attempt to replace params in pattern
+        for name in @paramNames
+          value = params[name]
+          throw new Error notEnoughParams if value is undefined
           url = url.replace ///[:*]#{name}///g, value
+
       # If the url tests out good; return the url; else, false
       if @test url then url else false
 
     createRegExp: ->
-      if _.isRegExp(@pattern)
+      if _.isRegExp @pattern
         @regExp = @pattern
         @paramNames = @options.names if _.isArray @options.names
         return
@@ -1707,7 +1715,6 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
       @regExp = ///^#{pattern}(?=\?|$)///
 
     addParamName: (match, paramName) =>
-      @paramNames ?= []
       # Test if parameter name is reserved
       if _(reservedParams).include(paramName)
         throw new Error "Route#addParamName: parameter name #{paramName} is reserved"
@@ -1770,7 +1777,7 @@ require.define 'chaplin/lib/route': (exports, require, module) ->
 
       # Fill the hash using the paramNames and the matches
       for match, index in matches.slice(1)
-        paramName = if @paramNames then @paramNames[index] else index
+        paramName = if @paramNames.length then @paramNames[index] else index
         params[paramName] = match
 
       params
