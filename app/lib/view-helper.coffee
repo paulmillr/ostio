@@ -139,3 +139,7 @@ Handlebars.registerHelper 'url', (routeName, params..., options) ->
   mediator.publish '!router:reverse', routeName, params, (result) ->
     url = result
   "/#{url}"
+
+Handlebars.registerHelper 'loginUrl', ->
+  {protocol, host} = window.location
+  "#{protocol}//#{host}/auth-callback/"
