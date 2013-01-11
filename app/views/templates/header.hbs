@@ -18,7 +18,7 @@
     {{/with_user}}
   {{else}}
     {{#with_config}}
-      <button class="header-login-button button go-to" data-href="{{api.root}}/auth/github">Login with GitHub</button>
+      <a href="{{api.root}}/auth/github/?origin={{#loginUrl}}{{/loginUrl}}" class="header-login-button button noscript">Login with GitHub</a>
     {{/with_config}}
   {{/if_logged_in}}
 </div>

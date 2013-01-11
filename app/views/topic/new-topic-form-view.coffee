@@ -40,11 +40,9 @@ module.exports = class NewTopicFormView extends FormView
         @post.save()
           .done (postResponse) =>
             @$('.new-topic-form-toggle-fields-button').click()
-            @setTimeout 'save', =>
-              @publishSave response
-              @trigger 'dispose'
-              @dispose()
-            , 300
+            @publishSave response
+            @trigger 'dispose'
+            @dispose()
           .fail (error) =>
             console.error 'NewTopicFormView#save', error
             @model.destroy()
