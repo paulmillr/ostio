@@ -8,7 +8,6 @@ module.exports = class EditPostFormView extends FormView
 
   initialize: (options) ->
     super
-    @pass 'text', '.edit-post-body'
     @delegate 'keyup keydown', '.edit-post-body', @changeText
 
   resizeTextArea: ->
