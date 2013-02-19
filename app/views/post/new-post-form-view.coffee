@@ -8,7 +8,6 @@ module.exports = class NewPostFormView extends FormView
 
   initialize: ->
     super
-    @pass 'text', '.new-post-body'
     @delegate 'keyup keydown', '.new-post-body', @changeText
 
   # Update model data by default, save on ⌘R.
