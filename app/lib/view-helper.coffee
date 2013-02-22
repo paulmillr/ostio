@@ -123,14 +123,14 @@ Handlebars.registerHelper 'markdown', (options) ->
     gfm: yes,
     highlight: (code, language) ->
       # ಠ_ಠ
-      reEscaped = escapeExpression unescapeExpression code
-      if language
+      raw = unescapeExpression code
+      if language and language of hljs.LANGUAGES
         try
-          hljs.highlight(language, unescapeExpression reEscaped).value
+          hljs.highlight(language, raw).value
         catch error
-          reEscaped
+          new Handlebars.SafeString code
       else
-        reEscaped
+        new Handlebars.SafeString code
   new Handlebars.SafeString markdown
 
 
