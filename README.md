@@ -36,7 +36,7 @@ structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 ## Getting started
 * Clone the project.
 * Install brunch via nodejs: `npm install -g brunch`
-* Run `brunch w -s` (or `brunch b` if you'll listen webserver on `public/`)
+* Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
 * Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
 * Run [backend](https://github.com/paulmillr/ostio-api)
 
