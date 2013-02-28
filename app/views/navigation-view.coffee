@@ -11,5 +11,5 @@ module.exports = class NavigationView extends View
     super
     @listenTo @model, 'change', @render
     @subscribeEvent 'navigation:change', (attributes) =>
-      @model.clear silent: yes
+      @model.clear()
       @model.set attributes
