@@ -1,5 +1,6 @@
 Chaplin = require 'chaplin'
 routes = require 'routes'
+Layout = require 'views/layout'
 
 # The application object.
 module.exports = class Application extends Chaplin.Application
@@ -38,6 +39,9 @@ module.exports = class Application extends Chaplin.Application
 
     # Freeze the application instance to prevent further changes.
     Object.freeze? this
+
+  initLayout: ->
+    @layout = new Layout {@title}
 
   # Create additional mediator properties.
   initMediator: ->

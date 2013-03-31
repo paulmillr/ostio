@@ -1,13 +1,15 @@
 Chaplin = require 'chaplin'
 
 module.exports = class Layout extends Chaplin.Layout
+  initialVisit: yes
+
   initialize: ->
     super
-    @initialVisit = yes
-    @subscribeEvent 'startupController', @trackVisit
+    @subscribeEvent 'dispatcher:dispatch', @trackVisit
 
   trackVisit: =>
+    gauges = window._gauges
     if @initialVisit
-      window._gauges?.track_referrer = yes
+      gauges?.track_referrer = yes
       @initialVisit = no
-    window._gauges?.push ['track']
+    gauges?.push ['track']
