@@ -4,13 +4,11 @@ View = require 'views/base/view'
 
 module.exports = class PostView extends View
   className: 'post'
+  events:
+    'click .post-edit-button': 'editPost'
+    'click .post-delete-button': 'deletePost'
   tagName: 'article'
   template: template
-
-  initialize: ->
-    super
-    @delegate 'click', '.post-edit-button', @editPost
-    @delegate 'click', '.post-delete-button', @deletePost
 
   editPost: (event) =>
     @$('.post-text').remove()

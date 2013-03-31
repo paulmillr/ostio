@@ -3,11 +3,9 @@ template = require './templates/settings-page'
 
 module.exports = class SettingsPageView extends PageView
   autoRender: yes
+  events:
+    'change #setting-email-notifications': 'updateSetting'
   template: template
-
-  initialize: ->
-    super
-    @delegate 'change', '#setting-email-notifications', @updateSetting
 
   updateSetting: (event) =>
     checked = $(event.currentTarget).attr('checked')

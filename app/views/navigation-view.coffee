@@ -3,13 +3,12 @@ template = require './templates/navigation'
 
 module.exports = class NavigationView extends View
   className: 'navigation'
-  container: '#navigation-container'
+  listen:
+    'change model': 'render'
+    'navigation:change mediator': 'clearModel'
   tagName: 'nav'
   template: template
 
-  initialize: ->
-    super
-    @listenTo @model, 'change', @render
-    @subscribeEvent 'navigation:change', (attributes) =>
-      @model.clear()
-      @model.set attributes
+  clearModel: (attributes) =>
+    @model.clear()
+    @model.set attributes

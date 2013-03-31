@@ -3,15 +3,12 @@ SpinnerView = require 'views/spinner-view'
 
 module.exports = class FormView extends View
   autoRender: yes
+  events:
+    'click .cancel-form': 'dismiss'
+    'submit': 'submit'
+  listen:
+    'loginStatus mediator': 'render'
   tagName: 'form'
-
-  initialize: ->
-    super
-    @subscribeEvent 'loginStatus', @render
-    @delegate 'click', '.cancel-form', @dismiss
-    @delegate 'submit', (event) =>
-      event.preventDefault()
-      @save event if event.currentTarget.checkValidity()
 
   publishSave: (response) ->
     @publishEvent @saveEvent, response if @saveEvent
@@ -29,3 +26,7 @@ module.exports = class FormView extends View
         @dismiss()
       .always (response) =>
         spinner.dispose()
+
+  submit: (event) =>
+    event.preventDefault()
+    @save event if event.currentTarget.checkValidity()

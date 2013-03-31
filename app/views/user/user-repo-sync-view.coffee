@@ -4,13 +4,15 @@ template = require './templates/user-repo-sync'
 module.exports = class UserRepoSyncView extends View
   autoRender: yes
   className: 'user-repo-sync'
+  events:
+    'click .user-repo-sync-button': 'sync'
+  listen:
+    'loginStatus mediator': 'render'
   template: template
 
   initialize: (args) ->
     super
     @login = args.login
-    @subscribeEvent 'loginStatus', @render
-    @delegate 'click', '.user-repo-sync-button', @sync
 
   getTemplateData: ->
     obj = super

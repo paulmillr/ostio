@@ -5,15 +5,18 @@ SpinnerView = require 'views/spinner-view'
 
 module.exports = class NewTopicFormView extends FormView
   className: 'new-topic-form'
+  events:
+    'click .new-topic-form-toggle-fields-button': 'toggleFields'
+    'keyup .new-topic-form-title': 'changeTitle'
+    'keydown .new-topic-form-title': 'changeTitle'
+    'keyup .new-topic-form-text': 'changeText'
+    'keydown .new-topic-form-text': 'changeText'
   saveEvent: 'topic:new'
   template: template
 
   initialize: ->
     super
     @post = new Post topic: @model
-    @delegate 'click', '.new-topic-form-toggle-fields-button', @toggleFields
-    @delegate 'keyup keydown', '.new-topic-form-title', @changeTitle
-    @delegate 'keyup keydown', '.new-topic-form-text', @changeText
 
   toggleFields: (event) =>
     $(event.currentTarget).toggleClass('active')

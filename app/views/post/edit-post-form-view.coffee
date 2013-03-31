@@ -3,12 +3,11 @@ template = require './templates/edit-post-form'
 
 module.exports = class EditPostFormView extends FormView
   className: 'post post-create'
+  events:
+    'keyup .edit-post-body': 'changeText'
+    'keydown .edit-post-body': 'changeText'
   saveEvent: 'post:edit'
   template: template
-
-  initialize: (options) ->
-    super
-    @delegate 'keyup keydown', '.edit-post-body', @changeText
 
   resizeTextArea: ->
     @$edit ?= @$('.edit-post-body')
