@@ -1,5 +1,4 @@
 config = require 'config'
-mediator = require 'mediator'
 ServiceProvider = require 'lib/services/service-provider'
 User = require 'models/user'
 
@@ -10,7 +9,7 @@ module.exports = class Ostio extends ServiceProvider
     super
     @accessToken = localStorage.getItem 'accessToken'
     authCallback = _(@loginHandler).bind(this, @loginHandler)
-    mediator.subscribe 'auth:callback:ostio', authCallback
+    @subscribeEvent 'auth:callback:ostio', authCallback
 
   load: ->
     @resolve()

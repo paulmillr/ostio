@@ -1,4 +1,3 @@
-mediator = require 'mediator'
 Chaplin = require 'chaplin'
 config = require 'config'
 
@@ -12,7 +11,7 @@ module.exports = class Model extends Chaplin.Model
     ''
 
   urlParams: ->
-    access_token: mediator.user?.get('accessToken')
+    access_token: Chaplin.mediator.user?.get('accessToken')
 
   urlRoot: ->
     urlPath = @urlPath()

@@ -1,4 +1,4 @@
-mediator = require 'mediator'
+Chaplin = require 'chaplin'
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
 LoginView = require 'views/login-view'
@@ -48,7 +48,7 @@ module.exports = class SessionController extends Controller
 
   # Instantiate the user with the given data
   createUser: (userData) ->
-    mediator.user = new User userData
+    Chaplin.mediator.user = new User userData
 
   # Try to get an existing session from one of the login providers
   getSession: ->
@@ -99,7 +99,7 @@ module.exports = class SessionController extends Controller
     @loginStatusDetermined = true
 
     # Publish a global login event passing the user
-    @publishEvent 'login', mediator.user
+    @publishEvent 'login', Chaplin.mediator.user
     @publishEvent 'loginStatus', true
 
   # Logout
@@ -128,7 +128,7 @@ module.exports = class SessionController extends Controller
   # -------------------------------------
 
   userData: (data) ->
-    mediator.user.set data
+    Chaplin.mediator.user.set data
 
   # Disposal
   # --------
@@ -139,8 +139,8 @@ module.exports = class SessionController extends Controller
     @loginView = null
 
   disposeUser: ->
-    return unless mediator.user
+    return unless Chaplin.mediator.user
     # Dispose the user model
-    mediator.user.dispose()
+    Chaplin.mediator.user.dispose()
     # Nullify property on the mediator
-    mediator.user = null
+    Chaplin.mediator.user = null

@@ -1,5 +1,4 @@
 config = require 'config'
-mediator = require 'mediator'
 utils = require 'lib/utils'
 Chaplin = require 'chaplin'
 
@@ -13,13 +12,11 @@ Chaplin = require 'chaplin'
 
 # Choose block by user login status
 Handlebars.registerHelper 'if_logged_in', (options) ->
-  if mediator.user
-    options.fn(this)
-  else
-    options.inverse(this)
+  method = if Chaplin.mediator.user then options.fn else options.inverse
+  method this
 
 Handlebars.registerHelper 'if_is_repo_admin', (options) ->
-  user = mediator.user
+  user = Chaplin.mediator.user
   return options.inverse(this) unless user
   orgs = user.get('organizations')?.pluck('login') ? []
   repoOwner = @login
@@ -29,7 +26,7 @@ Handlebars.registerHelper 'if_is_repo_admin', (options) ->
     options.inverse(this)
 
 Handlebars.registerHelper 'if_can_edit_post', (options) ->
-  user = mediator.user
+  user = Chaplin.mediator.user
   return options.inverse(this) unless user
   orgs = user.get('organizations')?.pluck('login') ? []
   postCreator = @user.login
@@ -41,7 +38,7 @@ Handlebars.registerHelper 'if_can_edit_post', (options) ->
     options.inverse(this)
 
 Handlebars.registerHelper 'if_user_type_is_user', (options) ->
-  if mediator.user?.get('type') is 'User'
+  if Chaplin.mediator.user?.get('type') is 'User'
     options.fn(this)
   else
     options.inverse(this)
@@ -76,7 +73,7 @@ Handlebars.registerHelper 'with_config', (options) ->
 
 # Evaluate block with context being current user
 Handlebars.registerHelper 'with_user', (options) ->
-  context = mediator.user.getAttributes()
+  context = Chaplin.mediator.user.getAttributes()
   Handlebars.helpers.with.call(this, context, options)
 
 Handlebars.registerHelper 'gravatar', (options) ->
