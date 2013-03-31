@@ -1,6 +1,7 @@
 config = require 'config'
 mediator = require 'mediator'
 utils = require 'lib/utils'
+Chaplin = require 'chaplin'
 
 # Application-specific view helpers
 # ---------------------------------
@@ -135,10 +136,7 @@ Handlebars.registerHelper 'markdown', (options) ->
 
 
 Handlebars.registerHelper 'url', (routeName, params..., options) ->
-  url = null
-  mediator.publish '!router:reverse', routeName, params, (result) ->
-    url = result
-  "/#{url}"
+  Chaplin.helpers.reverse routeName, params
 
 Handlebars.registerHelper 'loginUrl', ->
   {protocol, host} = window.location

@@ -4,17 +4,17 @@
 
 <div class="header-links">
   <h4 class="header-link">
-    <a href="{{#url "feed"}}{{/url}}">Feed</a>
+    <a href="{{#url "feed#show"}}{{/url}}">Feed</a>
   </h4>
 </div>
 
 <div class="header-auth">
   {{#if_logged_in}}
     {{#with_user}}
-      <a href="{{#url "user" login}}{{/url}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
-      <a href="{{#url "user" login}}{{/url}}">{{login}}</a>
-      <a class="icon-cog" href="{{#url "settings"}}{{/url}}"></a>
-      <a class="icon-logout" href="{{#url "logout"}}{{/url}}"></a>
+      <a href="{{#url "users#show" login}}{{/url}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
+      <a href="{{#url "users#show" login}}{{/url}}">{{login}}</a>
+      <a class="icon-cog" href="{{#url "settings#show"}}{{/url}}"></a>
+      <a class="icon-logout" href="{{#url "auth#logout"}}{{/url}}"></a>
     {{/with_user}}
   {{else}}
     {{#with_config}}
