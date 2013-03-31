@@ -7,7 +7,7 @@ module.exports = (match) ->
 
   match ':login', 'users#show'
   match ':login/:repoName', 'repos#show'
-  match ':login/:repoName/', 'topics#redirect_to_repo'
-  match ':login/:repoName/topics', 'topics#redirect_to_repo'
-  match ':login/:repoName/topics/', 'topics#redirect_to_repo'
+  match ':login/:repoName/', 'topics#index'
+  match ':login/:repoName/topics', 'topics#index'
+  match ':login/:repoName/topics/', 'topics#index'
   match ':login/:repoName/topics/:topicNumber', 'topics#show'
