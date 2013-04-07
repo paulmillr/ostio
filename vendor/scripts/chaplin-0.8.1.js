@@ -1,5 +1,5 @@
 /*!
- * Chaplin 0.8.0
+ * Chaplin 0.8.1
  *
  * Chaplin may be freely distributed under the MIT license.
  * For all details and documentation:
@@ -806,6 +806,8 @@ module.exports = Layout = (function() {
 
   Layout.prototype.undelegateEvents = Backbone.View.prototype.undelegateEvents;
 
+  Layout.prototype.$ = Backbone.View.prototype.$;
+
   Layout.prototype.hideOldView = function(controller) {
     var scrollTo, view;
     scrollTo = this.settings.scrollTo;
@@ -1052,7 +1054,11 @@ module.exports = View = (function(_super) {
       this.listenTo(this.model, 'dispose', this.dispose);
     }
     if (this.collection) {
-      this.listenTo(this.collection, 'dispose', this.dispose);
+      this.listenTo(this.collection, 'dispose', function(subject) {
+        if (!subject || subject === _this.collection) {
+          return _this.dispose();
+        }
+      });
     }
     if (this.regions != null) {
       this.publishEvent('!region:register', this);
