@@ -897,7 +897,7 @@ module.exports = Layout = (function() {
       }
     }
     options = {
-      queryString: queryString
+      query: queryString
     };
     callback = function(routed) {
       if (routed) {
