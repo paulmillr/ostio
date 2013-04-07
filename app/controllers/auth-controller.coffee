@@ -8,6 +8,7 @@ module.exports = class AuthController extends Controller
     console.log 'AuthController#callback', params
     localStorage.setItem 'accessToken', params.accessToken
     @redirectToRoute 'users#show', [params.login]
+    location.reload()
 
   logout: ->
     @redirectToRoute 'home#show'
