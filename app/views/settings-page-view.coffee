@@ -8,5 +8,5 @@ module.exports = class SettingsPageView extends PageView
   template: template
 
   updateSetting: (event) =>
-    checked = $(event.currentTarget).attr('checked')
+    checked = $(event.currentTarget).prop('checked')
     @model.save enabled_email_notifications: checked
