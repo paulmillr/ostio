@@ -1,4 +1,4 @@
-{{#if_logged_in}}
+{{#ifLoggedIn}}
   <div class="new-topic-form-toggle-fields-button-container">
     <input type="button" class="button new-topic-form-toggle-fields-button" value="Create new topic" />
   </div>
@@ -8,8 +8,8 @@
     <textarea class="new-topic-form-text" placeholder="Post body" required></textarea>
     <div class="new-topic-form-submit-button-container form-submit-button-container">
       <button class="new-topic-form-submit-button submit-form button">
-        Submit new topic{{#if_on_mac}} (⌘↩){{/if_on_mac}}
+        Submit new topic{{showShortcut}}
       </button>
     </div>
   </div>
-{{/if_logged_in}}
+{{/ifLoggedIn}}

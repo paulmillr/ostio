@@ -11,11 +11,11 @@ Chaplin = require 'chaplin'
 # ----------------------
 
 # Choose block by user login status
-Handlebars.registerHelper 'if_logged_in', (options) ->
+Handlebars.registerHelper 'ifLoggedIn', (options) ->
   method = if Chaplin.mediator.user then options.fn else options.inverse
   method this
 
-Handlebars.registerHelper 'if_is_repo_admin', (options) ->
+Handlebars.registerHelper 'ifIsRepoAdmin', (options) ->
   user = Chaplin.mediator.user
   return options.inverse(this) unless user
   orgs = user.get('organizations')?.pluck('login') ? []
@@ -25,7 +25,7 @@ Handlebars.registerHelper 'if_is_repo_admin', (options) ->
   else
     options.inverse(this)
 
-Handlebars.registerHelper 'if_can_edit_post', (options) ->
+Handlebars.registerHelper 'ifCanEditPost', (options) ->
   user = Chaplin.mediator.user
   return options.inverse(this) unless user
   orgs = user.get('organizations')?.pluck('login') ? []
@@ -37,17 +37,16 @@ Handlebars.registerHelper 'if_can_edit_post', (options) ->
   else
     options.inverse(this)
 
-Handlebars.registerHelper 'if_user_type_is_user', (options) ->
-  if Chaplin.mediator.user?.get('type') is 'User'
-    options.fn(this)
-  else
-    options.inverse(this)
-
-Handlebars.registerHelper 'if_on_mac', (options) ->
+# Show keyboard short-cut for posting etc on OS X.
+Handlebars.registerHelper 'showShortcut', (options) ->
   if /mac/i.test(navigator.userAgent)
-    options.fn(this)
+    ' (⌘↩)'
   else
-    options.inverse(this)
+    ''
+
+Handlebars.registerHelper 'showPostUrl', (c, options) ->
+  url = Chaplin.helpers.reverse 'topics#show', [@topic.repo.user.login, @topic.repo.name, @topic.number]
+  new Handlebars.SafeString "<a class='post-url' href='#{url}'>#{url.slice(2)}</a>"
 
 # Map helpers
 # -----------
@@ -59,20 +58,13 @@ Handlebars.registerHelper 'with', (context, options) ->
   else
     options.fn(context)
 
-# Inverse for 'with'
-Handlebars.registerHelper 'without', (context, options) ->
-  inverse = options.inverse
-  options.inverse = options.fn
-  options.fn = inverse
-  Handlebars.helpers.with.call(this, context, options)
-
 # Make 'with' behave a little more mustachey
-Handlebars.registerHelper 'with_config', (options) ->
+Handlebars.registerHelper 'withConfig', (options) ->
   context = config
   Handlebars.helpers.with.call(this, context, options)
 
 # Evaluate block with context being current user
-Handlebars.registerHelper 'with_user', (options) ->
+Handlebars.registerHelper 'withUser', (options) ->
   context = Chaplin.mediator.user.getAttributes()
   Handlebars.helpers.with.call(this, context, options)
 

@@ -1,24 +1,24 @@
 <h1 class="header-logo">
-  <a href="/">Ost.io</a>
+  <a href="{{url "home#show"}}">Ost.io</a>
 </h1>
 
 <div class="header-links">
   <h4 class="header-link">
-    <a href="{{#url "feed#show"}}{{/url}}">Feed</a>
+    <a href="{{url "feed#show"}}">Feed</a>
   </h4>
 </div>
 
 <div class="header-auth">
-  {{#if_logged_in}}
-    {{#with_user}}
-      <a href="{{#url "users#show" login}}{{/url}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
-      <a href="{{#url "users#show" login}}{{/url}}">{{login}}</a>
-      <a class="icon-cog" href="{{#url "settings#show"}}{{/url}}"></a>
-      <a class="icon-logout" href="{{#url "auth#logout"}}{{/url}}"></a>
-    {{/with_user}}
+  {{#ifLoggedIn}}
+    {{#withUser}}
+      <a href="{{url "users#show" login}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
+      <a href="{{url "users#show" login}}">{{login}}</a>
+      <a class="icon-cog" href="{{url "settings#show"}}"></a>
+      <a class="icon-logout" href="{{url "auth#logout"}}"></a>
+    {{/withUser}}
   {{else}}
-    {{#with_config}}
-      <a href="{{api.root}}/auth/github/?origin={{#loginUrl}}{{/loginUrl}}" class="header-login-button button noscript">Login with GitHub</a>
-    {{/with_config}}
-  {{/if_logged_in}}
+    {{#withConfig}}
+      <a href="{{api.root}}/auth/github/?origin={{loginUrl}}" class="header-login-button button noscript">Login with GitHub</a>
+    {{/withConfig}}
+  {{/ifLoggedIn}}
 </div>

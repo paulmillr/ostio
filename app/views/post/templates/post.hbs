@@ -1,18 +1,18 @@
-<a class="post-avatar-container" href="{{#url "users#show" "login" user.login}}{{/url}}">
+<a class="post-avatar-container" href="{{url "users#show" "login" user.login}}">
   <img class="post-avatar avatar" src="{{#gravatar}}{{user.gravatar_id}}{{/gravatar}}" alt="" />
 </a>
 <div class="post-content">
   <div class="post-header">
-    <a class="post-author" href="{{#url "users#show" user.login}}{{/url}}">{{user.login}}</a>
-    {{#if isFeedPost}}in <a class="post-url" href="{{#url "topics#show" topic.repo.user.login topic.repo.name topic.number}}{{/url}}">{{#url "topics#show" topic.repo.user.login topic.repo.name topic.number}}{{/url}}</a>{{/if}}
+    <a class="post-author" href="{{url "users#show" user.login}}">{{user.login}}</a>
+    {{#if isFeedPost}}in {{showPostUrl}}{{/if}}
     <time class="post-metadata post-date">{{#date}}{{created_at}}{{/date}}</time>
   </div>
-  {{#if_can_edit_post}}
+  {{#ifCanEditPost}}
     <div class="post-icons">
       <span class="icon-pencil-1 post-edit-button" title="Edit"></span>
       <span class="icon-trash post-delete-button" title="Delete"></span>
     </div>
-  {{/if_can_edit_post}}
+  {{/ifCanEditPost}}
   <div class="post-text">
     {{#markdown}}{{{text}}}{{/markdown}}
   </div>
