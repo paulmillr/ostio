@@ -134,7 +134,3 @@ Handlebars.registerHelper 'markdown', (options) ->
 
 Handlebars.registerHelper 'url', (routeName, params..., options) ->
   Chaplin.helpers.reverse routeName, params
-
-Handlebars.registerHelper 'loginUrl', ->
-  {protocol, host} = window.location
-  "#{protocol}//#{host}/auth-callback/"

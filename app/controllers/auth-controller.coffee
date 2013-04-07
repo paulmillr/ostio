@@ -7,11 +7,11 @@ module.exports = class AuthController extends Controller
       .map((string) -> string.split('='))
     console.log 'AuthController#callback', params
     localStorage.setItem 'accessToken', params.accessToken
-    @redirectTo "/#{params.login}"
+    @redirectToRoute 'users#show', [params.login]
     window.location.reload()
 
   logout: ->
-    @redirectTo '/'
+    @redirectToRoute 'home#show'
     localStorage.clear()
     @publishEvent '!logout'
     # window.location.reload()

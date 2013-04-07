@@ -9,6 +9,9 @@ module.exports = class Controller extends Chaplin.Controller
     '.*': (params, route) ->
       @compose 'site', SiteView
       @compose 'header', HeaderView
+      @compose 'auth', ->
+        SessionController = require 'controllers/session-controller'
+        @controller = new SessionController
 
       if route.name in ['users#show', 'repos#show', 'topics#show']
         @compose 'navigation', ->
