@@ -18,7 +18,7 @@
     {{/withUser}}
   {{else}}
     {{#withConfig}}
-      <a href="{{api.root}}/auth/github/?origin={{loginUrl}}" class="header-login-button button noscript">Login with GitHub</a>
+      <a href="{{api.root}}/auth/github/?origin={{showLoginUrl}}" class="header-login-button button noscript">Login with GitHub</a>
     {{/withConfig}}
   {{/ifLoggedIn}}
 </div>
