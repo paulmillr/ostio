@@ -39,7 +39,7 @@ structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 * Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
 * Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
 * Run [backend](https://github.com/paulmillr/ostio-api) if you want to use it locally
-  or use ost.io (configurable in `app/config.coffee`).
+  or use default api.ost.io (configurable in `app/config.coffee`).
 
 Deploy via: `sudo sh bin/deploy`
 
