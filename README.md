@@ -11,7 +11,7 @@ integrated with GitHub. The main ostio mission is to replace mailing lists.
 The stack is cloned from [brunch with chaplin](https://github.com/paulmillr/brunch-with-chaplin) skeleton.
 Use brunch with chaplin if you want to build new application:
 
-`brunch new <project name> --skeleton git://github.com/paulmillr/brunch-with-chaplin.git`
+`brunch new <project name> --skeleton gh:paulmillr/brunch-with-chaplin`
 
 ### Brunch
 [Brunch](http://brunch.io) is a html5 application builder that's
