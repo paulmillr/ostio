@@ -1,5 +1,5 @@
 exports.config =
-  # See http://brunch.readthedocs.org/en/latest/config.html for documentation.
+  # See http://brunch.io/#documentation for docs.
   files:
     javascripts:
       joinTo:
@@ -11,14 +11,12 @@ exports.config =
         before: [
           'vendor/scripts/console-helper.js',
           'vendor/scripts/jquery-1.9.1.js',
-          'vendor/scripts/underscore-1.4.4.js',
-          'vendor/scripts/backbone-0.9.10.js'
+          'vendor/scripts/lodash-1.2.0.js',
+          'vendor/scripts/backbone-1.0.0.js'
         ]
 
     stylesheets:
-      joinTo:
-        'stylesheets/app.css': /^(app|vendor)/
-        'test/stylesheets/test.css': /^test/
+      joinTo: 'stylesheets/app.css'
       order:
         after: ['vendor/styles/helpers.css']
 

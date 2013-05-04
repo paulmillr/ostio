@@ -18,7 +18,7 @@ module.exports = class LoginView extends View
   initButtons: (serviceProviders) ->
     _.each serviceProviders, (serviceProvider, serviceProviderName) =>
       bind = (fn) =>
-        _(fn).bind this, serviceProviderName, serviceProvider
+        _.bind fn, this, serviceProviderName, serviceProvider
 
       buttonSelector = ".#{serviceProviderName}"
       @$(buttonSelector).addClass('service-loading')

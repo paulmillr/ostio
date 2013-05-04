@@ -4,7 +4,7 @@ Chaplin = require 'chaplin'
 module.exports = class ServiceProvider
 
   # Mixin an Event Broker
-  _(@prototype).extend Chaplin.EventBroker
+  _.extend @prototype, Chaplin.EventBroker
 
   loading: false
 
@@ -12,7 +12,7 @@ module.exports = class ServiceProvider
     ###console.debug 'ServiceProvider#constructor'###
 
     # Mixin a Deferred
-    _(this).extend $.Deferred()
+    _.extend this, $.Deferred()
 
     utils.deferMethods
       deferred: this
@@ -56,7 +56,7 @@ module.exports = class ServiceProvider
 
   # Trigger login popup
   triggerLogin: (loginContext) ->
-    callback = _(@loginHandler).bind(this, loginContext)
+    callback = _.bind(@loginHandler, this, loginContext)
     ServiceProviderLibrary.login callback
 
   # Callback for the login popup

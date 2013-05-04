@@ -6,7 +6,7 @@ Chaplin = require 'chaplin'
 # Delegate to Chaplin’s utils module
 utils = Chaplin.utils.beget Chaplin.utils
 
-_(utils).extend
+_.extend utils,
   # Functional helpers for handling asynchronous dependancies and I/O
   # -----------------------------------------------------------------
 

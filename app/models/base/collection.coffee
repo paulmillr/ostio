@@ -2,7 +2,7 @@ Chaplin = require 'chaplin'
 Model = require 'models/base/model'
 
 module.exports = class Collection extends Chaplin.Collection
-  _(@prototype).extend Chaplin.SyncMachine
+  _.extend @prototype, Chaplin.SyncMachine
 
   model: Model
 

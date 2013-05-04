@@ -2,7 +2,7 @@ Chaplin = require 'chaplin'
 config = require 'config'
 
 module.exports = class Model extends Chaplin.Model
-  _(@prototype).extend Chaplin.SyncMachine
+  _.extend @prototype, Chaplin.SyncMachine
 
   apiRoot: config.api.versionRoot
   urlKey: 'id'

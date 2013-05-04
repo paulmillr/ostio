@@ -7,7 +7,7 @@ Chaplin = require 'chaplin'
 # Delegate to Chaplin’s support module
 support = utils.beget Chaplin.support
 
-# _(support).extend
+# _.extend support,
   # someMethod: ->
 
 module.exports = support

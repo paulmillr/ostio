@@ -8,7 +8,7 @@ module.exports = class Ostio extends ServiceProvider
   constructor: ->
     super
     @accessToken = localStorage.getItem 'accessToken'
-    authCallback = _(@loginHandler).bind(this, @loginHandler)
+    authCallback = _.bind(@loginHandler, this, @loginHandler)
     @subscribeEvent 'auth:callback:ostio', authCallback
 
   load: ->
@@ -25,7 +25,7 @@ module.exports = class Ostio extends ServiceProvider
 
   # Trigger login popup
   triggerLogin: (loginContext) ->
-    callback = _(@loginHandler).bind(this, @loginHandler)
+    callback = _.bind(@loginHandler, this, @loginHandler)
     window.location = URL
 
   # Callback for the login popup
