@@ -11,7 +11,7 @@ integrated with GitHub. The main ostio mission is to replace mailing lists.
 The stack is cloned from [brunch with chaplin](https://github.com/paulmillr/brunch-with-chaplin) skeleton.
 Use brunch with chaplin if you want to build new application:
 
-`brunch new <project name> --skeleton git://github.com/paulmillr/brunch-with-chaplin.git`
+`brunch new <project name> --skeleton gh:paulmillr/brunch-with-chaplin`
 
 ### Brunch
 [Brunch](http://brunch.io) is a html5 application builder that's
@@ -38,7 +38,8 @@ structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 * Install brunch via nodejs: `npm install -g brunch`
 * Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
 * Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
-* Run [backend](https://github.com/paulmillr/ostio-api)
+* Run [backend](https://github.com/paulmillr/ostio-api) if you want to use it locally
+  or use default api.ost.io (configurable in `app/config.coffee`).
 
 Deploy via: `sudo sh bin/deploy`
 
