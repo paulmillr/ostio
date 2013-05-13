@@ -9,7 +9,16 @@ module.exports = class Ostio extends ServiceProvider
     super
     @accessToken = localStorage.getItem 'accessToken'
     authCallback = _.bind(@loginHandler, this, @loginHandler)
+    @subscribeEvent 'auth:setToken', @setToken
     @subscribeEvent 'auth:callback:ostio', authCallback
+
+  setToken: (token) =>
+    console.log 'Ostio#setToken', token
+    if token?
+      localStorage.setItem 'accessToken', token
+    else
+      localStorage.clear()
+    @accessToken = token
 
   load: ->
     @resolve()
@@ -19,6 +28,7 @@ module.exports = class Ostio extends ServiceProvider
     yes
 
   ajax: (type, url, data) ->
+    console.log 'ajax', url, @accessToken, this
     url = @baseUrl + url
     url += "?access_token=#{@accessToken}" if @accessToken
     $.ajax {url, data, type, dataType: 'json'}
@@ -31,18 +41,18 @@ module.exports = class Ostio extends ServiceProvider
   # Callback for the login popup
   loginHandler: (loginContext, response) =>
     if response
+      @setToken response.accessToken
+
       # Publish successful login
       @publishEvent 'loginSuccessful', {provider: this, loginContext}
 
       # Publish the session
-      @accessToken = response.accessToken
-      localStorage.setItem 'accessToken', @accessToken
       @getUserData().done(@processUserData)
     else
       @publishEvent 'loginFail', provider: this, loginContext: loginContext
 
   getUserData: ->
-    @ajax('get', '/v1/users/me')
+    @ajax 'get', '/v1/users/me'
 
   processUserData: (response) ->
     @publishEvent 'userData', response

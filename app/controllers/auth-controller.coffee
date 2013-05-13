@@ -6,11 +6,12 @@ module.exports = class AuthController extends Controller
       .slice(1).split('&')
       .map((string) -> string.split('='))
     console.log 'AuthController#callback', params
-    localStorage.setItem 'accessToken', params.accessToken
+    @publishEvent 'auth:setToken', params.accessToken
     @redirectToRoute 'users#show', [params.login]
-    location.reload()
+    window.location = window.location.pathname
 
   logout: ->
+    @publishEvent 'auth:setToken', null
     @redirectToRoute 'home#show'
-    localStorage.clear()
-    @publishEvent '!logout'
+    @publishEvent 'logout'
+    window.location = window.location.pathname
