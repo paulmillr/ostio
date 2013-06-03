@@ -2,7 +2,7 @@ View = require 'views/base/view'
 template = require './templates/spinner'
 
 module.exports = class SpinnerView extends View
-  autoRender: yes
+  autoRender: true
   containerMethod: 'html'
   template: template
 

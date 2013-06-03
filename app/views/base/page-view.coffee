@@ -4,15 +4,6 @@ module.exports = class PageView extends View
   region: 'main'
   renderedSubviews: no
 
-  initialize: ->
-    super
-    modelOrCollection = @model or @collection
-    if modelOrCollection
-      rendered = no
-      @listenTo modelOrCollection, 'change', =>
-        @render() unless rendered
-        rendered = yes
-
   getNavigationData: ->
     {}
 
@@ -23,5 +14,5 @@ module.exports = class PageView extends View
     super
     unless @renderedSubviews
       @renderSubviews()
-      @renderedSubviews = yes
+      @renderedSubviews = true
     @publishEvent 'navigation:change', @getNavigationData()

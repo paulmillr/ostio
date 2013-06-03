@@ -3,7 +3,7 @@ View = require 'views/base/view'
 template = require './templates/login'
 
 module.exports = class LoginView extends View
-  autoRender: yes
+  autoRender: true
   container: '#page-container'
   id: 'login'
   template: template

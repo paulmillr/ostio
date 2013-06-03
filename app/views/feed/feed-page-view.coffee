@@ -8,7 +8,7 @@ User = require 'models/user'
 UsersView = require 'views/user/users-view'
 
 module.exports = class FeedPageView extends PageView
-  autoRender: yes
+  autoRender: true
   template: template
 
   renderSubviews: ->

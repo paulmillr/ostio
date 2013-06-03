@@ -2,7 +2,7 @@ View = require 'views/base/view'
 SpinnerView = require 'views/spinner-view'
 
 module.exports = class FormView extends View
-  autoRender: yes
+  autoRender: true
   events:
     'click .cancel-form': 'dismiss'
     'submit': 'submit'

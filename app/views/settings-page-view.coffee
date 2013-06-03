@@ -2,7 +2,7 @@ PageView = require 'views/base/page-view'
 template = require './templates/settings-page'
 
 module.exports = class SettingsPageView extends PageView
-  autoRender: yes
+  autoRender: true
   events:
     'change #setting-email-notifications': 'updateSetting'
   template: template

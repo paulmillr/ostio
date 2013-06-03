@@ -25,7 +25,7 @@ module.exports = class Ostio extends ServiceProvider
     this
 
   isLoaded: ->
-    yes
+    true
 
   ajax: (type, url, data) ->
     console.log 'ajax', url, @accessToken, this

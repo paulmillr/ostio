@@ -115,7 +115,7 @@ Handlebars.registerHelper 'markdown', (options) ->
   string = escapeExpression(options.fn this).replace /&#x60;/g, '`'
 
   markdown = marked string,
-    gfm: yes,
+    gfm: true,
     highlight: (code, language) ->
       # ಠ_ಠ
       raw = unescapeExpression code

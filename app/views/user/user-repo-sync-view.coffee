@@ -2,7 +2,7 @@ View = require 'views/base/view'
 template = require './templates/user-repo-sync'
 
 module.exports = class UserRepoSyncView extends View
-  autoRender: yes
+  autoRender: true
   className: 'user-repo-sync'
   events:
     'click .user-repo-sync-button': 'sync'

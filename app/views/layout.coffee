@@ -1,7 +1,7 @@
 Chaplin = require 'chaplin'
 
 module.exports = class Layout extends Chaplin.Layout
-  initialVisit: yes
+  initialVisit: true
 
   initialize: ->
     super
@@ -10,6 +10,6 @@ module.exports = class Layout extends Chaplin.Layout
   trackVisit: =>
     gauges = window._gauges
     if @initialVisit
-      gauges?.track_referrer = yes
+      gauges?.track_referrer = true
       @initialVisit = no
     gauges?.push ['track']
