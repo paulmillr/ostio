@@ -11,6 +11,7 @@ module.exports = class FormView extends View
   tagName: 'form'
 
   publishSave: (response) ->
+    throw new Error 'FormView must have saveEvent defined' unless @saveEvent
     @publishEvent @saveEvent, response if @saveEvent
 
   dismiss: (event) =>

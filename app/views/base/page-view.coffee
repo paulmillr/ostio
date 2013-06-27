@@ -12,7 +12,4 @@ module.exports = class PageView extends View
 
   render: ->
     super
-    unless @renderedSubviews
-      @renderSubviews()
-      @renderedSubviews = true
     @publishEvent 'navigation:change', @getNavigationData()

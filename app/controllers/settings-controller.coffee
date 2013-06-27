@@ -1,5 +1,4 @@
 Controller = require 'controllers/base/controller'
-Chaplin = require 'chaplin'
 SettingsPageView = require 'views/settings-page-view'
 
 module.exports = class SettingsController extends Controller

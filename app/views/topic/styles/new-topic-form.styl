@@ -1,23 +1,21 @@
 @import 'nib'
 @import '../../styles/_utils'
 
-slide-down($slided-height, $duration, $type = ease-in)
-  height: 0
-  opacity: 0
-  transition: height $duration $type, visibility $duration $type, opacity $duration $type
-  input, textarea
-    display: none
-  &.visible
-    height: $slided-height
-    opacity: 1
-    input, textarea
-      display: inline
-
 .new-topic-form
   &-fields
-    slide-down(311px, ease-in, 0.3s)
+    height: 0
+    opacity: 0
+    transition-property: height, visibility, opacity
+    transition-duration: 0.3s
+    transition-timing-function: ease-in
+    input, textarea
+      display: none
     &.visible
+      height: 311px
       padding-bottom: 10px
+      opacity: 1
+      input, textarea
+        display: inline
   &-toggle-fields-button
     &-container
       nav-button()

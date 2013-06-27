@@ -3,9 +3,11 @@ NewTopicFormView = require 'views/topic/new-topic-form-view'
 PageView = require 'views/base/page-view'
 template = require './templates/repo-page'
 Topic = require 'models/topic'
-TopicsView = require 'views/topic/topics-view'
 
 module.exports = class RepoPageView extends PageView
+  regions:
+    '.new-topic-form-container': 'new-topic'
+    '.repo-topic-list-container': 'topics'
   template: template
 
   getNavigationData: ->
@@ -13,28 +15,18 @@ module.exports = class RepoPageView extends PageView
     user_login: @model.get('user').get('login')
     repo_name: @model.get('name')
 
-  renderSubviews: ->
-    @topics = new Collection null, model: Topic
-    @topics.url = @model.url('/topics/')
-    @subview 'topics', new TopicsView
-      collection: @topics,
-      container: @$('.repo-topic-list-container')
-    @topics.fetch()
-    @subscribeEvent 'topic:new', (topic) =>
-      @topics.unshift topic
+  render: ->
+    super
     @createNewTopic()
 
   createNewTopic: =>
-    topic = new Topic repo: @model
-    topicView = new NewTopicFormView
-      model: topic,
-      container: @$('.new-topic-form-container')
-    topicView.on 'dispose', =>
-      setTimeout @createNewTopic, 0
+    @topic?.dispose()
+    @topic = new Topic repo: @model
+    topicView = new NewTopicFormView model: @topic, region: 'new-topic'
+    @listenTo topicView, 'dispose', => setTimeout @createNewTopic, 0
     @subview 'newTopicForm', topicView
 
   dispose: ->
     return if @disposed
-    @topics.dispose()
-    delete @topics
+    @topic?.dispose()
     super

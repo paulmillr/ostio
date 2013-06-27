@@ -6,6 +6,9 @@ PostsView = require 'views/post/posts-view'
 template = require './templates/topic-page'
 
 module.exports = class TopicPageView extends PageView
+  regions:
+    '.topic-posts-container': 'posts'
+    '.new-post-form-container': 'new-post'
   template: template
 
   getNavigationData: ->
@@ -14,30 +17,18 @@ module.exports = class TopicPageView extends PageView
     repo_name: @model.get('repo').get('name'),
     topic_number: @model.get('number')
 
-  renderSubviews: ->
-    @posts = new Collection null, model: Post
-    @posts.url = @model.url('/posts/')
-    @subview 'posts', new PostsView
-      collection: @posts,
-      container: @$('.topic-posts-container')
-    @posts.fetch()
-
-    @subscribeEvent 'post:new', (post) =>
-      @posts.push post
-
+  render: ->
+    super
     @createNewPost()
 
   createNewPost: =>
-    newPost = new Post topic: @model
-    newPostView = new NewPostFormView
-      model: newPost,
-      container: @$('.new-post-form-container')
-    newPostView.on 'dispose', =>
-      setTimeout @createNewPost, 0
+    @newPost?.dispose()
+    @newPost = new Post topic: @model
+    newPostView = new NewPostFormView model: @newPost, region: 'new-post'
+    newPostView.on 'dispose', => setTimeout @createNewPost, 0
     @subview 'newPostForm', newPostView
 
   dispose: ->
     return if @disposed
-    @posts.dispose()
-    delete @posts
+    @newPost?.dispose()
     super

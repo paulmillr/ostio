@@ -1,9 +1,6 @@
-Chaplin = require 'chaplin'
 config = require 'config'
 
 module.exports = class Model extends Chaplin.Model
-  _.extend @prototype, Chaplin.SyncMachine
-
   apiRoot: config.api.versionRoot
   urlKey: 'id'
 
@@ -43,11 +40,3 @@ module.exports = class Model extends Chaplin.Model
     else
       full
     url
-
-  fetch: (options = {}) ->
-    @beginSync()
-    previous = options.success
-    options.success = (args...) =>
-      previous? args...
-      @finishSync()
-    super

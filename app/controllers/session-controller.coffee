@@ -1,4 +1,3 @@
-Chaplin = require 'chaplin'
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
 LoginView = require 'views/login-view'

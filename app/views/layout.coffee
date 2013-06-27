@@ -1,15 +1,12 @@
-Chaplin = require 'chaplin'
-
 module.exports = class Layout extends Chaplin.Layout
   initialVisit: true
 
-  initialize: ->
-    super
-    @subscribeEvent 'dispatcher:dispatch', @trackVisit
+  listen:
+    'dispatcher:dispatch mediator': 'trackVisit'
 
   trackVisit: =>
     gauges = window._gauges
     if @initialVisit
       gauges?.track_referrer = true
-      @initialVisit = no
+      @initialVisit = false
     gauges?.push ['track']

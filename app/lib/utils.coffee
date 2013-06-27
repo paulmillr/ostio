@@ -1,4 +1,3 @@
-Chaplin = require 'chaplin'
 
 # Application-specific utilities
 # ------------------------------

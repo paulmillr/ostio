@@ -9,7 +9,5 @@ module.exports = class HeaderView extends View
   tagName: 'header'
   template: template
 
-  initialize: ->
-    super
-    @subscribeEvent 'loginStatus', @render
-    @subscribeEvent 'dispatcher:dispatch', @render
+  listen:
+    'loginStatus mediator': 'render'

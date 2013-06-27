@@ -38,6 +38,7 @@ module.exports = class NewTopicFormView extends FormView
 
   save: (event) =>
     spinner = new SpinnerView container: @$('.submit-form')
+    end = -> spinner.dispose()
     @model.save()
       .done (response) =>
         @post.save()
@@ -47,12 +48,9 @@ module.exports = class NewTopicFormView extends FormView
             @trigger 'dispose'
             @dispose()
           .fail (error) =>
-            console.error 'NewTopicFormView#save', error
             @model.destroy()
-          .always =>
-            spinner.dispose()
-      .fail =>
-        spinner.dispose()
+          .always(end)
+      .fail(end)
 
   dispose: ->
     return if @disposed

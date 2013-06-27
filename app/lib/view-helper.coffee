@@ -1,6 +1,5 @@
 config = require 'config'
 utils = require 'lib/utils'
-Chaplin = require 'chaplin'
 
 # Application-specific view helpers
 # ---------------------------------
