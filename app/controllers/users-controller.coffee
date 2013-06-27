@@ -11,7 +11,6 @@ UserOrganizationsView = require 'views/user/user-organizations-view'
 UsersView = require 'views/user/users-view'
 UserRepoSyncView = require 'views/user/user-repo-sync-view'
 
-
 module.exports = class UsersController extends Controller
   _showRepos: ->
     # Main repositories collection.

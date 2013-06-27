@@ -1,4 +1,3 @@
-Collection = require 'models/base/collection'
 NewTopicFormView = require 'views/topic/new-topic-form-view'
 PageView = require 'views/base/page-view'
 template = require './templates/repo-page'
