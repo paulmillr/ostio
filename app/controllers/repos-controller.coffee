@@ -17,6 +17,4 @@ module.exports = class ReposController extends Controller
       @topics = new Collection null, model: Topic
       @topics.url = @model.url('/topics/')
       @topicsView = new TopicsView collection: @topics, region: 'topics'
-      @subscribeEvent 'topic:new', (topic) =>
-        @topics.unshift topic
       @topics.fetch().then @topicsView.render
