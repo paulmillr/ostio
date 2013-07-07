@@ -5,8 +5,8 @@ Topic = require 'models/topic'
 
 module.exports = class RepoPageView extends PageView
   regions:
-    '.new-topic-form-container': 'new-topic'
-    '.repo-topic-list-container': 'topics'
+    'new-topic': '.new-topic-form-container'
+    'topics': '.repo-topic-list-container'
   template: template
 
   getNavigationData: ->

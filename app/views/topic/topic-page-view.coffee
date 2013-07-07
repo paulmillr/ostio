@@ -5,8 +5,8 @@ template = require './templates/topic-page'
 
 module.exports = class TopicPageView extends PageView
   regions:
-    '.topic-posts-container': 'posts'
-    '.new-post-form-container': 'new-post'
+    'posts': '.topic-posts-container'
+    'new-post': '.new-post-form-container'
   template: template
 
   getNavigationData: ->

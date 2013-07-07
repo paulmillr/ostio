@@ -5,5 +5,5 @@ module.exports = class FeedPageView extends PageView
   autoRender: true
   template: template
   regions:
-    '.user-list-container': 'users'
-    '.post-list-container': 'posts'
+    'users': '.user-list-container'
+    'posts': '.post-list-container'

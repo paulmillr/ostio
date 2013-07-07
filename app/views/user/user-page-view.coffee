@@ -3,9 +3,9 @@ template = require './templates/user-page'
 
 module.exports = class UserPageView extends PageView
   regions:
-    '.user-repo-list-container': 'repos'
-    '.user-repo-sync-container': 'sync-repos'
-    '.user-relations': 'relations'
+    'repos': '.user-repo-list-container'
+    'sync-repos': '.user-repo-sync-container'
+    'relations': '.user-relations'
   template: template
 
   getNavigationData: ->
