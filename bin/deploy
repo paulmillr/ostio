@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-brunch b -m && \
+brunch build --optimize && \
   sudo rm -rf /usr/share/nginx/www/* && \
   sudo cp -r public/* /usr/share/nginx/www
