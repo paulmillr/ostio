@@ -2,9 +2,6 @@ Layout = require 'views/layout'
 
 # The application object.
 module.exports = class Application extends Chaplin.Application
-
-# The application object.
-module.exports = class Application extends Chaplin.Application
   title: 'Ost.io'
 
   initLayout: (options = {}) ->
