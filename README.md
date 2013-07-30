@@ -35,7 +35,10 @@ structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 
 ## Getting started
 * Clone the project.
+* Install bower via nodejs: `npm install -g bower`
+* Install bower plugins: `bower install`
 * Install brunch via nodejs: `npm install -g brunch`
+* Install brunch plugins: `npm install`
 * Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
 * Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
 * Run [backend](https://github.com/paulmillr/ostio-api) if you want to use it locally
