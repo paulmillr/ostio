@@ -27,7 +27,7 @@ module.exports = class Model extends Chaplin.Model
       base + data
     sep = if full.indexOf('?') >= 0 then '&' else '?'
     params = @urlParams()
-    payload = _.keys(params)
+    payload = Object.keys(params)
       .map (key) ->
         [key, params[key]]
       .filter (pair) ->

@@ -16,9 +16,9 @@ module.exports = class LoginView extends View
   # In this project we currently only have one service provider and therefore
   # one button. But this should allow for different service providers.
   initButtons: (serviceProviders) ->
-    _.each serviceProviders, (serviceProvider, serviceProviderName) =>
+    for k, v of serviceProviders then do (serviceProvider = v, serviceProviderName = k) =>
       bind = (fn) =>
-        _.bind fn, this, serviceProviderName, serviceProvider
+        fn.bind this, serviceProviderName, serviceProvider
 
       buttonSelector = ".#{serviceProviderName}"
       @$(buttonSelector).addClass('service-loading')
