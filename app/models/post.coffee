@@ -12,8 +12,8 @@ module.exports = class Post extends Model
 
   parse: (response) ->
     if response?
-      repoUser = new User _.extend response.topic.repo.user, {}
-      repo = new Repo _.extend response.topic.repo, {user: repoUser}
-      topic = new Topic _.extend response.topic, {repo}
-      user = new User _.extend response.user, {}
-      _.extend response, {topic}
+      repoUser = new User Backbone.utils.extend response.topic.repo.user, {}
+      repo = new Repo Backbone.utils.extend response.topic.repo, {user: repoUser}
+      topic = new Topic Backbone.utils.extend response.topic, {repo}
+      user = new User Backbone.utils.extend response.user, {}
+      Backbone.utils.extend response, {topic}

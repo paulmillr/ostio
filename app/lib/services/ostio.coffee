@@ -8,7 +8,7 @@ module.exports = class Ostio extends ServiceProvider
   constructor: ->
     super
     @accessToken = localStorage.getItem 'accessToken'
-    authCallback = _.bind(@loginHandler, this, @loginHandler)
+    authCallback = @loginHandler.bind this, @loginHandler
     @subscribeEvent 'auth:setToken', @setToken
     @subscribeEvent 'auth:callback:ostio', authCallback
 
@@ -21,7 +21,7 @@ module.exports = class Ostio extends ServiceProvider
     @accessToken = token
 
   load: ->
-    @resolve()
+    @fulfill()
     this
 
   isLoaded: ->
@@ -31,11 +31,13 @@ module.exports = class Ostio extends ServiceProvider
     console.log 'ajax', url, @accessToken, this
     url = @baseUrl + url
     url += "?access_token=#{@accessToken}" if @accessToken
-    $.ajax {url, data, type, dataType: 'json'}
+    Backbone.utils.ajax {
+      url, data, type, headers: {Accept: 'application/json'}
+    }
 
   # Trigger login popup
   triggerLogin: (loginContext) ->
-    callback = _.bind(@loginHandler, this, @loginHandler)
+    callback = @loginHandler.bind this, @loginHandler
     window.location = URL
 
   # Callback for the login popup
@@ -47,7 +49,7 @@ module.exports = class Ostio extends ServiceProvider
       @publishEvent 'loginSuccessful', {provider: this, loginContext}
 
       # Publish the session
-      @getUserData().done(@processUserData)
+      @getUserData().then @processUserData
     else
       @publishEvent 'loginFail', provider: this, loginContext: loginContext
 
@@ -58,14 +60,14 @@ module.exports = class Ostio extends ServiceProvider
     @publishEvent 'userData', response
 
   getLoginStatus: (callback = @loginStatusHandler, force = false) ->
-    @getUserData().always(callback)
+    @getUserData().then(callback, callback)
 
   loginStatusHandler: (response, status) =>
-    if not response or status is 'error'
+    if not response or response.status is 401
       @publishEvent 'logout'
     else
       parsed = User::parse.call(null, response)
-      @publishEvent 'serviceProviderSession', _.extend parsed,
+      @publishEvent 'serviceProviderSession', Backbone.utils.extend parsed,
         provider: this
         userId: response.id
         accessToken: @accessToken

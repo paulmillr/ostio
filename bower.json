@@ -8,21 +8,21 @@
     "components"
   ],
   "dependencies": {
-    "chaplin": "~0.10.0",
+    "chaplin": "~0.11.3",
     "console-polyfill": "~0.1.0",
-    "lodash": "~1.3.1",
     "moment": "~2.0.0",
-    "jquery": "~2.0.2",
-    "normalize-css": "~2.1.2"
+    "normalize-css": "~2.1.2",
+    "exoskeleton": "~0.4.0",
+    "davy": "~0.0.5"
   },
   "overrides": {
-    "backbone": {
+    "chaplin": {
       "dependencies": {
-        "lodash": "*",
-        "jquery": "*"
-      },
-      "main": "backbone.js"
+        "exoskeleton": "*"
+      }
     },
-    "moment": {"main": "moment.js"}
+    "moment": {
+      "main": "moment.js"
+    }
   }
 }

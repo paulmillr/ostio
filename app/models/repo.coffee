@@ -7,5 +7,5 @@ module.exports = class Repo extends Model
     "/users/#{@get('user').get('login')}/repos/"
 
   parse: (response) ->
-    user = new User _.extend response.user, {}
-    _.extend response, {user}
+    user = new User Backbone.utils.extend response.user, {}
+    Backbone.utils.extend response, {user}

@@ -5,7 +5,7 @@
 # Delegate to Chaplin’s utils module
 utils = Chaplin.utils.beget Chaplin.utils
 
-_.extend utils,
+Backbone.utils.extend utils,
   # Functional helpers for handling asynchronous dependancies and I/O
   # -----------------------------------------------------------------
 
@@ -111,12 +111,12 @@ found on host #{host}"
     ->
       # Save the original arguments
       args = arguments
-      if deferred.state() is 'resolved'
+      if deferred.isFulfilled
         # Deferred already resolved, call func immediately
         func.apply context, args
       else
         # Register a done handler
-        deferred.done ->
+        deferred.then ->
           func.apply context, args
         # Invoke the onDeferral callback
         if typeof onDeferral is 'function'

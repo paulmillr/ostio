@@ -1,10 +1,10 @@
 Controller = require 'controllers/base/controller'
+utils = require 'lib/utils'
 
 module.exports = class AuthController extends Controller
   callback: (params) ->
-    _.extend params, _.object window.location.search
-      .slice(1).split('&')
-      .map((string) -> string.split('='))
+    parsed = utils.queryParams.parse window.location.search
+    Backbone.utils.extend params, parsed
     console.log 'AuthController#callback', params
     @publishEvent 'auth:setToken', params.accessToken
     @redirectToRoute 'users#show', [params.login]

@@ -3,7 +3,7 @@ utils = require 'lib/utils'
 module.exports = class ServiceProvider
 
   # Mixin an Event Broker
-  _.extend @prototype, Chaplin.EventBroker
+  Backbone.utils.extend @prototype, Chaplin.EventBroker
 
   loading: false
 
@@ -11,7 +11,7 @@ module.exports = class ServiceProvider
     ###console.debug 'ServiceProvider#constructor'###
 
     # Mixin a Deferred
-    _.extend this, $.Deferred()
+    Backbone.utils.extend this, new window.Davy()
 
     utils.deferMethods
       deferred: this
@@ -55,7 +55,7 @@ module.exports = class ServiceProvider
 
   # Trigger login popup
   triggerLogin: (loginContext) ->
-    callback = _.bind(@loginHandler, this, loginContext)
+    callback = @loginHandler.bind this, @loginHandler
     ServiceProviderLibrary.login callback
 
   # Callback for the login popup

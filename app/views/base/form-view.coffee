@@ -21,12 +21,13 @@ module.exports = class FormView extends View
 
   save: (event) =>
     spinner = new SpinnerView container: @$('.submit-form')
+    dispose = (response) => spinner.dispose()
     @model.save()
-      .done (response) =>
+      .then (response) =>
         @publishSave response
         @dismiss()
-      .always (response) =>
-        spinner.dispose()
+        dispose()
+      , dispose
 
   submit: (event) =>
     event.preventDefault()

@@ -40,17 +40,18 @@ module.exports = class NewTopicFormView extends FormView
     spinner = new SpinnerView container: @$('.submit-form')
     end = -> spinner.dispose()
     @model.save()
-      .done (response) =>
+      .then (response) =>
         @post.save()
-          .done (postResponse) =>
+          .then (postResponse) =>
             @$('.new-topic-form-toggle-fields-button').click()
             @publishSave response
             @trigger 'dispose'
             @dispose()
-          .fail (error) =>
+            end()
+          , (error) =>
             @model.destroy()
-          .always(end)
-      .fail(end)
+            end()
+      , end
 
   dispose: ->
     return if @disposed

@@ -12,10 +12,10 @@ module.exports = class User extends Model
     options = {model: User}
     if response.organizations?
       organizations = new Collection response.organizations, options
-      _.extend response, {organizations}
+      Backbone.utils.extend response, {organizations}
     if response.owners?
       owners = new Collection response.owners, options
-      _.extend response, {owners}
+      Backbone.utils.extend response, {owners}
     response
 
   # Ideally, there should be a special model field for this.
