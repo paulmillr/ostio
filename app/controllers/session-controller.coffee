@@ -1,6 +1,5 @@
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
-LoginView = require 'views/login-view'
 Ostio = require 'lib/services/ostio'
 
 module.exports = class SessionController extends Controller
@@ -13,9 +12,6 @@ module.exports = class SessionController extends Controller
 
   # Was the login status already determined?
   loginStatusDetermined: false
-
-  # This controller governs the LoginView
-  loginView: null
 
   # Current service provider
   serviceProviderName: null
@@ -30,8 +26,6 @@ module.exports = class SessionController extends Controller
 
     # Handler events which trigger an action
 
-    # Show the login dialog
-    @subscribeEvent '!showLogin', @showLoginView
     # Try to login with a service provider
     @subscribeEvent '!login', @triggerLogin
     # Initiate logout
@@ -55,13 +49,6 @@ module.exports = class SessionController extends Controller
     for name, serviceProvider of SessionController.serviceProviders
       serviceProvider.then serviceProvider.getLoginStatus
 
-  # Handler for the global !showLoginView event
-  showLoginView: ->
-    return if @loginView
-    @loadServiceProviders()
-    @loginView = new LoginView
-      serviceProviders: SessionController.serviceProviders
-
   # Handler for the global !login event
   # Delegate the login to the selected service provider
   triggerLogin: (serviceProviderName) =>
@@ -82,9 +69,6 @@ module.exports = class SessionController extends Controller
   serviceProviderSession: (session) =>
     # Save the session provider used for login
     @serviceProviderName = session.provider.name
-
-    # Hide the login view
-    @disposeLoginView()
 
     # Transform session into user attributes and create a user
     session.id = session.userId
@@ -119,7 +103,7 @@ module.exports = class SessionController extends Controller
     @serviceProviderName = null
 
     # Show the login view again
-    @showLoginView()
+    @loadServiceProviders()
 
     @publishEvent 'loginStatus', false
 
@@ -131,11 +115,6 @@ module.exports = class SessionController extends Controller
 
   # Disposal
   # --------
-
-  disposeLoginView: ->
-    return unless @loginView
-    @loginView.dispose()
-    @loginView = null
 
   disposeUser: ->
     return unless Chaplin.mediator.user
