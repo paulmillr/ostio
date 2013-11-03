@@ -1,5 +1,4 @@
 FormView = require 'views/base/form-view'
-template = require './templates/new-post-form'
 
 module.exports = class NewPostFormView extends FormView
   className: 'post post-create'
@@ -7,12 +6,12 @@ module.exports = class NewPostFormView extends FormView
     'keyup .new-post-body': 'changeText'
     'keydown .new-post-body': 'changeText'
   saveEvent: 'post:new'
-  template: template
+  template: require './templates/new-post-form'
 
   # Update model data by default, save on ⌘R.
   changeText: (event) =>
     text = event.delegateTarget.value.trim()
     if event.metaKey and event.keyCode is 13
-      @el.submit()
+      @submit()
     else
       @model.set {text}

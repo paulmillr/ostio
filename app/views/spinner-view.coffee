@@ -3,14 +3,16 @@ template = require './templates/spinner'
 
 module.exports = class SpinnerView extends View
   autoRender: true
-  containerMethod: 'html'
+  containerMethod: (container, el) ->
+    container.replaceChild el, container.firstChild
   template: template
 
   initialize: (options) ->
     super
-    @previous = options.container.innerHTML
+    @previous = options.container.firstChild
 
   dispose: ->
-    @container.innerHTML = @previous
+    return if @disposed
+    @containerMethod @container, @previous
     delete @previous
     super

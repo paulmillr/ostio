@@ -19,7 +19,7 @@ module.exports = class FormView extends View
     @trigger 'dispose'
     @dispose()
 
-  save: (event) =>
+  save: =>
     spinner = new SpinnerView container: @find('.submit-form')
     dispose = (response) => spinner.dispose()
     @model.save()
@@ -30,5 +30,5 @@ module.exports = class FormView extends View
       , dispose
 
   submit: (event) =>
-    event.preventDefault()
-    @save event if event.currentTarget.checkValidity()
+    event.preventDefault() if event
+    @save() if @el.checkValidity()

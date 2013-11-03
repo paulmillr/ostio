@@ -25,18 +25,18 @@ module.exports = class NewTopicFormView extends FormView
   changeTitle: (event) =>
     return unless event.delegateTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @el.submit()
+      @submit()
     else
       @model.set title: event.delegateTarget.value
 
   changeText: (event) =>
     return unless event.delegateTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @el.submit()
+      @submit()
     else
       @post.set text: event.delegateTarget.value
 
-  save: (event) =>
+  save: =>
     spinner = new SpinnerView container: @find('.submit-form')
     end = -> spinner.dispose()
     @model.save()
