@@ -1,13 +1,13 @@
 Controller = require 'controllers/base/controller'
 SettingsPageView = require 'views/settings-page-view'
+mediator = require 'mediator'
 
 module.exports = class SettingsController extends Controller
   _show: =>
-    model = Chaplin.mediator.user
-    @view = new SettingsPageView {model}
+    @view = new SettingsPageView {model: mediator.user}
 
   show: ->
-    if Chaplin.mediator.user?
+    if mediator.user?
       @_show()
     else
       @subscribeEvent 'login', @_show

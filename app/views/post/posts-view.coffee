@@ -1,9 +1,8 @@
 CollectionView = require 'views/base/collection-view'
-Post = require 'views/post/post-view'
 
 module.exports = class PostsView extends CollectionView
   className: 'topic-posts'
-  itemView: Post
+  itemView: require 'views/post/post-view'
   listen:
     'post:new mediator': 'push'
 

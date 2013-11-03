@@ -35,11 +35,11 @@ module.exports = class UsersController extends Controller
   _initSyncRepos: ->
     # “Sync repos” button.
     @repoSync = new Collection null, model: Repo
-    @repoSync.url = @model.url('/sync_repos/')
+    @repoSync.url = @model.url('/sync_repos')
     @repoSync.fetch = (options) =>
       Backbone.utils.ajax
         url: @repoSync.url,
-        method: 'POST'
+        type: 'POST'
     @repoSyncView = new UserRepoSyncView
       collection: @repoSync,
       region: 'sync-repos'

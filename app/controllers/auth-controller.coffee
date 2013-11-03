@@ -1,4 +1,5 @@
 Controller = require 'controllers/base/controller'
+mediator = require 'mediator'
 utils = require 'lib/utils'
 
 module.exports = class AuthController extends Controller
@@ -6,12 +7,5 @@ module.exports = class AuthController extends Controller
     parsed = utils.queryParams.parse window.location.search
     Backbone.utils.extend params, parsed
     console.log 'AuthController#callback', params
-    @publishEvent 'auth:setToken', params.accessToken
-    @redirectToRoute 'users#show', [params.login]
-    window.location = window.location.pathname
-
-  logout: ->
-    @publishEvent 'auth:setToken', null
-    @redirectToRoute 'home#show'
-    @publishEvent 'logout'
-    window.location = window.location.pathname
+    mediator.login().then =>
+      @redirectTo 'users#show', [params.login]

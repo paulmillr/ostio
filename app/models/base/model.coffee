@@ -1,4 +1,6 @@
 config = require 'config'
+mediator = require 'mediator'
+utils = require 'lib/utils'
 
 module.exports = class Model extends Chaplin.Model
   apiRoot: config.api.versionRoot
@@ -8,7 +10,7 @@ module.exports = class Model extends Chaplin.Model
     ''
 
   urlParams: ->
-    access_token: Chaplin.mediator.user?.get('accessToken')
+    access_token: mediator.user?.get('accessToken') ? localStorage.getItem('accessToken')
 
   urlRoot: ->
     urlPath = @urlPath()
@@ -22,20 +24,12 @@ module.exports = class Model extends Chaplin.Model
   url: (data = '') ->
     base = @urlRoot()
     full = if @get(@urlKey)?
-      base + encodeURIComponent(@get(@urlKey)) + data
+      base + encodeURIComponent(@get @urlKey) + data
     else
       base + data
-    sep = if full.indexOf('?') >= 0 then '&' else '?'
-    params = @urlParams()
-    payload = Object.keys(params)
-      .map (key) ->
-        [key, params[key]]
-      .filter (pair) ->
-        pair[1]?
-      .map (pair) ->
-        pair.join('=')
-      .join('&')
+    payload = utils.queryParams.stringify @urlParams()
     url = if payload
+      sep = if full.indexOf('?') >= 0 then '&' else '?'
       full + sep + payload
     else
       full

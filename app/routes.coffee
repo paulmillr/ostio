@@ -1,6 +1,5 @@
 module.exports = (match) ->
   match '', 'home#show'
-  match 'logout', 'auth#logout'
   match 'feed', 'feed#show'
   match 'settings', 'settings#show'
   match 'auth-callback/', 'auth#callback'
