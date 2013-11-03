@@ -6,5 +6,5 @@ module.exports = class PostsView extends CollectionView
   listen:
     'post:new mediator': 'push'
 
-  push: (post) =>
+  push: (post) ->
     @collection.push post

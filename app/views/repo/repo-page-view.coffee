@@ -18,11 +18,11 @@ module.exports = class RepoPageView extends PageView
     super
     @createNewTopic()
 
-  createNewTopic: =>
+  createNewTopic: ->
     @topic?.dispose()
     @topic = new Topic repo: @model
     topicView = new NewTopicFormView model: @topic, region: 'new-topic'
-    @listenTo topicView, 'dispose', => setTimeout @createNewTopic, 0
+    @listenTo topicView, 'dispose', => setTimeout @createNewTopic.bind(this), 0
     @subview 'newTopicForm', topicView
 
   dispose: ->

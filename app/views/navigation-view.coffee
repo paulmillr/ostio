@@ -10,6 +10,6 @@ module.exports = class NavigationView extends View
   tagName: 'nav'
   template: template
 
-  clearModel: (attributes) =>
+  clearModel: (attributes) ->
     @model.clear()
     @model.set attributes

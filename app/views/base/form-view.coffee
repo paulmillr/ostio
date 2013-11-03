@@ -14,12 +14,12 @@ module.exports = class FormView extends View
     throw new Error 'FormView must have saveEvent defined' unless @saveEvent
     @publishEvent @saveEvent, response if @saveEvent
 
-  dismiss: (event) =>
+  dismiss: (event) ->
     event?.preventDefault()
     @trigger 'dispose'
     @dispose()
 
-  save: =>
+  save: ->
     spinner = new SpinnerView container: @find('.submit-form')
     dispose = (response) => spinner.dispose()
     @model.save()
@@ -29,6 +29,6 @@ module.exports = class FormView extends View
         dispose()
       , dispose
 
-  submit: (event) =>
+  submit: (event) ->
     event.preventDefault() if event
     @save() if @el.checkValidity()

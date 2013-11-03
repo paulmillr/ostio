@@ -19,11 +19,11 @@ module.exports = class TopicPageView extends PageView
     super
     @createNewPost()
 
-  createNewPost: =>
+  createNewPost: ->
     @newPost?.dispose()
     @newPost = new Post topic: @model
     newPostView = new NewPostFormView model: @newPost, region: 'new-post'
-    newPostView.on 'dispose', => setTimeout @createNewPost, 0
+    newPostView.on 'dispose', => setTimeout @createNewPost.bind(this), 0
     @subview 'newPostForm', newPostView
 
   dispose: ->

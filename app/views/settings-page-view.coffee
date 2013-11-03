@@ -9,7 +9,7 @@ module.exports = class SettingsPageView extends PageView
     'loginStatus mediator': 'redirectIfLoggedOut'
   template: template
 
-  updateSetting: (event) =>
+  updateSetting: (event) ->
     @model.save enabled_email_notifications: event.delegateTarget.checked
 
   redirectIfLoggedOut: (isLoggedIn) ->

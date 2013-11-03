@@ -5,7 +5,7 @@ module.exports = class Layout extends Chaplin.Layout
     'dispatcher:dispatch mediator': 'trackVisit'
 
   # Enable tracking with Gaug.es.
-  trackVisit: =>
+  trackVisit: ->
     gauges = window._gauges
     if @initialVisit
       gauges?.track_referrer = true

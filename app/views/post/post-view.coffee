@@ -12,7 +12,7 @@ module.exports = class PostView extends View
   tagName: 'article'
   template: template
 
-  editPost: (event) =>
+  editPost: (event) ->
     text = @find('.post-text')
     icons = @find('.post-icons')
     text.parentNode.removeChild text
@@ -24,5 +24,5 @@ module.exports = class PostView extends View
       @subview 'editPostForm', editPostView
     createNewPost()
 
-  deletePost: (event) =>
+  deletePost: (event) ->
     @model.destroy()

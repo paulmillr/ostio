@@ -19,7 +19,7 @@ module.exports = class EditPostFormView extends FormView
     , 0
 
   # Update model data by default, save on ⌘R..
-  changeText: (event) =>
+  changeText: (event) ->
     if event.metaKey and event.keyCode is 13
       @submit()
     else

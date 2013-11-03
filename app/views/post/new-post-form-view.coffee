@@ -9,7 +9,7 @@ module.exports = class NewPostFormView extends FormView
   template: require './templates/new-post-form'
 
   # Update model data by default, save on ⌘R.
-  changeText: (event) =>
+  changeText: (event) ->
     text = event.delegateTarget.value.trim()
     if event.metaKey and event.keyCode is 13
       @submit()

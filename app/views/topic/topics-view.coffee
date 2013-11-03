@@ -6,5 +6,5 @@ module.exports = class TopicsView extends CollectionView
   listen:
     'topic:new mediator': 'push'
 
-  push: (item) =>
+  push: (item) ->
     @collection.unshift item
