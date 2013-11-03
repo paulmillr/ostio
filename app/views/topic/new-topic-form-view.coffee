@@ -19,31 +19,31 @@ module.exports = class NewTopicFormView extends FormView
     @post = new Post topic: @model
 
   toggleFields: (event) =>
-    $(event.currentTarget).toggleClass('active')
-    @$('.new-topic-form-fields').toggleClass('visible')
+    event.delegateTarget.classList.add 'active'
+    @find('.new-topic-form-fields').classList.add 'visible'
 
   changeTitle: (event) =>
-    return unless event.currentTarget.validity.valid
+    return unless event.delegateTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @$el.trigger('submit')
+      @el.submit()
     else
-      @model.set(title: $(event.currentTarget).val())
+      @model.set title: event.delegateTarget.value
 
   changeText: (event) =>
-    return unless event.currentTarget.validity.valid
+    return unless event.delegateTarget.validity.valid
     if event.metaKey and event.keyCode is 13
-      @$el.trigger('submit')
+      @el.submit()
     else
-      @post.set(text: $(event.currentTarget).val())
+      @post.set text: event.delegateTarget.value
 
   save: (event) =>
-    spinner = new SpinnerView container: @$('.submit-form')
+    spinner = new SpinnerView container: @find('.submit-form')
     end = -> spinner.dispose()
     @model.save()
       .then (response) =>
         @post.save()
           .then (postResponse) =>
-            @$('.new-topic-form-toggle-fields-button').click()
+            @find('.new-topic-form-toggle-fields-button').click()
             @publishSave response
             @trigger 'dispose'
             @dispose()

@@ -20,7 +20,7 @@ module.exports = class FormView extends View
     @dispose()
 
   save: (event) =>
-    spinner = new SpinnerView container: @$('.submit-form')
+    spinner = new SpinnerView container: @find('.submit-form')
     dispose = (response) => spinner.dispose()
     @model.save()
       .then (response) =>

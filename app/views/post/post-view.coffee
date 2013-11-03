@@ -7,13 +7,18 @@ module.exports = class PostView extends View
   events:
     'click .post-edit-button': 'editPost'
     'click .post-delete-button': 'deletePost'
+  listen:
+    'loginStatus mediator': 'render'
   tagName: 'article'
   template: template
 
   editPost: (event) =>
-    @$('.post-text').remove()
+    text = @find('.post-text')
+    icons = @find('.post-icons')
+    text.parentNode.removeChild text
+    icons.parentNode.removeChild icons
     createNewPost = =>
-      container = @$('.post-content')
+      container = @find('.post-content')
       editPostView = new EditPostFormView {@model, container}
       editPostView.on 'dispose', @render
       @subview 'editPostForm', editPostView

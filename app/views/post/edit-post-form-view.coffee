@@ -10,18 +10,20 @@ module.exports = class EditPostFormView extends FormView
   template: template
 
   resizeTextArea: ->
-    @$edit ?= @$('.edit-post-body')
+    @edit ?= @find('.edit-post-body')
     setTimeout =>
-      height = "#{@$edit.prop('scrollHeight') + 10}px"
-      @$edit.animate {height}, 250
+      height = "#{@edit.scrollHeight + 10}px"
+      @edit.style.height = 0
+      @edit.style.transition = '1s height'
+      @edit.style.height = height
     , 0
 
   # Update model data by default, save on ⌘R..
   changeText: (event) =>
     if event.metaKey and event.keyCode is 13
-      @$el.trigger('submit')
+      @el.submit()
     else
-      @model.set(text: $(event.currentTarget).val())
+      @model.set(text: event.delegateTarget.value.trim())
 
   render: ->
     super

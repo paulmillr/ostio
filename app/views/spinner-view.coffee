@@ -11,6 +11,6 @@ module.exports = class SpinnerView extends View
     @previous = options.container.html()
 
   dispose: ->
-    $(@container).html @previous
+    @container.innerHTML = @previous
     delete @previous
     super
