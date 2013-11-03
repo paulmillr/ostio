@@ -8,7 +8,7 @@ module.exports = class SpinnerView extends View
 
   initialize: (options) ->
     super
-    @previous = options.container.html()
+    @previous = options.container.innerHTML
 
   dispose: ->
     @container.innerHTML = @previous
