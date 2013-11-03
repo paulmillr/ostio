@@ -17,4 +17,4 @@ module.exports = class ReposController extends Controller
       @topics = new Collection null, model: Topic
       @topics.url = @model.url('/topics/')
       @topicsView = new TopicsView collection: @topics, region: 'topics'
-      @topics.fetch().then @topicsView.render
+      @topics.fetch()

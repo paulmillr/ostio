@@ -21,4 +21,4 @@ module.exports = class TopicsController extends Controller
       @posts = new Collection null, model: Post
       @posts.url = @model.url '/posts/'
       @postsView = new PostsView collection: @posts, region: 'posts'
-      @posts.fetch().then @postsView.render
+      @posts.fetch()
