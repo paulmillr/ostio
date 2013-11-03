@@ -7,5 +7,5 @@ module.exports = class AuthController extends Controller
     parsed = utils.queryParams.parse window.location.search
     Backbone.utils.extend params, parsed
     console.log 'AuthController#callback', params
-    mediator.login().then =>
+    mediator.login(params.accessToken).then =>
       @redirectTo 'users#show', [params.login]
