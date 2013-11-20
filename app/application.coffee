@@ -6,6 +6,7 @@ module.exports = class Application extends Chaplin.Application
   title: 'Ost.io'
 
   initLayout: (options = {}) ->
+    options.title ?= @title
     @layout = new Layout options
 
   # Create additional mediator properties.
@@ -20,5 +21,6 @@ module.exports = class Application extends Chaplin.Application
     mediator.user.fetch().then =>
       super
     , =>
+      # Logout if there is no info..
       mediator.removeUser()
       super
