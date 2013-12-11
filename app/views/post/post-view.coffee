@@ -20,7 +20,7 @@ module.exports = class PostView extends View
     createNewPost = =>
       container = @find('.post-content')
       editPostView = new EditPostFormView {@model, container}
-      editPostView.on 'dispose', @render
+      @listenToOnce editPostView, 'dispose', @render
       @subview 'editPostForm', editPostView
     createNewPost()
 

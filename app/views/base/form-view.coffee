@@ -1,5 +1,6 @@
 View = require 'views/base/view'
 SpinnerView = require 'views/spinner-view'
+mediator = require 'mediator'
 
 module.exports = class FormView extends View
   autoRender: true
@@ -20,14 +21,20 @@ module.exports = class FormView extends View
     @dispose()
 
   save: ->
-    spinner = new SpinnerView container: @find('.submit-form')
-    dispose = (response) => spinner.dispose()
-    @model.save()
-      .then (response) =>
-        @publishSave response
-        @dismiss()
-        dispose()
-      , dispose
+    # spinner = new SpinnerView container: @find('.submit-form')
+    # dispose = (response) => spinner.dispose()
+    # @model.save()
+    #   .then (response) =>
+    #     @publishSave response
+    #     @dismiss()
+    #     dispose()
+    #   , dispose
+    clone = @model.clone()
+    clone.set user: mediator.user.clone()
+    clone.save().then null, (error) =>
+      console.error 'error'
+    @publishSave clone
+    @dismiss()
 
   submit: (event) ->
     event.preventDefault() if event
