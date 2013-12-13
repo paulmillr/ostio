@@ -45,12 +45,12 @@ Handlebars.registerHelper 'showShortcut', (options) ->
     ''
 
 Handlebars.registerHelper 'showPostUrl', (c, options) ->
-  url = Chaplin.helpers.reverse 'topics#show', [@topic.repo.user.login, @topic.repo.name, @topic.number]
+  url = utils.reverse 'topics#show', [@topic.repo.user.login, @topic.repo.name, @topic.number]
   new Handlebars.SafeString "<a class='post-url' href='#{url}'>#{url.slice(2)}</a>"
 
 Handlebars.registerHelper 'showLoginUrl', ->
   {protocol, host} = window.location
-  path = Chaplin.helpers.reverse 'auth#callback'
+  path = utils.reverse 'auth#callback'
   encodeURIComponent "#{protocol}//#{host}#{path}"
 
 # Map helpers
@@ -130,4 +130,4 @@ Handlebars.registerHelper 'markdown', (options) ->
 
 
 Handlebars.registerHelper 'url', (routeName, params..., options) ->
-  Chaplin.helpers.reverse routeName, params
+  utils.reverse routeName, params

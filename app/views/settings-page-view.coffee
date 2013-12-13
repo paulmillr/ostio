@@ -1,4 +1,5 @@
 PageView = require 'views/base/page-view'
+utils = require 'lib/utils'
 template = require './templates/settings-page'
 
 module.exports = class SettingsPageView extends PageView
@@ -13,4 +14,4 @@ module.exports = class SettingsPageView extends PageView
     @model.save enabled_email_notifications: event.delegateTarget.checked
 
   redirectIfLoggedOut: (isLoggedIn) ->
-    Chaplin.helpers.redirectTo 'home#show' unless isLoggedIn
+    utils.redirectTo 'home#show' unless isLoggedIn

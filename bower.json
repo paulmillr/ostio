@@ -8,11 +8,11 @@
     "components"
   ],
   "dependencies": {
-    "chaplin": "~0.11.3",
+    "chaplin": "~0.12.0",
     "console-polyfill": "~0.1.0",
     "moment": "~2.0.0",
     "normalize-css": "~2.1.2",
-    "exoskeleton": "~0.5.0",
+    "exoskeleton": "~0.6.0",
     "davy": "~0.0.5"
   },
   "overrides": {
