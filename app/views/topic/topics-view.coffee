@@ -9,6 +9,29 @@ module.exports = class TopicsView extends CollectionView
   push: (item) ->
     @collection.unshift item
 
+  filterer: (model) ->
+    matchesFilterer = (attr) =>
+      index = attr.toLowerCase().indexOf(@filteredTitle)
+      index isnt -1
+
+    if @filteredTitle
+      matchesFilterer(model.get('title')) or matchesFilterer(model.get('user').login)
+    else
+      true
+
+  filterCallback: (view, included) ->
+    # console.log view.el
+    method = [if included then 'remove' else 'add']
+    classes = view.el.classList
+    classes[method] 'filtering'
+    classes[method] 'filtered'
+    classes.remove 'hidden' if included
+
+
+  reFilter: (value) ->
+    @filteredTitle = value.toLowerCase()
+    @filter()
+
   # To test rendering performance of ~100 views:
   # 1. Edit `bower.json`, add
   #     `"exoskeleton": {"dependencies": {"jquery": "2"}}`
