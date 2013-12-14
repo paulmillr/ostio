@@ -27,4 +27,3 @@ module.exports = class FeedController extends Controller
     @posts = new Collection null, model: Post
     @posts.url = "#{config.api.versionRoot}/search"
     @view.subview 'posts', new FeedPostsView collection: @posts, region: 'posts'
-    @posts.fetch(data: query: params.query)
