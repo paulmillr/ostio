@@ -12,10 +12,10 @@ module.exports = class FeedController extends Controller
     @view = new FeedPageView
     @users = new Collection null, model: User
     @users.url = "#{config.api.versionRoot}/users/"
-    @usersView = new UsersView collection: @users, region: 'users'
+    @view.subview 'users', new UsersView collection: @users, region: 'users'
     @users.fetch()
 
     @posts = new Collection null, model: Post
     @posts.url = "#{config.api.versionRoot}/posts/"
-    @postsView = new FeedPostsView collection: @posts, region: 'posts'
+    @view.subview 'posts', new FeedPostsView collection: @posts, region: 'posts'
     @posts.fetch()
