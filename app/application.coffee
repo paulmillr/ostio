@@ -17,6 +17,7 @@ module.exports = class Application extends Chaplin.Application
     # Seal the mediator.
     super
 
+  # Start app after initial user request.
   start: ->
     mediator.user.fetch().then =>
       super

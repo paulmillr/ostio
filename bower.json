@@ -8,7 +8,7 @@
     "components"
   ],
   "dependencies": {
-    "chaplin": "~0.12.0",
+    "chaplin": "~1.0.0",
     "console-polyfill": "~0.1.0",
     "moment": "~2.0.0",
     "normalize-css": "~2.1.2",

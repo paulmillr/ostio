@@ -5,10 +5,10 @@ NavigationView = require 'views/navigation-view'
 
 module.exports = class Controller extends Chaplin.Controller
   beforeAction: (params, route) ->
-    @compose 'site', SiteView
-    @compose 'header', HeaderView
+    @reuse 'site', SiteView
+    @reuse 'header', HeaderView
 
     if route.name in ['users#show', 'repos#show', 'topics#show']
-      @compose 'navigation', ->
+      @reuse 'navigation', ->
         @model = new Navigation
         @view = new NavigationView {@model}
