@@ -1,0 +1,28 @@
+{
+  "name": "ostio",
+  "repo": "paulmillr/ostio",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "chaplin": "~1.0.0",
+    "console-polyfill": "~0.1.0",
+    "moment": "~2.0.0",
+    "normalize-css": "~2.1.2",
+    "exoskeleton": "~0.6.0",
+    "davy": "~0.0.5"
+  },
+  "overrides": {
+    "chaplin": {
+      "dependencies": {
+        "exoskeleton": "*"
+      }
+    },
+    "moment": {
+      "main": "moment.js"
+    }
+  }
+}

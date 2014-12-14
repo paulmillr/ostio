@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'fontello';
+  src: url("../fonts/fontello.eot");
+  src: url("../fonts/fontello.eot?#iefix") format('embedded-opentype'), url("../fonts/fontello.woff") format('woff'), url("../fonts/fontello.ttf") format('truetype'), url("../fonts/fontello.svg#fontello") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon:before {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  opacity: 0.9;
+/* Uncomment for 3D effect */
+ text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3);
+/* fix buttons height */
+  line-height: 1em;
+/* you can be more comfortable with increased icons size */
+ font-size: 120%;
+}
+
+.icon-cog:before { content: '\2699'; } /* '⚙' */
+.icon-pencil-1:before { content: '\e800'; } /* '' */
+.icon-trash:before { content: '\e729'; } /* '' */
+.icon-logout:before { content: '\e741'; } /* '' */
+.icon-github:before { content: '\f308'; } /* '' */
+.icon-github { font-size: 80%; }
+
+
+.the-icons li {
+  font-size: 14px;
+  line-height: 24px;
+  height: 24px;
+}
