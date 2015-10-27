@@ -3,6 +3,7 @@ module.exports = (match) ->
   match 'feed', 'feed#show'
   match 'search', 'feed#search'
   match 'settings', 'settings#show'
+  match 'auth-callback', 'auth#callback'
   match 'auth-callback/', 'auth#callback'
 
   # Users, repos, topics.
