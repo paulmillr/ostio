@@ -73,10 +73,8 @@ Handlebars.registerHelper 'withUser', (options) ->
   context = mediator.user.getAttributes()
   Handlebars.helpers.with.call(this, context, options)
 
-Handlebars.registerHelper 'gravatar', (options) ->
-  "https://secure.gravatar.com/avatar/#{options.fn this}?s=140
-&d=https://a248.e.akamai.net/assets.github.com
-%2Fimages%2Fgravatars%2Fgravatar-140.png"
+Handlebars.registerHelper 'avatar', (options) ->
+  options || "https://a248.e.akamai.net/assets.github.com/images/gravatars/gravatar-140.png"
 
 Handlebars.registerHelper 'date', (options) ->
   date = new Date options.fn this

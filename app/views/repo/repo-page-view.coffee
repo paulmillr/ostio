@@ -10,7 +10,7 @@ module.exports = class RepoPageView extends PageView
   template: template
 
   getNavigationData: ->
-    gravatar_id: @model.get('user').get('gravatar_id')
+    avatar_url: @model.get('user').get('avatar_url')
     user_login: @model.get('user').get('login')
     repo_name: @model.get('name')
 
