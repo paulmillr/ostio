@@ -9,5 +9,5 @@ module.exports = class UserPageView extends PageView
   template: template
 
   getNavigationData: ->
-    gravatar_id: @model.get('gravatar_id'),
+    avatar_url: @model.get('avatar_url')
     user_login: @model.get('login')

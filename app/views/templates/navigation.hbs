@@ -1,7 +1,7 @@
 {{#if user_login}}
   <h2>
     <a class="navigation-link" href="{{url "users#show" user_login}}">
-      <img class="avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}" alt="" />
+      <img class="avatar" src="{{avatar avatar_url}}" alt="" />
     </a>
     <a class="navigation-link" data-type="login" href="{{url "users#show" user_login}}">{{user_login}}</a>
     {{#if repo_name}}

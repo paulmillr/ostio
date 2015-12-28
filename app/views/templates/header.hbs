@@ -14,7 +14,7 @@
 <div class="header-auth">
   {{#ifLoggedIn}}
     {{#withUser}}
-      <a href="{{url "users#show" login}}"><img class="avatar header-avatar" src="{{#gravatar}}{{gravatar_id}}{{/gravatar}}"></a>
+      <a href="{{url "users#show" login}}"><img class="avatar header-avatar" src="{{avatar avatar_url}}"></a>
       <a href="{{url "users#show" login}}">{{login}}</a>
       <a class="icon icon-cog" href="{{url "settings#show"}}"></a>
       <a class="icon icon-logout" href=""></a>
