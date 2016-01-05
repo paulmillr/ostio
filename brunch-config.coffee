@@ -2,7 +2,7 @@ exports.config =
   # See http://brunch.io/#documentation for docs.
   npm:
     enabled: true
-    whitelist: ['moment', 'console-polyfill', 'underscore', 'davy', 'jquery']
+    whitelist: ['moment', 'console-polyfill', 'underscore', 'davy', 'jquery', 'chaplin', 'exoskeleton']
 
     globals:
       moment: 'moment'
@@ -10,6 +10,11 @@ exports.config =
       _: 'underscore'
       $: 'jquery'
       Davy: 'davy'
+      Backbone: 'backbone'
+      Chaplin: 'chaplin'
+
+    aliases:
+      backbone: 'exoskeleton'
 
     styles:
       'normalize.css': ['normalize.css']
@@ -18,7 +23,7 @@ exports.config =
     javascripts:
       joinTo:
         'javascripts/app.js': /^app/
-        'javascripts/vendor.js': /^(bower_components|node_modules|vendor)/
+        'javascripts/vendor.js': /^(node_modules|vendor)/
       order:
         before: [/underscore/]
 

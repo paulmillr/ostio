@@ -27,7 +27,9 @@
     "console-polyfill": "~0.1.0",
     "underscore": "~1.8.3",
     "davy": "~0.0.5",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "chaplin": "~1.0.0",
+    "exoskeleton": "~0.6.0"
   },
   "devDependencies": {}
 }
