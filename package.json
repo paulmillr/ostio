@@ -20,7 +20,16 @@
     "handlebars-brunch": ">= 1.0 < 1.8",
     "javascript-brunch": ">= 1.0 < 1.8",
     "stylus-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
+    "uglify-js-brunch": ">= 1.0 < 1.8",
+
+    "moment": "~2.0.0",
+    "normalize.css": "~3.0",
+    "console-polyfill": "~0.1.0",
+    "underscore": "~1.8.3",
+    "davy": "~0.0.5",
+    "jquery": "~2.1.0",
+    "chaplin": "~1.0.0",
+    "exoskeleton": "~0.6.0"
   },
   "devDependencies": {}
 }
