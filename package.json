@@ -24,14 +24,14 @@
     "exoskeleton": "~0.6.0"
   },
   "devDependencies": {
-    "auto-reload-brunch": "^1.8.1",
+    "auto-reload-brunch": ">= 1.0 < 3.0",
     "brunch": "github:brunch/brunch",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "coffee-script-brunch": ">= 1.0 < 1.8",
-    "css-brunch": ">= 1.0 < 1.8",
-    "handlebars-brunch": ">= 1.0 < 1.8",
-    "javascript-brunch": ">= 1.0 < 1.8",
-    "stylus-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
+    "clean-css-brunch": ">= 1.0 < 3.0",
+    "coffee-script-brunch": ">= 1.0 < 3.0",
+    "css-brunch": ">= 1.0 < 3.0",
+    "handlebars-brunch": ">= 1.0 < 3.0",
+    "javascript-brunch": ">= 1.0 < 3.0",
+    "stylus-brunch": ">= 1.0 < 3.0",
+    "uglify-js-brunch": ">= 1.0 < 3.0"
   }
 }
