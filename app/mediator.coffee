@@ -1,3 +1,4 @@
+Chaplin = require 'chaplin'
 CurrentUser = require 'models/current-user'
 
 mediator = module.exports = Chaplin.mediator

@@ -1,3 +1,4 @@
+Backbone = require 'backbone'
 Controller = require 'controllers/base/controller'
 mediator = require 'mediator'
 utils = require 'lib/utils'

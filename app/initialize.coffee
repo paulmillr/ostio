@@ -1,9 +1,15 @@
+require 'exoskeleton'
+
+Backbone = require 'backbone'
 Application = require 'application'
 routes = require 'routes'
+Davy = require 'davy'
+
+require 'console-polyfill'
 
 # Set Deferred to Davy.js deferred.
 Backbone.Deferred = ->
-  p = new window.Davy
+  p = new Davy
   promise: p, resolve: p.fulfill.bind(p), reject: p.reject.bind(p)
 
 # Initialize the application on DOM ready event.

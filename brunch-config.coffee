@@ -3,16 +3,6 @@ exports.config =
   npm:
     enabled: true
 
-    globals:
-      moment: 'moment'
-      _cp: 'console-polyfill'
-      _: 'underscore'
-      $: 'jquery'
-      Davy: 'davy'
-      Backbone: 'backbone'
-      Chaplin: 'chaplin'
-      Exoskeleton: 'exoskeleton'
-
     aliases:
       backbone: 'exoskeleton'
 

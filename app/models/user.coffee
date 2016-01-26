@@ -1,3 +1,4 @@
+Backbone = require 'backbone'
 Model = require 'models/base/model'
 Collection = require 'models/base/collection'
 
