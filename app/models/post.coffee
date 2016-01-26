@@ -1,3 +1,4 @@
+Backbone = require 'backbone'
 Model = require 'models/base/model'
 User = require 'models/user'
 Repo = require 'models/repo'

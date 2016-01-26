@@ -1,3 +1,4 @@
+Chaplin = require 'chaplin'
 mediator = require 'mediator'
 Layout = require 'views/layout'
 

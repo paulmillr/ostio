@@ -1,3 +1,4 @@
+Chaplin = require 'chaplin'
 config = require 'config'
 mediator = require 'mediator'
 utils = require 'lib/utils'

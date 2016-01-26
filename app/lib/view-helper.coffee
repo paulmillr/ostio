@@ -1,3 +1,4 @@
+moment = require 'moment'
 config = require 'config'
 mediator = require 'mediator'
 utils = require 'lib/utils'

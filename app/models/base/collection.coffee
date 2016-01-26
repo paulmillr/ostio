@@ -1,3 +1,5 @@
+Chaplin = require 'chaplin'
+Backbone = require 'backbone'
 Model = require 'models/base/model'
 
 module.exports = class Collection extends Chaplin.Collection

@@ -31,5 +31,7 @@
     "chaplin": "~1.0.0",
     "exoskeleton": "~0.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "brunch": "~2.2.0"
+  }
 }

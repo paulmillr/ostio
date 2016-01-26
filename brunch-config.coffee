@@ -2,16 +2,6 @@ exports.config =
   # See http://brunch.io/#documentation for docs.
   npm:
     enabled: true
-    whitelist: ['moment', 'console-polyfill', 'underscore', 'davy', 'jquery', 'chaplin', 'exoskeleton']
-
-    globals:
-      moment: 'moment'
-      _cp: 'console-polyfill'
-      _: 'underscore'
-      $: 'jquery'
-      Davy: 'davy'
-      Backbone: 'backbone'
-      Chaplin: 'chaplin'
 
     aliases:
       backbone: 'exoskeleton'
