@@ -7,9 +7,11 @@ module.exports = class Topic extends Model
   urlKey: 'number'
 
   urlPath: ->
-    "/users/#{@get('repo').get('user').get('login')}
-/repos/#{@get('repo').get('name')}
-/topics/"
+    [
+      "/users/#{@get('repo').get('user').get('login')}"
+      "/repos/#{@get('repo').get('name')}"
+      "/topics/"
+    ].join('')
 
   parse: (response) ->
     Post = require 'models/post'

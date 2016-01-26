@@ -14,8 +14,9 @@ module.exports = class Collection extends Chaplin.Collection
     super
 
   urlPath: ->
-    "
-/users/#{@urlParams.login}
-/repos/#{@urlParams.repoName}
-/topics/#{@urlParams.topicNumber}
-/posts/"
+    [
+      "/users/#{@urlParams.login}"
+      "/repos/#{@urlParams.repoName}"
+      "/topics/#{@urlParams.topicNumber}"
+      "/posts/"
+    ].join('')

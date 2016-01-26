@@ -6,10 +6,12 @@ Topic = require 'models/topic'
 
 module.exports = class Post extends Model
   urlPath: ->
-    "/users/#{@get('topic').get('repo').get('user').get('login')}
-/repos/#{@get('topic').get('repo').get('name')}
-/topics/#{@get('topic').get('number')}
-/posts/"
+    [
+      "/users/#{@get('topic').get('repo').get('user').get('login')}"
+      "/repos/#{@get('topic').get('repo').get('name')}"
+      "/topics/#{@get('topic').get('number')}"
+      "/posts/"
+    ].join('')
 
   parse: (response) ->
     if response
