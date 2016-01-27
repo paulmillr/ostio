@@ -11,7 +11,7 @@ module.exports = class SettingsPageView extends PageView
   template: template
 
   updateSetting: (event) ->
-    @model.save enabled_email_notifications: event.delegateTarget.checked
+    @model.save enabled_email_notifications: event.target.checked
 
   redirectIfLoggedOut: (isLoggedIn) ->
     utils.redirectTo 'home#show' unless isLoggedIn

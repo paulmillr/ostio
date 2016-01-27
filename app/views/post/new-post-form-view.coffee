@@ -10,7 +10,7 @@ module.exports = class NewPostFormView extends FormView
 
   # Update model data by default, save on ⌘R.
   changeText: (event) ->
-    text = event.delegateTarget.value.trim()
+    text = event.target.value.trim()
     if event.metaKey and event.keyCode is 13
       @submit()
     else

@@ -9,7 +9,7 @@ module.exports = class SearchPageView extends PageView
     posts: '.post-list-container'
 
   search: (event) ->
-    query = event.delegateTarget.value
+    query = event.target.value
     unless query
       @find('.post-list-container').classList.add('hidden')
       return

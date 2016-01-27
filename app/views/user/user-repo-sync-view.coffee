@@ -20,7 +20,7 @@ module.exports = class UserRepoSyncView extends View
     obj
 
   sync: (event) ->
-    button = event.delegateTarget
+    button = event.target
     return if button.disabled
     button.setAttribute 'disabled', 'disabled'
     @collection.fetch().then =>
