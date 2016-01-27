@@ -23,7 +23,7 @@ module.exports = class EditPostFormView extends FormView
     if event.metaKey and event.keyCode is 13
       @submit()
     else
-      @model.set(text: event.delegateTarget.value.trim())
+      @model.set(text: event.target.value.trim())
 
   render: ->
     super

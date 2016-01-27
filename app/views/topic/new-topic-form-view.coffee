@@ -19,22 +19,22 @@ module.exports = class NewTopicFormView extends FormView
     @post = new Post topic: @model
 
   toggleFields: (event) ->
-    event.delegateTarget.classList.add 'active'
+    event.target.classList.add 'active'
     @find('.new-topic-form-fields').classList.add 'visible'
 
   changeTitle: (event) ->
-    return unless event.delegateTarget.validity.valid
+    return unless event.target.validity.valid
     if event.metaKey and event.keyCode is 13
       @submit()
     else
-      @model.set title: event.delegateTarget.value
+      @model.set title: event.target.value
 
   changeText: (event) ->
-    return unless event.delegateTarget.validity.valid
+    return unless event.target.validity.valid
     if event.metaKey and event.keyCode is 13
       @submit()
     else
-      @post.set text: event.delegateTarget.value
+      @post.set text: event.target.value
 
   save: ->
     spinner = new SpinnerView container: @find('.submit-form')
