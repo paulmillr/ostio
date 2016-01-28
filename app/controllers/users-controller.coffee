@@ -1,3 +1,5 @@
+Backbone = require 'backbone'
+
 Controller = require 'controllers/base/controller'
 User = require 'models/user'
 UserPageView = require 'views/user/user-page-view'
