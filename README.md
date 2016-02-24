@@ -35,8 +35,6 @@ structure, like `ModelView`, `Controller`, `mediator`, `Application`.
 
 ## Getting started
 * Clone the project.
-* Install bower via nodejs: `npm install -g bower`
-* Install bower plugins: `bower install`
 * Install brunch via nodejs: `npm install -g brunch`
 * Install brunch plugins: `npm install`
 * Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
