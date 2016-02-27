@@ -1,14 +1,21 @@
-# Ostio
-
-This is a [Backbone + Chaplin](http://chaplinjs.org) implementation of the [Ostio front-end](https://github.com/paulmillr/ostio).
-
----
+# Ost.io. Backbone + Chaplin
 
 >Your open-source talks place.
 
-Ostio ("open-source talks") is a forum for open-source projects and the
-best place for discussing project stuff with other users. It is tightly
-integrated with GitHub. The main ostio mission is to replace mailing lists.
+[Ost.io](http://ost.io) ("open-source talks") is a forum for open-source projects and the best place for discussing project stuff with other users. It is tightly integrated with GitHub. The main ostio mission is to replace mailing lists.
+
+Ost.io apps are [TodoMVC](http://todomvc.com)-like set of example applications, which hopes to offer more complex apps.
+
+We think example app should be:
+
+1. Real-world. Ost.io support forum will be self-hosted. Ost.io is already
+   used by popular open-source projects.
+2. Complex. TodoMVC is simple, but does not show advanced framework features.
+3. Useful besides its main purpose.
+
+This is a [Backbone.js](http://backbonejs.org) + [Chaplin](http://chaplinjs.org) implementation of the [Ostio front-end](https://github.com/paulmillr/ostio).
+
+---
 
 [![](http://brunch.io/images/screenshots/ostio.png)](http://ost.io/paulmillr)
 
