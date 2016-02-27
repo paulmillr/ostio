@@ -1,5 +1,10 @@
 # Ostio
-Your open-source talks place.
+
+This is a [Backbone + Chaplin](http://chaplinjs.org) implementation of the [Ostio front-end](https://github.com/paulmillr/ostio).
+
+---
+
+>Your open-source talks place.
 
 Ostio ("open-source talks") is a forum for open-source projects and the
 best place for discussing project stuff with other users. It is tightly
@@ -18,8 +23,8 @@ Use brunch with chaplin if you want to build new application:
 agnostic to programming langs and frameworks. In this case,
 CoffeeScript is used with Stylus, Handlebars.js templates and javascript libs.
 
-`config.coffee` contains brunch configuration, `package.json` contains
-brunch plugins.
+`brunch-config` contains brunch configuration, `package.json` contains
+brunch plugins and dependencies.
 
 ### Chaplin (+ Backbone.js)
 [Chaplin](http://chaplinjs.org) is a framework on top of
