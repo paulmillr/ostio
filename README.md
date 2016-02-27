@@ -1,4 +1,4 @@
-# Ost.io. Backbone + Chaplin
+# Ost.io in Backbone + Chaplin
 
 >Your open-source talks place.
 
