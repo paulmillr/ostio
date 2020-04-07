@@ -1,0 +1,38 @@
+@import 'nib'
+@import '_utils'
+
+.new-topic-form
+  &-fields
+    height: 0
+    opacity: 0
+    transition-property: height, visibility, opacity
+    transition-duration: 0.3s
+    transition-timing-function: ease-in
+    input, textarea
+      display: none
+    &.visible
+      height: 311px
+      padding-bottom: 10px
+      opacity: 1
+      input, textarea
+        display: inline
+  &-toggle-fields-button
+    &-container
+      nav-button()
+  &-title, &-text
+    padding: 6px
+  &-title
+    width: 50%
+    font-size: 25px
+    font-weight: bold
+    color: #444
+  &-text
+    width: 100%
+    height: 200px
+    margin: 10px 0
+  &-submit-button-container
+    display: none
+    text-align: right
+
+.new-topic-form-fields.visible .new-topic-form-submit-button-container
+  display: block

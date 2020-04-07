@@ -1,0 +1,35 @@
+{
+  "name": "your-app",
+  "description": "Description",
+  "author": "Your Name",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "brunch watch --server"
+  },
+  "dependencies": {
+    "react": "~0.14.7",
+    "react-dom": "~0.14.7",
+    "react-router": "~2.0.0",
+    "exim": "~0.9.5",
+    "moment": "~2.0.0",
+    "normalize.css": "~3.0.0",
+    "whatwg-fetch": "~0.11.0",
+    "es6-promise": "~3.1.2"
+  },
+  "devDependencies": {
+    "auto-reload-brunch": "~2.0.0",
+    "babel-brunch": "~6.0.0",
+    "babel-preset-es2015": "~6.3.13",
+    "babel-preset-react": "~6.3.13",
+    "brunch": "^2.4.2",
+    "clean-css-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "stylus-brunch": "~2.0.0",
+    "javascript-brunch": "~2.0.0",
+    "uglify-js-brunch": "~2.0.0"
+  }
+}

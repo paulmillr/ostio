@@ -1,0 +1,29 @@
+@import 'nib'
+
+.post
+  position: relative
+  padding: 5px 0
+  &-avatar-container
+    position: relative
+    display: block
+    float: left
+  &-content
+    min-height: 60px
+    margin-left: 70px
+    padding: 0 5px 5px 5px
+  &-author
+    margin-right: 3px
+    font-family: 'OpenSansBold', 'Helvetica Neue', Helvetica, Arial, sans-serif
+    font-weight: normal
+  &-metadata
+    float: right
+    font-style: italic
+  &-icons
+    float: right
+  &-buttons
+    margin-top: 10px
+    text-align: right
+
+.topic-posts
+  > .collection-indicator, > .collection-fallback
+    text-align: center

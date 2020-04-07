@@ -1,6 +1,4 @@
-# Ost.io in Backbone + Chaplin
-
->Your open-source talks place.
+# Ost.io
 
 [Ost.io](http://ost.io) ("open-source talks") is a forum for open-source projects and the best place for discussing project stuff with other users. It is tightly integrated with GitHub. The main ostio mission is to replace mailing lists.
 
@@ -13,72 +11,180 @@ We think example app should be:
 2. Complex. TodoMVC is simple, but does not show advanced framework features.
 3. Useful besides its main purpose.
 
-This is a [Backbone.js](http://backbonejs.org) + [Chaplin](http://chaplinjs.org) implementation of the [Ostio front-end](https://github.com/paulmillr/ostio).
+There are currently two main examples of ostio apps:
 
----
+- [**React + Exim**](https://github.com/paulmillr/ostio-exim) implementation from 2016. Very useful if you'd love to know how to make real-world apps with React.
+- [**Backbone + Chaplin**](https://github.com/paulmillr/ostio-chaplin) app. This is the first and initial app, made in 2012.
 
-[![](http://brunch.io/images/screenshots/ostio.png)](http://ost.io/paulmillr)
+## Features
 
-## Stack
-The stack is cloned from [brunch with chaplin](https://github.com/paulmillr/brunch-with-chaplin) skeleton.
-Use brunch with chaplin if you want to build new application:
+Features we initially feel it should capture:
 
-`brunch new -s paulmillr/brunch-with-chaplin`
+* Multi-view
+* Multi-level hierarchies, modals
+* Captures CRUD
+* Authentication, session management
+* Register, login, logout
+* Demonstrates github login
+* Uses a dedicated backend for data
+* State management / routing
+* Precompiled templates
+* Sub-views
+* Mobile support
+* Animations
 
-### Brunch
-[Brunch](http://brunch.io) is a html5 application builder that's
-agnostic to programming langs and frameworks. In this case,
-CoffeeScript is used with Stylus, Handlebars.js templates and javascript libs.
+# Examples
 
-`brunch-config` contains brunch configuration, `package.json` contains
-brunch plugins and dependencies.
+For initial launch, we need at least three apps.
 
-### Chaplin (+ Backbone.js)
-[Chaplin](http://chaplinjs.org) is a framework on top of
-[Backbone.js](http://backbonejs.org) that adds some great predefined
-structure, like `ModelView`, `Controller`, `mediator`, `Application`.
+You may pick any stack you want. Just stick to the
+look-and-feel specification.
+Though we **suggest** to use [Bower](http://bower.io)
+for dependency management
+and [Mocha](http://mochajs.org/) for tests.
 
-### Other
-* [HTML5Boilerplate](http://html5boilerplate.com): great template for html5 projects.
-* [Underscore.js](http://underscorejs.org): needed for Backbone.js, a small set of utils.
-* [Marked.js](https://github.com/chjj/marked): renders GitHub-flavored Markdown.
-* [Moment.js](http://momentjs.com): lightweight javascript date library.
-* [jQuery](http://jquery.com).
+Any transpiled languages (coffee, typescript, elm) are very welcome.
 
-## Getting started
-* Clone the project.
-* Install brunch via nodejs: `npm install -g brunch`
-* Install brunch plugins: `npm install`
-* Run `brunch watch --server` (or `brunch build` if you'll listen webserver on `public/`)
-* Open `dev.ost.io:3333` (set dev.ost.io to `127.0.0.1`)
-* Run [backend](https://github.com/paulmillr/ostio-api) if you want to use it locally
-  or use default api.ost.io (configurable in `app/config.coffee`).
+For list of current implementations, see **apps/** directory.
 
-Deploy via: `sudo sh bin/deploy`
+# Specification
 
-## License
-The MIT License (MIT)
+Feel free to submit any proposals.
 
-Copyright (c) 2012 Paul Miller (http://paulmillr.com/)
+## Structure
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the “Software”), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Develop your application in your own repository and
+send us a pull request that will add
+[git submodule](http://git-scm.com/book/en/Git-Tools-Submodules)
+to `apps` directory.
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+For example, if you’re making angular app built with Grunt,
+send us `angular-grunt` submodule.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+# General
 
+See [http://ost.io](http://ost.io) for general example of how app should behave. Source: [https://github.com/paulmillr/ostio](https://github.com/paulmillr/ostio/).
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/paulmillr/ostio/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+* **UX:** Must look exactly the same. Try to reuse existing styles. Box-sizing: border-box must be used for simplicity of calculations.
 
+* **Compatibility:** IE9+, modern Firefox, Chrome, Safari (including mobile)
+
+* **Structure:** Files in `app` dir, libs in `vendor` dir unless other is specified by your framework.
+
+* **Routing:** Required, with pushState. Routes:
+
+    * `/` — **home** page. Contains description text.
+    * `/auth-callback` — endpoint for OAuth redirection.
+    * `/feed` — **feed**, contains last users and posts.
+    * `/settings` — user **settings.**
+    * `/@:login` — **user** page. Contains user info, repos and organisations.
+    * `/@:login/:repo` — **repository** page. Contains current repo topics with their stats.
+    * `/@:login/:repo/topics/:topic` — **topic** page. Contains topic posts.
+
+# Common
+
+## API & Auth
+
+App plays with OAuth REST API at [http://api.ost.io](http://api.ost.io/) (source: [https://github.com/paulmillr/ostio-api](https://github.com/paulmillr/ostio-api)). App must have a simple way [in code] to switch between API endpoints. **Auth token** must be stored in local storage. No cookies.
+
+*// we should likely also provide backend specification for people who want to show how it can be alternatively done with their stack*
+
+## Header
+
+Located on top of application. Contains link to **home**, **feed**.
+
+If logged-in, also contains links to current **user** with his name, **settings** and **logout**.
+
+When clicked on **logout**, the app should destroy the session. If user was on **settings** page, he must be redirected to `/`. On any other page user must not be redirected.
+
+Otherwise, contains login button. Must have its own persistent view.
+
+## Breadcrumbs
+
+Located under the header, on **user**, **repository** or **topic** pages. Example for **topic** page:
+
+`[:user avatar] :user / :repo / #:number`. Must have its own persistent view.
+
+## Spinners
+
+When creating new post or topic, button that was pressed by user must change its state and its contents must turn into spinner.
+
+# Pages
+
+## Home
+
+Contains description of an application, description of taste.js project, links to frontend and backend implementations and api docs. Also, top repos and screenshot of users page.
+
+## Auth callback
+
+A page to which oauth authentication redirects. Receives credentials (access token & current user).
+
+## Logout
+
+Destroys current session, clears local storage. Must be done without page reloading.
+
+## Feed
+
+24 latest users. Just their avatars with links to them.
+
+20 latest posts. Each post has:
+
+* user **avatar** with link to user
+
+* **username** also with link to user
+
+* a **repo** and **topic** where it was posted
+
+* post **date**
+
+* **contents**
+
+* **edit** and **delete** buttons if it’s written by current user or in a current user repository or in repository of organization that current user is in.
+
+## Settings
+
+A simple page with switches, radio buttons etc. Clicking on switch immediately submits API request.
+
+## User
+
+Repositories list (also, GitHub icon with link to GitHub profile)
+
+Organizations list (just avatars with links)
+
+If it’s current user or organization that current user is in, also has "Sync GitHub repos" button which updates repositories list.
+
+## Repository
+
+Topics list. Each topic has:
+
+* Number (#35 etc) with link to topic
+
+* Topic name with link to topic
+
+* Topic author
+
+* Date
+
+* Post count
+
+Also has GitHub icon with link to repository on GitHub.
+
+## Topic
+
+Topic name, then posts (see feed) and new post form. Posts must be without post location, unlike in feed.
+
+# Links
+
+Example app: [http://ost.io/](http://ost.io/)
+
+Frontend source code: [https://github.com/paulmillr/ostio](https://github.com/paulmillr/ostio)
+
+Backend source code: [https://github.com/paulmillr/ostio-api](https://github.com/paulmillr/ostio-api)
+
+Building an app with Ember: [http://www.youtube.com/watch?v=Ga99hMi7wfY](http://www.youtube.com/watch?v=Ga99hMi7wfY)
+
+Support for complex nested hierarchies: [http://stackoverflow.com/questions/12863663/angularjs-complex-nesting-of-partials-and-templates](http://stackoverflow.com/questions/12863663/angularjs-complex-nesting-of-partials-and-templates)
+
+Runnable Ember app spec: [http://www.youtube.com/watch?v=heK78M6Ql9Q](http://www.youtube.com/watch?v=heK78M6Ql9Q)
+
+Jasmine tactics screencast: [http://searls.testdouble.com/posts/2013-03-21-jasmine-tactics-screencast.html](http://searls.testdouble.com/posts/2013-03-21-jasmine-tactics-screencast.html)
