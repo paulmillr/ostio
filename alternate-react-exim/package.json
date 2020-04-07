@@ -15,7 +15,7 @@
     "react-dom": "~0.14.7",
     "react-router": "~2.0.0",
     "exim": "~0.9.5",
-    "moment": "~2.0.0",
+    "moment": "~2.24.0",
     "normalize.css": "~3.0.0",
     "whatwg-fetch": "~0.11.0",
     "es6-promise": "~3.1.2"
